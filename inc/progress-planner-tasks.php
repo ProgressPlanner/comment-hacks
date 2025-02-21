@@ -23,7 +23,7 @@ class Progress_Planner_Tasks {
 	 *
 	 * @return array<int,Provider> Array of task provider objects.
 	 */
-	public function add_task_providers( $providers ) { // @phpstan-ignore-line
+	public function add_task_providers( $providers ) {
 		// Remove the disable-comments provider - if you have this plugin installed, you don't need to see this task.
 		foreach ( $providers as $key => $provider ) {
 			if ( $provider->get_provider_id() === 'disable-comments' ) {
