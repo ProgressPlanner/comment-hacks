@@ -36,20 +36,6 @@ class Comment_Moderation extends Repetitive {
 	protected $capability = 'moderate_comments';
 
 	/**
-	 * Holds our options.
-	 *
-	 * @var string[]
-	 */
-	private array $options;
-
-	/**
-	 * Class constructor.
-	 */
-	public function __construct() {
-		$this->options = Hacks::get_options();
-	}
-
-	/**
 	 * Check if the task should be added.
 	 *
 	 * @return bool
