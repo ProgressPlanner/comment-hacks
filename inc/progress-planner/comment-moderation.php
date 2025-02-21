@@ -5,6 +5,10 @@ namespace EmiliaProjects\WP\Comment\Inc\Progress_Planner;
 use EmiliaProjects\WP\Comment\Inc\Hacks;
 use Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\Repetitive\Repetitive;
 
+if ( ! class_exists( 'Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\Repetitive\Repetitive' ) ) {
+	return;
+}
+
 /**
  * Task for the comment moderation.
  */
@@ -58,7 +62,7 @@ class Comment_Moderation extends Repetitive {
 			]
 		);
 
-		return $comments > 0;
+		return $comments > 0; // @phpstan-ignore-line
 	}
 
 	/**

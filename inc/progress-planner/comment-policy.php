@@ -5,6 +5,10 @@ namespace EmiliaProjects\WP\Comment\Inc\Progress_Planner;
 use EmiliaProjects\WP\Comment\Inc\Hacks;
 use Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\One_Time\One_Time;
 
+if ( ! class_exists( 'Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\One_Time\One_Time' ) ) {
+	return;
+}
+
 /**
  * Task for the comment policy.
  */
