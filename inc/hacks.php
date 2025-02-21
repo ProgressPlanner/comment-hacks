@@ -59,6 +59,7 @@ class Hacks {
 		new Email_Links();
 		new Forms();
 		new Length();
+		new Progress_Planner_Tasks();
 	}
 
 	/**

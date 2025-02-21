@@ -21,6 +21,10 @@ class Autoload {
 		'EmiliaProjects\WP\Comment\Inc\Hacks'            => 'inc/hacks.php',
 		'EmiliaProjects\WP\Comment\Inc\Length'           => 'inc/length.php',
 		'EmiliaProjects\WP\Comment\Inc\Notifications'    => 'inc/notifications.php',
+		'EmiliaProjects\WP\Comment\Inc\Progress_Planner_Tasks' => 'inc/progress-planner-tasks.php',
+		'EmiliaProjects\WP\Comment\Inc\Progress_Planner\Comment_Policy' => 'inc/progress-planner/comment-policy.php',
+		'EmiliaProjects\WP\Comment\Inc\Progress_Planner\Comment_Redirect' => 'inc/progress-planner/comment-redirect.php',
+		'EmiliaProjects\WP\Comment\Inc\Progress_Planner\Comment_Moderation' => 'inc/progress-planner/comment-moderation.php',
 	];
 
 	/**
