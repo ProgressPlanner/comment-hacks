@@ -5,7 +5,7 @@ namespace EmiliaProjects\WP\Comment\Inc\Progress_Planner;
 use EmiliaProjects\WP\Comment\Inc\Hacks;
 use Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\One_Time;
 
-if ( ! \class_exists( '\Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\One_Time\One_Time' ) ) {
+if ( ! \class_exists( '\Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\One_Tim' ) ) {
 	return;
 }
 
@@ -74,7 +74,7 @@ class Comment_Policy extends One_Time {
 	public function get_task_details( $task_id = '' ) {
 
 		if ( ! $task_id ) {
-			$task_id = $this->get_provider_id();
+			$task_id = $this->get_task_id();
 		}
 
 		return [

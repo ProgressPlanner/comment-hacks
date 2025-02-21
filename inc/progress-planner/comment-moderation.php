@@ -4,7 +4,7 @@ namespace EmiliaProjects\WP\Comment\Inc\Progress_Planner;
 
 use Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\Repetitive;
 
-if ( ! \class_exists( '\Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\Repetitive\Repetitive' ) ) {
+if ( ! \class_exists( '\Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\Repetitive' ) ) {
 	return;
 }
 
@@ -69,7 +69,7 @@ class Comment_Moderation extends Repetitive {
 	public function get_task_details( $task_id = '' ) {
 
 		if ( ! $task_id ) {
-			$task_id = $this->get_provider_id() . '-' . \gmdate( 'YW' );
+			$task_id = $this->get_task_id();
 		}
 
 		return [
