@@ -19,14 +19,14 @@ class Comment_Policy extends One_Time {
 	 *
 	 * @var string
 	 */
-	private const ID = 'ch-comment-policy';
+	protected const ID = 'ch-comment-policy';
 
 	/**
 	 * The provider type. This is used to determine the type of task.
 	 *
 	 * @var string
 	 */
-	private const TYPE = 'configuration';
+	protected const TYPE = 'configuration';
 
 	/**
 	 * Holds our options.
