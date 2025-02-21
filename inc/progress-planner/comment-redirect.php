@@ -19,14 +19,14 @@ class Comment_Redirect extends One_Time {
 	 *
 	 * @var string
 	 */
-	public const ID = 'ch-comment-redirect';
+	private const ID = 'ch-comment-redirect';
 
 	/**
 	 * The provider type. This is used to determine the type of task.
 	 *
 	 * @var string
 	 */
-	public const TYPE = 'configuration';
+	private const TYPE = 'configuration';
 
 	/**
 	 * Holds our options.

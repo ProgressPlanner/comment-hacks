@@ -18,21 +18,21 @@ class Comment_Moderation extends Repetitive {
 	 *
 	 * @var string
 	 */
-	public const ID = 'ch-comment-moderation';
+	private const ID = 'ch-comment-moderation';
 
 	/**
 	 * The provider type. This is used to determine the type of task.
 	 *
 	 * @var string
 	 */
-	public const TYPE = 'maintenance';
+	private const TYPE = 'maintenance';
 
 	/**
 	 * The capability required to perform the task.
 	 *
 	 * @var string
 	 */
-	protected $capability = 'moderate_comments';
+	private const CAPABILITY = 'moderate_comments';
 
 	/**
 	 * Check if the task should be added.
