@@ -19,14 +19,14 @@ class Comment_Policy extends One_Time {
 	 *
 	 * @var string
 	 */
-	public const ID = 'ch-comment-policy';
+	protected const ID = 'ch-comment-policy';
 
 	/**
 	 * The provider type. This is used to determine the type of task.
 	 *
 	 * @var string
 	 */
-	public const TYPE = 'configuration';
+	protected const TYPE = 'configuration';
 
 	/**
 	 * Holds our options.
@@ -74,7 +74,7 @@ class Comment_Policy extends One_Time {
 	public function get_task_details( $task_id = '' ) {
 
 		if ( ! $task_id ) {
-			$task_id = $this->get_provider_id();
+			$task_id = $this->get_task_id();
 		}
 
 		return [

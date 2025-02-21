@@ -18,21 +18,21 @@ class Comment_Moderation extends Repetitive {
 	 *
 	 * @var string
 	 */
-	public const ID = 'ch-comment-moderation';
+	protected const ID = 'ch-comment-moderation';
 
 	/**
 	 * The provider type. This is used to determine the type of task.
 	 *
 	 * @var string
 	 */
-	public const TYPE = 'maintenance';
+	protected const TYPE = 'maintenance';
 
 	/**
 	 * The capability required to perform the task.
 	 *
 	 * @var string
 	 */
-	protected $capability = 'moderate_comments';
+	protected const CAPABILITY = 'moderate_comments';
 
 	/**
 	 * Check if the task should be added.
@@ -69,7 +69,7 @@ class Comment_Moderation extends Repetitive {
 	public function get_task_details( $task_id = '' ) {
 
 		if ( ! $task_id ) {
-			$task_id = $this->get_provider_id() . '-' . \gmdate( 'YW' );
+			$task_id = $this->get_task_id();
 		}
 
 		return [
