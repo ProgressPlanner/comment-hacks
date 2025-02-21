@@ -5,7 +5,7 @@ namespace EmiliaProjects\WP\Comment\Inc\Progress_Planner;
 use EmiliaProjects\WP\Comment\Inc\Hacks;
 use Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\Repetitive\Repetitive;
 
-if ( ! class_exists( '\Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\Repetitive\Repetitive' ) ) {
+if ( ! \class_exists( '\Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\Repetitive\Repetitive' ) ) {
 	return;
 }
 
