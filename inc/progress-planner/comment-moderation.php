@@ -2,7 +2,7 @@
 
 namespace EmiliaProjects\WP\Comment\Inc\Progress_Planner;
 
-use Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\Repetitive\Repetitive;
+use Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\Repetitive;
 
 if ( ! \class_exists( '\Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\Repetitive\Repetitive' ) ) {
 	return;
