@@ -60,7 +60,7 @@ class Comment_Moderation extends Repetitive {
 	 *           title: string,
 	 *           parent: int,
 	 *           priority: string,
-	 *           type: string,
+	 *           category: string,
 	 *           points: int,
 	 *           url: string,
 	 *           description: string

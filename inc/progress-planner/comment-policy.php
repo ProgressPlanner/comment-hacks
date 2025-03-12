@@ -11,6 +11,10 @@ if ( ! \class_exists( '\Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\O
 
 /**
  * Task for the comment policy.
+ *
+ * @property string $title
+ * @property string $description
+ * @property string $url
  */
 class Comment_Policy extends One_Time {
 
