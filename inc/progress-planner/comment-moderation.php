@@ -18,14 +18,14 @@ class Comment_Moderation extends Repetitive {
 	 *
 	 * @var string
 	 */
-	protected const ID = 'ch-comment-moderation';
+	protected const PROVIDER_ID = 'ch-comment-moderation';
 
 	/**
 	 * The provider type. This is used to determine the type of task.
 	 *
 	 * @var string
 	 */
-	protected const TYPE = 'maintenance';
+	protected const CATEGORY = 'maintenance';
 
 	/**
 	 * The capability required to perform the task.
@@ -77,7 +77,7 @@ class Comment_Moderation extends Repetitive {
 			'title'        => \esc_html__( 'Moderate comments', 'comment-hacks' ),
 			'parent'       => 0,
 			'priority'     => 'high',
-			'type'         => $this->get_provider_type(),
+			'category'     => $this->get_provider_category(),
 			'points'       => 1,
 			'url'          => $this->capability_required() ? \esc_url( \admin_url( 'edit-comments.php?comment_status=moderated' ) ) : '',
 			'description'  => '<p>' . \esc_html__( 'Moderate comments to make sure they are not spam.', 'comment-hacks' ) . '</p>',
