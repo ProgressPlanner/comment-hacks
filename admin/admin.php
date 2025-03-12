@@ -72,7 +72,7 @@ class Admin {
 	 * @return void
 	 */
 	public function enqueue_discussion_settings_script( $hook ) {
-		if ( $hook !== 'options-discussion' ) {
+		if ( $hook !== 'options-discussion.php' ) {
 			return;
 		}
 
