@@ -64,20 +64,27 @@ class Admin {
 		new Comment_Parent();
 	}
 
+	/**
+	 * Enqueue a small script on the discussion settings page to link to the comment experience settings page.
+	 *
+	 * @param string $hook The current admin page.
+	 *
+	 * @return void
+	 */
 	public function enqueue_discussion_settings_script( $hook ) {
-		if ( 'options-discussion.php' !== $hook ) {
+		if ( $hook !== 'options-discussion' ) {
 			return;
 		}
-	
-		wp_add_inline_script(
+
+		\wp_add_inline_script(
 			'jquery-core',
 			'jQuery(document).ready(function($){
-				var link = "<div style=\"margin: 15px 0;\"><strong>Note:</strong> You will find more comment settings on the <a href=\"' . admin_url('options-general.php?page=' . $this->hook ) . '\">Comment Experience plugin\'s settings page</a>.</div>";
+				var link = "<div style=\"margin: 15px 0;\"><strong>Note:</strong> You will find more comment settings on the <a href=\"' . \admin_url( 'options-general.php?page=' . $this->hook ) . '\">Comment Experience plugin\'s settings page</a>.</div>";
 				$(".wrap > h1").after(link);
 			});'
 		);
 	}
-	
+
 	/**
 	 * Show when a comment was forwarded already.
 	 *
