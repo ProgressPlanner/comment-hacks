@@ -21,7 +21,7 @@ class Admin {
 	/**
 	 * The plugin page hook.
 	 */
-	private string $hook = 'comment-hacks';
+	private string $hook = 'comment-experience';
 
 	/**
 	 * Holds the plugins options.
@@ -59,9 +59,25 @@ class Admin {
 		\add_action( 'admin_head', [ $this, 'forward_comment' ] );
 		\add_filter( 'comment_text', [ $this, 'show_forward_status' ], 10, 2 );
 
+		\add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_discussion_settings_script' ] );
+
 		new Comment_Parent();
 	}
 
+	public function enqueue_discussion_settings_script( $hook ) {
+		if ( 'options-discussion.php' !== $hook ) {
+			return;
+		}
+	
+		wp_add_inline_script(
+			'jquery-core',
+			'jQuery(document).ready(function($){
+				var link = "<div style=\"margin: 15px 0;\"><strong>Note:</strong> You will find more comment settings on the <a href=\"' . admin_url('options-general.php?page=' . $this->hook ) . '\">Comment Experience plugin\'s settings page</a>.</div>";
+				$(".wrap > h1").after(link);
+			});'
+		);
+	}
+	
 	/**
 	 * Show when a comment was forwarded already.
 	 *
@@ -183,7 +199,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 	public function register_meta_boxes(): void {
 		\add_meta_box(
 			'comment-hacks-reroute',
-			\__( 'Comment Hacks', 'comment-hacks' ),
+			\__( 'Comment Experience', 'comment-hacks' ),
 			[
 				$this,
 				'meta_box_callback',
@@ -263,7 +279,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 	public function enqueue(): void {
 		$page = \filter_input( \INPUT_GET, 'page' );
 
-		if ( $page === 'comment-hacks' ) {
+		if ( $page === 'comment-experience' ) {
 			\wp_enqueue_style(
 				'emiliaprojects-comment-hacks-admin-css',
 				\plugins_url( 'admin/assets/css/comment-hacks.css', \EMILIA_COMMENT_HACKS_FILE ),
@@ -387,8 +403,8 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 	 */
 	public function add_config_page() {
 		\add_options_page(
-			\__( 'Comment Hacks', 'comment-hacks' ),
-			\__( 'Comment Hacks', 'comment-hacks' ),
+			\__( 'Comment Experience', 'comment-hacks' ),
+			\__( 'Comment Experience', 'comment-hacks' ),
 			'manage_options',
 			$this->hook,
 			[

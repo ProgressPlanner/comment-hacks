@@ -1,6 +1,6 @@
 {
   "name": "comment-hacks",
-  "description": "Development files for the Comment Hacks plugin",
+  "description": "Development files for the Comment Experience plugin",
   "license": "GPL-2.0+",
   "plugin": {
     "glotpress": "https://translate.wordpress.org",

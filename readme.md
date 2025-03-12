@@ -4,13 +4,13 @@
 [![Release Version](https://img.shields.io/github/release/emilia-capital/comment-hacks.svg)](https://github.com/emilia-capital/comment-hacks/releases/latest) 
 [![MIT License](https://img.shields.io/github/license/emilia-capital/comment-hacks.svg)](https://github.com/emilia-capital/comment-hacks/blob/trunk/LICENSE)
 
-# Comment Hacks
+# Comment Experience by Progress Planner
 
-Make comments management easier by applying the simple hacks Joost has gathered over the years.
+Improve the comment experience on your site. Adds lots of features to make commenting easier and more engaging.
 
 ## Description
 
-This plugin adds some small hacks around core WordPress comments to make them more bearable:
+This plugin adds many small improvements around core WordPress comments to make them more bearable:
 
 * Cleaner comment notification emails.
 * The option to enforce a comment policy.

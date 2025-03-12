@@ -84,7 +84,7 @@ class Comment_Redirect extends One_Time {
 			'priority'     => 'high',
 			'type'         => $this->get_provider_type(),
 			'points'       => 1,
-			'url'          => $this->capability_required() ? \esc_url( \admin_url( 'options-general.php?page=comment-hacks#top#comment-redirect' ) ) : '',
+			'url'          => $this->capability_required() ? \esc_url( \admin_url( 'options-general.php?page=comment-experience#top#comment-redirect' ) ) : '',
 			'description'  => '<p>' . \sprintf(
 				/* translators: %s:<a href="https://prpl.fyi/comment-redirect" target="_blank">comment redirect</a> link */
 				\esc_html__( 'Implement a %s to thank first-time commenters for their comment.', 'comment-hacks' ),

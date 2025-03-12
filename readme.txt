@@ -1,4 +1,4 @@
-=== Comment Hacks ===
+=== Comment Experience by Progress Planner ===
 Contributors: joostdevalk
 Tags: comments, spam, emails
 Text Domain: comment-hacks
@@ -47,7 +47,7 @@ If you have bugs to report, please go to [the plugin's GitHub repository](https:
 1. Download and unzip the plugin.
 1. Upload the `comment-hacks` directory to the `/wp-content/plugins/` directory.
 1. Activate the plugin through the 'Plugins' menu in WordPress.
-1. Configure your settings on the Settings &rarr; Comment Hacks screen.
+1. Configure your settings on the Settings &rarr; Comment Experience screen.
 
 == Screenshots ==
 
