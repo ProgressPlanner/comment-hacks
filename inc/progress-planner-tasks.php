@@ -24,6 +24,12 @@ class Progress_Planner_Tasks {
 	 * @return array<int,Provider> Array of task provider objects.
 	 */
 	public function add_task_providers( $providers ) {
+		// Bail early if the version is less than 1.1.1.
+		$progress_planner_version = \get_file_data( \PROGRESS_PLANNER_FILE, [ 'Version' => 'Version' ] )['Version'];
+		if ( \version_compare( $progress_planner_version, '1.1.1', '<' ) ) {
+			return $providers;
+		}
+
 		// Remove the disable-comments provider - if you have this plugin installed, you don't need to see this task.
 		foreach ( $providers as $key => $provider ) {
 			if ( $provider->get_provider_id() === 'disable-comments' ) {
