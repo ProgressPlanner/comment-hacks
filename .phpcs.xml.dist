@@ -56,6 +56,7 @@
 			<property name="prefixes" type="array">
 				<element value="EmiliaProjects\WP\Comment"/>
 				<element value="comment_hacks"/>
+				<element value="comment_experience"/>
 			</property>
 		</properties>
 	</rule>

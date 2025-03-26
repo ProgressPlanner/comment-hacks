@@ -51,7 +51,7 @@ class Comment_Redirect extends One_Time {
 			\esc_html__( 'Implement a %s to thank first-time commenters for their comment.', 'comment-hacks' ),
 			'<a href="https://prpl.fyi/comment-policy" target="_blank">' . \esc_html__( 'comment redirect', 'comment-hacks' ) . '</a>'
 		);
-		$this->url = \admin_url( 'options-general.php?page=comment-hacks#top#comment-redirect' );
+		$this->url = \admin_url( 'options-general.php?page=comment-policy#top#comment-redirect' );
 	}
 
 	/**
