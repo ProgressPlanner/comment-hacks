@@ -51,7 +51,7 @@ class Comment_Policy extends One_Time {
 			\esc_html__( 'Implement a %s to make sure your commenters know what they can and cannot do.', 'comment-hacks' ),
 			'<a href="https://prpl.fyi/comment-policy" target="_blank">' . \esc_html__( 'comment policy', 'comment-hacks' ) . '</a>'
 		);
-		$this->url = \admin_url( 'options-general.php?page=comment-hacks#top#comment-policy' );
+		$this->url = \admin_url( 'options-general.php?page=comment-policy#top#comment-policy' );
 	}
 
 	/**

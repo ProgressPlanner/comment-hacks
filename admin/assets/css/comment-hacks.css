@@ -1,16 +1,21 @@
 .emiliaprojectstab {
 	display: none;
-	margin-top :15px
-}
+	margin-top: 15px;
+	max-width: 800px;
 
-.emiliaprojectstab.active {
-	display: block
-}
+	&.active {
+		display: block
+	}
+	
+	strong {
+		font-size: 115%
+	}
+	
+	.dashicons-email-alt {
+		color:#00f
+	}
 
-.emiliaprojectstab strong {
-	font-size: 115%
-}
-
-.emiliaprojectstab .dashicons-email-alt {
-	color:#00f
+	table th {
+		width: 250px;
+	}
 }
