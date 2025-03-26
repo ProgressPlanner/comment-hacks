@@ -24,11 +24,6 @@ class Progress_Planner_Tasks {
 	 * @return array<int,Provider> Array of task provider objects.
 	 */
 	public function add_task_providers( $providers ) {
-		// Get the version of the PROGRESS_PLANNER_FILE file.
-		if ( ! defined( 'PROGRESS_PLANNER_FILE' ) ) {
-			return $providers;
-		}
-
 		// Bail early if the version is less than 1.1.1.
 		$progress_planner_version = \get_file_data( PROGRESS_PLANNER_FILE, [ 'Version' => 'Version' ] )['Version'];
 		if ( \version_compare( $progress_planner_version, '1.1.1', '<' ) ) {
