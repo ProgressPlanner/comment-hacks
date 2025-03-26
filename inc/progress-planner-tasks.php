@@ -25,7 +25,7 @@ class Progress_Planner_Tasks {
 	 */
 	public function add_task_providers( $providers ) {
 		// Bail early if the version is less than 1.1.1.
-		$progress_planner_version = \get_file_data( PROGRESS_PLANNER_FILE, [ 'Version' => 'Version' ] )['Version'];
+		$progress_planner_version = \get_file_data( \PROGRESS_PLANNER_FILE, [ 'Version' => 'Version' ] )['Version'];
 		if ( \version_compare( $progress_planner_version, '1.1.1', '<' ) ) {
 			return $providers;
 		}
