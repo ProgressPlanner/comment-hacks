@@ -128,7 +128,7 @@ class Hacks {
 	 * @return string Modified block content with the "Remove URL" option.
 	 */
 	public function modify_comment_edit_link_block( $block_content, $block ) {
-		if ( isset( $block['blockName'] ) && $block['blockName'] === 'core/comment-edit-link' ) {
+		if ( ! empty( $block_content ) && isset( $block['blockName'] ) && $block['blockName'] === 'core/comment-edit-link' ) {
 				\preg_match( '/c=(\d+)/', $block_content, $matches );
 
 				$remove_url_link = $this->get_remove_comment_url_link( (int) $matches[1] );
