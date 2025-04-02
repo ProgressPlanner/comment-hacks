@@ -35,6 +35,35 @@ class Comment_Moderation extends Repetitive {
 	protected const CAPABILITY = 'moderate_comments';
 
 	/**
+	 * Constructor.
+	 *
+	 * @property string $url
+	 *
+	 * @return void
+	 */
+	public function __construct() {
+		$this->url = \admin_url( 'edit-comments.php?comment_status=moderated' );
+	}
+
+	/**
+	 * Get the title.
+	 *
+	 * @return string
+	 */
+	public function get_title() {
+		return \esc_html__( 'Moderate comments', 'comment-hacks' );
+	}
+
+	/**
+	 * Get the description.
+	 *
+	 * @return string
+	 */
+	public function get_description() {
+		return \esc_html__( 'Moderate comments to make sure they are not spam.', 'comment-hacks' );
+	}
+
+	/**
 	 * Check if the task should be added.
 	 *
 	 * @return bool
@@ -74,13 +103,13 @@ class Comment_Moderation extends Repetitive {
 
 		return [
 			'task_id'      => $task_id,
-			'title'        => \esc_html__( 'Moderate comments', 'comment-hacks' ),
+			'title'        => $this->get_title(),
 			'parent'       => 0,
 			'priority'     => 'high',
 			'category'     => $this->get_provider_category(),
 			'points'       => 1,
-			'url'          => $this->capability_required() ? \esc_url( \admin_url( 'edit-comments.php?comment_status=moderated' ) ) : '',
-			'description'  => '<p>' . \esc_html__( 'Moderate comments to make sure they are not spam.', 'comment-hacks' ) . '</p>',
+			'url'          => $this->get_url(),
+			'description'  => $this->get_description(),
 		];
 	}
 }
