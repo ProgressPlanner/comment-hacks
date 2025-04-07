@@ -10,6 +10,8 @@ if ( ! \class_exists( '\Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\R
 
 /**
  * Task for the comment moderation.
+ *
+ * @property string $url
  */
 class Comment_Moderation extends Repetitive {
 
