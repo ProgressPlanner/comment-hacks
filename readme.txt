@@ -59,6 +59,15 @@ If you have bugs to report, please go to [the plugin's GitHub repository](https:
 
 == Changelog ==
 
+= 2.1.3 =
+
+* Add necessary compatibility to Progress Planner integration for the upcoming WordPress 6.8.
+
+= 2.1.2 =
+
+* Rename the plugin from "Comment Hacks" to "Comment Experience".
+* Bring up to date with changes in Progress Planner
+
 = 2.1.1 =
 
 * Don't enqueue the remove URL script on the frontend for logged out users or users without the `edit_posts` capability.
