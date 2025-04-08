@@ -12,8 +12,6 @@ if ( ! \class_exists( '\Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\O
 /**
  * Task for the comment policy.
  *
- * @property string $title
- * @property string $description
  * @property string $url
  */
 class Comment_Policy extends One_Time {
@@ -41,17 +39,36 @@ class Comment_Policy extends One_Time {
 
 	/**
 	 * Class constructor.
+	 *
+	 * @property string $url
+	 *
+	 * @return void
 	 */
 	public function __construct() {
 		$this->options = Hacks::get_options();
+		$this->url     = \admin_url( 'options-general.php?page=comment-experience#top#comment-policy' );
+	}
 
-		$this->title       = \esc_html__( 'Implement a comment policy', 'comment-hacks' );
-		$this->description = \sprintf(
+	/**
+	 * Get the title.
+	 *
+	 * @return string
+	 */
+	public function get_title() {
+		return \esc_html__( 'Implement a comment policy', 'comment-hacks' );
+	}
+
+	/**
+	 * Get the description.
+	 *
+	 * @return string
+	 */
+	public function get_description() {
+		return \sprintf(
 			/* translators: %s:<a href="https://prpl.fyi/comment-policy" target="_blank">comment policy</a> link */
 			\esc_html__( 'Implement a %s to make sure your commenters know what they can and cannot do.', 'comment-hacks' ),
 			'<a href="https://prpl.fyi/comment-policy" target="_blank">' . \esc_html__( 'comment policy', 'comment-hacks' ) . '</a>'
 		);
-		$this->url = \admin_url( 'options-general.php?page=comment-policy#top#comment-policy' );
 	}
 
 	/**

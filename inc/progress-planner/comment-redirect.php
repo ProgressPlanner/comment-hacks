@@ -12,8 +12,6 @@ if ( ! \class_exists( '\Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\O
 /**
  * Task for the comment redirect.
  *
- * @property string $title
- * @property string $description
  * @property string $url
  */
 class Comment_Redirect extends One_Time {
@@ -41,17 +39,36 @@ class Comment_Redirect extends One_Time {
 
 	/**
 	 * Class constructor.
+	 *
+	 * @property string $url
+	 *
+	 * @return void
 	 */
 	public function __construct() {
 		$this->options = Hacks::get_options();
+		$this->url     = \admin_url( 'options-general.php?page=comment-experience#top#comment-redirect' );
+	}
 
-		$this->title       = \esc_html__( 'Implement a comment redirect', 'comment-hacks' );
-		$this->description = \sprintf(
+	/**
+	 * Get the title.
+	 *
+	 * @return string
+	 */
+	public function get_title() {
+		return \esc_html__( 'Implement a comment redirect', 'comment-hacks' );
+	}
+
+	/**
+	 * Get the description.
+	 *
+	 * @return string
+	 */
+	public function get_description() {
+		return \sprintf(
 			/* translators: %s:<a href="https://prpl.fyi/comment-redirect" target="_blank">comment redirect</a> link */
 			\esc_html__( 'Implement a %s to thank first-time commenters for their comment.', 'comment-hacks' ),
 			'<a href="https://prpl.fyi/comment-policy" target="_blank">' . \esc_html__( 'comment redirect', 'comment-hacks' ) . '</a>'
 		);
-		$this->url = \admin_url( 'options-general.php?page=comment-policy#top#comment-redirect' );
 	}
 
 	/**

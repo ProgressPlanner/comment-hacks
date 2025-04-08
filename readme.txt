@@ -4,7 +4,7 @@ Tags: comments, spam, emails
 Text Domain: comment-hacks
 Requires at least: 5.9
 Tested up to: 6.8
-Stable tag: 2.1.2
+Stable tag: 2.1.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires PHP: 7.4
@@ -58,6 +58,15 @@ If you have bugs to report, please go to [the plugin's GitHub repository](https:
 5. The link in the backend to email an individual commenters on a post.
 
 == Changelog ==
+
+= 2.1.3 =
+
+* Add necessary compatibility to Progress Planner integration for the upcoming WordPress 6.8.
+
+= 2.1.2 =
+
+* Rename the plugin from "Comment Hacks" to "Comment Experience".
+* Bring up to date with changes in Progress Planner
 
 = 2.1.1 =
 
