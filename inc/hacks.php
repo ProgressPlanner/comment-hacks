@@ -59,6 +59,7 @@ class Hacks {
 		new Email_Links();
 		new Forms();
 		new Length();
+		new Progress_Planner_Tasks();
 	}
 
 	/**
@@ -127,7 +128,7 @@ class Hacks {
 	 * @return string Modified block content with the "Remove URL" option.
 	 */
 	public function modify_comment_edit_link_block( $block_content, $block ) {
-		if ( isset( $block['blockName'] ) && $block['blockName'] === 'core/comment-edit-link' ) {
+		if ( ! empty( $block_content ) && isset( $block['blockName'] ) && $block['blockName'] === 'core/comment-edit-link' ) {
 				\preg_match( '/c=(\d+)/', $block_content, $matches );
 
 				$remove_url_link = $this->get_remove_comment_url_link( (int) $matches[1] );
@@ -233,11 +234,29 @@ class Hacks {
 				 *
 				 * @param string $url     URL to which the first-time commenter will be redirected.
 				 * @param object $comment The comment object.
+				 * @param string $type    The type of redirect.
 				 *
 				 * @since 1.6.0
 				 */
-				$url = \apply_filters( 'EmiliaProjects\WP\Comment\redirect', $url, $comment );
+				$url = \apply_filters( 'EmiliaProjects\WP\Comment\redirect', $url, $comment, 'first' );
 			}
+		}
+
+		// Only change $url when the page option is actually set and not zero.
+		if ( isset( $this->options['redirect_repeat_page'] ) && $this->options['redirect_repeat_page'] !== 0 ) {
+			$url = \get_permalink( (int) $this->options['redirect_repeat_page'] );
+
+			/**
+			 * Allow other plugins to hook in when the user is being redirected,
+			 * for analytics calls or even to change the target URL.
+			 *
+			 * @param string $url     URL to which a repeat commenter will be redirected.
+			 * @param object $comment The comment object.
+			 * @param string $type    The type of redirect.
+			 *
+			 * @since 2.2.0
+			 */
+			$url = \apply_filters( 'EmiliaProjects\WP\Comment\redirect', $url, $comment, 'repeat' );
 		}
 
 		return $url;

@@ -10,7 +10,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 
 ?>
 	<div class="wrap">
-		<h2><?php esc_html_e( 'Comment Hacks', 'comment-hacks' ); ?></h2>
+		<h2><?php esc_html_e( 'Comment Experience', 'comment-hacks' ); ?></h2>
 
 		<h2 class="nav-tab-wrapper" id="emiliaprojects-tabs">
 			<a class="nav-tab nav-tab-active" id="comment-length-tab" href="#top#comment-length">
@@ -263,7 +263,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 			<div id="comment-redirect" class="emiliaprojectstab">
 				<h3><?php esc_html_e( 'Redirect first time commenters', 'comment-hacks' ); ?></h3>
 
-				<p><?php esc_html_e( 'Select the page below that a first time commenter should be redirected to', 'comment-hacks' ); ?></p>
+				<p><?php esc_html_e( 'Select the page below that a first time commenter on your site should be redirected to.', 'comment-hacks' ); ?></p>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
@@ -291,6 +291,44 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 								<br>
 								<br>
 								<a target="_blank" href="<?php echo esc_url( get_permalink( (int) $this->options['redirect_page'] ) ); ?>">
+									<?php esc_html_e( 'Current redirect page', 'comment-hacks' ); ?>
+								</a>
+							<?php endif; ?>
+						</td>
+					</tr>
+				</table>
+
+				<h3><?php esc_html_e( 'Redirect repeat commenters', 'comment-hacks' ); ?></h3>
+
+				<p><?php esc_html_e( 'A repeat commenter is a commenter that has commented on your entire site more than once. Select the page below that they should be redirected to.', 'comment-hacks' ); ?></p>
+				<p><?php esc_html_e( 'Note that if you have the "Redirect first time commenters" option set to "Don\'t redirect first time commenters", and you do have a page selected here, first-time commenters will be redirected to the same page as repeat commenters.', 'comment-hacks' ); ?></p>
+				<table class="form-table">
+					<tr>
+						<th scope="row">
+							<label for="redirect_repeat_page">
+								<?php esc_html_e( 'Redirect repeat commenters to', 'comment-hacks' ); ?>
+							</label>
+						</th>
+						<td>
+							<?php
+							// A dropdown of all pages in the current WP install.
+							wp_dropdown_pages(
+								[
+									'depth'             => 0,
+									'id'                => 'redirect_repeat_page',
+									// phpcs:ignore WordPress.Security.EscapeOutput -- This is a hard-coded string, just passed around as a variable.
+									'name'              => Hacks::$option_name . '[redirect_repeat_page]',
+									'option_none_value' => '',
+									'selected'          => ( isset( $this->options['redirect_repeat_page'] ) ? (int) $this->options['redirect_repeat_page'] : 0 ),
+									'show_option_none'  => esc_html__( 'Don\'t redirect repeat commenters', 'comment-hacks' ),
+								]
+							);
+							?>
+
+							<?php if ( isset( $this->options['redirect_repeat_page'] ) && $this->options['redirect_repeat_page'] !== 0 ) : ?>
+								<br>
+								<br>
+								<a target="_blank" href="<?php echo esc_url( get_permalink( (int) $this->options['redirect_repeat_page'] ) ); ?>">
 									<?php esc_html_e( 'Current redirect page', 'comment-hacks' ); ?>
 								</a>
 							<?php endif; ?>
@@ -438,7 +476,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 
 /**
  * Action hook to allow other plugins to add additional information to the
- * Comment Hacks admin page.
+ * Comment Experience admin page.
  *
  * @since 1.6.0
  */

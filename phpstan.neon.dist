@@ -9,3 +9,8 @@ parameters:
   treatPhpDocTypesAsCertain: false
   ignoreErrors:
     - '#Constant EMILIA_COMMENT_HACKS_PATH not found.#'
+    - '#Constant PROGRESS_PLANNER_FILE not found.#'
+    - '#Call to an undefined method EmiliaProjects\\WP\\Comment\\Inc\\Progress_Planner\\[a-zA-Z0-9_\\\:\(\)].#'
+    - '#Call to method [a-zA-Z0-9_\\\]+() on an unknown class Progress_Planner\\[a-zA-Z0-9_\\].#'
+    - '#Method EmiliaProjects\\WP\\Comment\\Inc\\Progress_Planner_Tasks\:\:add_task_providers\(\) has invalid return type Progress_Planner\\Suggested_Tasks\\Local_Tasks\\Providers\\Provider.#'
+    - '#Parameter \$providers of method EmiliaProjects\\WP\\Comment\\Inc\\Progress_Planner_Tasks\:\:add_task_providers\(\) has invalid type Progress_Planner\\Suggested_Tasks\\Local_Tasks\\Providers\\Provider.#'

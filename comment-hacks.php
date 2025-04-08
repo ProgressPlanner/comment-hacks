@@ -1,18 +1,18 @@
 <?php
 /**
- * Comment Hacks plugin.
+ * Comment Experience plugin.
  *
  * @wordpress-plugin
- * Plugin Name:  Comment Hacks
- * Version:      2.1.1
- * Plugin URI:   https://joost.blog/plugins/comment-hacks/
- * Description:  Make comments management easier by applying the simple hacks Joost has gathered over the years.
+ * Plugin Name:  Comment Experience
+ * Version:      2.1.2
+ * Plugin URI:   https://progressplanner.com/plugins/comment-experience/
+ * Description:  Improve the comment experience on your site. Adds lots of features to make commenting easier and more engaging.
  * Requires PHP: 7.4
- * Author:       Joost de Valk
- * Author URI:   https://joost.blog/
+ * Author:       Team Progress Planner
+ * Author URI:   https://progressplanner.com
  * Text Domain:  comment-hacks
  *
- * Copyright 2009-2024 Joost de Valk (email: joost@joost.blog)
+ * Copyright 2009-2025 Joost de Valk and Team Progress Planner
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

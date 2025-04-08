@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	name="Comment Hacks"
+	name="Comment Experience"
 	xsi:noNamespaceSchemaLocation="./vendor/squizlabs/php_codesniffer/phpcs.xsd">
 
-	<description>Comment Hacks rules for PHP_CodeSniffer</description>
+	<description>Comment Experience rules for PHP_CodeSniffer</description>
 
 	<!--
 	#############################################################################
@@ -56,6 +56,7 @@
 			<property name="prefixes" type="array">
 				<element value="EmiliaProjects\WP\Comment"/>
 				<element value="comment_hacks"/>
+				<element value="comment_experience"/>
 			</property>
 		</properties>
 	</rule>

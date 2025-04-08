@@ -1,16 +1,21 @@
-[![CS](https://github.com/emilia-capital/comment-hacks/actions/workflows/cs.yml/badge.svg)](https://github.com/emilia-capital/comment-hacks/actions/workflows/cs.yml)
-[![Lint](https://github.com/emilia-capital/comment-hacks/actions/workflows/lint.yml/badge.svg)](https://github.com/emilia-capital/comment-hacks/actions/workflows/lint.yml)
-[![Test](https://github.com/emilia-capital/comment-hacks/actions/workflows/test.yml/badge.svg)](https://github.com/emilia-capital/comment-hacks/actions/workflows/test.yml)
-[![Release Version](https://img.shields.io/github/release/emilia-capital/comment-hacks.svg)](https://github.com/emilia-capital/comment-hacks/releases/latest) 
-[![MIT License](https://img.shields.io/github/license/emilia-capital/comment-hacks.svg)](https://github.com/emilia-capital/comment-hacks/blob/trunk/LICENSE)
+[![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/yoast-comment-hacks.svg)](https://wordpress.org/plugins/yoast-comment-hacks/)
+![WordPress Plugin: Tested WP Version](https://img.shields.io/wordpress/plugin/tested/yoast-comment-hacks.svg)
+[![WordPress Plugin Active Installs](https://img.shields.io/wordpress/plugin/installs/yoast-comment-hacks.svg)](https://wordpress.org/plugins/yoast-comment-hacks/advanced/)
+[![WordPress Plugin Downloads](https://img.shields.io/wordpress/plugin/dt/yoast-comment-hacks.svg)](https://wordpress.org/plugins/yoast-comment-hacks/advanced/)
+[![WordPress Plugin Rating](https://img.shields.io/wordpress/plugin/stars/yoast-comment-hacks.svg)](https://wordpress.org/support/plugin/yoast-comment-hacks/reviews/)
+[![GPL License](https://img.shields.io/github/license/ProgressPlanner/comment-hacks.svg)](https://github.com/ProgressPlanner/comment-hacks/blob/main/LICENSE)
 
-# Comment Hacks
+[![CS](https://github.com/ProgressPlanner/comment-hacks/actions/workflows/cs.yml/badge.svg)](https://github.com/ProgressPlanner/comment-hacks/actions/workflows/cs.yml)
+[![Lint](https://github.com/ProgressPlanner/comment-hacks/actions/workflows/lint.yml/badge.svg)](https://github.com/ProgressPlanner/comment-hacks/actions/workflows/lint.yml)
+[![Test](https://github.com/ProgressPlanner/comment-hacks/actions/workflows/test.yml/badge.svg)](https://github.com/ProgressPlanner/comment-hacks/actions/workflows/test.yml)
 
-Make comments management easier by applying the simple hacks Joost has gathered over the years.
+# Comment Experience by Progress Planner
+
+Improve the comment experience on your site. Adds lots of features to make commenting easier and more engaging.
 
 ## Description
 
-This plugin adds some small hacks around core WordPress comments to make them more bearable:
+This plugin adds many small improvements around core WordPress comments to make them more bearable:
 
 * Cleaner comment notification emails.
 * The option to enforce a comment policy.

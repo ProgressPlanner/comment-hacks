@@ -9,7 +9,7 @@ if ( \function_exists( 'xdebug_disable' ) ) {
 	\xdebug_disable();
 }
 
-echo 'Welcome to the Comment Hacks Test Suite' . \PHP_EOL;
+echo 'Welcome to the Comment Experience Test Suite' . \PHP_EOL;
 echo 'Version: 1.0' . \PHP_EOL . \PHP_EOL;
 
 require_once \dirname( __DIR__ ) . '/vendor/yoast/wp-test-utils/src/WPIntegration/bootstrap-functions.php';
