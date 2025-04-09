@@ -158,7 +158,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 									'name'              => esc_attr( Hacks::$option_name . '[comment_policy_page]' ),
 									'id'                => 'comment_policy_page',
 									'show_option_none'  => esc_html__( 'Select comment policy page', 'comment-hacks' ),
-									'option_none_value' => '',
+									'option_none_value' => '0',
 								]
 							);
 							?>
@@ -287,7 +287,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 							);
 							?>
 
-							<?php if ( isset( $this->options['redirect_page'] ) && $this->options['redirect_page'] !== 0 ) : ?>
+							<?php if ( isset( $this->options['redirect_page'] ) && (int) $this->options['redirect_page'] !== 0 ) : ?>
 								<br>
 								<br>
 								<a target="_blank" href="<?php echo esc_url( get_permalink( (int) $this->options['redirect_page'] ) ); ?>">
@@ -352,7 +352,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 								type="checkbox"
 								id="clean_emails"
 								name="<?php echo esc_attr( Hacks::$option_name . '[clean_emails]' ); ?>"
-								<?php checked( $this->options['clean_emails'] ); ?> 
+								<?php checked( $this->options['clean_emails'] ); ?>
 							/>
 						</td>
 					</tr>
