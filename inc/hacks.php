@@ -26,11 +26,9 @@ class Hacks {
 	 * Class constructor.
 	 */
 	public function __construct() {
-		$this->options = self::get_options();
-		if ( ! isset( $this->options['version'] ) || \EMILIA_COMMENT_HACKS_VERSION > $this->options['version'] ) {
-			$this->set_defaults();
-			$this->upgrade();
-		}
+
+		// On init since option defaults have translatable strings.
+		\add_action( 'init', [ $this, 'init' ], 0, 1 );
 
 		\add_action( 'init', [ $this, 'load_text_domain' ] );
 
@@ -47,10 +45,6 @@ class Hacks {
 
 		\add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_comment_block_scripts' ] );
 
-		if ( $this->options['clean_emails'] ) {
-			new Clean_Emails();
-		}
-
 		if ( \is_admin() || \wp_doing_ajax() ) {
 			new Admin();
 		}
@@ -60,6 +54,23 @@ class Hacks {
 		new Forms();
 		new Length();
 		new Progress_Planner_Tasks();
+	}
+
+	/**
+	 * Initialize the comment hacks.
+	 *
+	 * @return void
+	 */
+	public function init() {
+		$this->options = self::get_options();
+		if ( ! isset( $this->options['version'] ) || \EMILIA_COMMENT_HACKS_VERSION > $this->options['version'] ) {
+			$this->set_defaults();
+			$this->upgrade();
+		}
+
+		if ( $this->options['clean_emails'] ) {
+			new Clean_Emails();
+		}
 	}
 
 	/**
