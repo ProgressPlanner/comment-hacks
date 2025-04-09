@@ -349,6 +349,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 				case 'comment_policy':
 				case 'clean_emails':
 				case 'disable_email_all_commenters':
+				case 'allowed_com_length_note_show':
 					$input[ $key ] = $this->sanitize_bool( $value );
 					break;
 				case 'email_subject':
@@ -356,6 +357,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 				case 'mass_email_body':
 				case 'forward_name':
 				case 'forward_subject':
+				case 'allowed_com_length_note_text':
 					$input[ $key ] = $this->sanitize_string( $value, $defaults[ $key ] );
 					break;
 				case 'forward_email':

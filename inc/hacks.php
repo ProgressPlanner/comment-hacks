@@ -331,6 +331,9 @@ class Hacks {
 			'mincomlengtherror'            => \__( 'Error: Your comment is too short. Please try to say something useful.', 'comment-hacks' ),
 			'maxcomlength'                 => 1500,
 			'maxcomlengtherror'            => \__( 'Error: Your comment is too long. Please try to be more concise.', 'comment-hacks' ),
+			'allowed_com_length_note_show' => false,
+			/* translators: %1$s is replaced with the minimum number of characters, %2$s with the maximum number of characters */
+			'allowed_com_length_note_text' => \sprintf( \__( 'Allowed comment length is between %1$s and %2$s characters.', 'comment-hacks' ), '%mincomlength%', '%maxcomlength%' ),
 			'redirect_page'                => 0,
 			'forward_email'                => '',
 			'forward_name'                 => \__( 'Support', 'comment-hacks' ),
