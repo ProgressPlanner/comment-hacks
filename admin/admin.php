@@ -39,7 +39,9 @@ class Admin {
 	 * Class constructor.
 	 */
 	public function __construct() {
-		$this->options = Hacks::get_options();
+
+		// Set the options on init, since they have translatable strings.
+		\add_action( 'init', [ $this, 'set_options' ], 1, 1 );
 
 		// Hook into init for registration of the option and the language files.
 		\add_action( 'admin_init', [ $this, 'init' ] );
@@ -62,6 +64,15 @@ class Admin {
 		\add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_discussion_settings_script' ] );
 
 		new Comment_Parent();
+	}
+
+	/**
+	 * Set the options on init, since they have translatable strings.
+	 *
+	 * @return void
+	 */
+	public function set_options() {
+		$this->options = Hacks::get_options();
 	}
 
 	/**

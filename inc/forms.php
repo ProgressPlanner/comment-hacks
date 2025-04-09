@@ -18,6 +18,17 @@ class Forms {
 	 * Class constructor.
 	 */
 	public function __construct() {
+
+		// Delay to init, since the options have translatable strings.
+		\add_action( 'init', [ $this, 'init' ], 1, 1 );
+	}
+
+	/**
+	 * Initialize Forms.
+	 *
+	 * @return void
+	 */
+	public function init() {
 		$this->options = Hacks::get_options();
 		Hacks::get_defaults();
 
