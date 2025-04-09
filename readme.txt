@@ -59,6 +59,10 @@ If you have bugs to report, please go to [the plugin's GitHub repository](https:
 
 == Changelog ==
 
+= 2.1.4 =
+
+* Save proper values for Redirect page settings when no selection is made.
+
 = 2.1.3 =
 
 * Add necessary compatibility to Progress Planner integration for the upcoming WordPress 6.8.
