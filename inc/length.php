@@ -80,13 +80,17 @@ class Length {
 	/**
 	 * Adds a message to the comment form for the allowed comment length.
 	 *
-	 * @return void
+	 * @since 2.1.4
+	 *
+	 * @param string $field The comment form field.
+	 *
+	 * @return string The comment form field.
 	 */
 	public function allowed_comment_length_note( $field ) {
 
 		if ( $this->options['allowed_com_length_note_show'] ) {
-			$note = \str_replace( '%mincomlength%', $this->options['mincomlength'], $this->options['allowed_com_length_note_text'] );
-			$note = \str_replace( '%maxcomlength%', $this->options['maxcomlength'], $note );
+			$note  = \str_replace( '%mincomlength%', $this->options['mincomlength'], $this->options['allowed_com_length_note_text'] );
+			$note  = \str_replace( '%maxcomlength%', $this->options['maxcomlength'], $note );
 			$field = '<label class="comment-hacks-allowed-comment-length-note">' . \esc_html( $note ) . '</label>' . $field;
 		}
 
