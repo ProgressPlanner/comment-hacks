@@ -77,7 +77,7 @@ class Comment_Policy extends One_Time {
 	 * @return bool
 	 */
 	public function should_add_task() {
-		if ( ! $this->options['comment_policy_page'] || ! $this->options['comment_policy'] ) {
+		if ( ! (int) $this->options['comment_policy_page'] || ! (int) $this->options['comment_policy'] ) {
 			return true;
 		}
 
