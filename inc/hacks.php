@@ -225,7 +225,7 @@ class Hacks {
 		// If no approved comments have been found, show the thank-you page.
 		if ( empty( $has_approved_comment ) ) {
 			// Only change $url when the page option is actually set and not zero.
-			if ( isset( $this->options['redirect_page'] ) && $this->options['redirect_page'] !== 0 ) {
+			if ( isset( $this->options['redirect_page'] ) && (int) $this->options['redirect_page'] !== 0 ) {
 				$url = \get_permalink( (int) $this->options['redirect_page'] );
 
 				/**
@@ -243,7 +243,7 @@ class Hacks {
 		}
 
 		// Only change $url when the page option is actually set and not zero.
-		if ( isset( $this->options['redirect_repeat_page'] ) && $this->options['redirect_repeat_page'] !== 0 ) {
+		if ( isset( $this->options['redirect_repeat_page'] ) && (int) $this->options['redirect_repeat_page'] !== 0 ) {
 			$url = \get_permalink( (int) $this->options['redirect_repeat_page'] );
 
 			/**
