@@ -301,12 +301,12 @@ class Hacks {
 
 		if ( ! isset( $this->options['version'] ) ) {
 			$this->options['clean_emails'] = true;
-			$options_changed = true;
+			$options_changed               = true;
 		}
 
 		if ( ! isset( $this->options['version'] ) || \EMILIA_COMMENT_HACKS_VERSION > $this->options['version'] ) {
 			$this->options['version'] = \EMILIA_COMMENT_HACKS_VERSION;
-			$options_changed = true;
+			$options_changed          = true;
 		}
 
 		if ( ! isset( $this->options['disable_email_all_commenters'] ) ) {
