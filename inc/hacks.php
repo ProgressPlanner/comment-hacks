@@ -311,7 +311,7 @@ class Hacks {
 
 		if ( ! isset( $this->options['disable_email_all_commenters'] ) ) {
 			$this->options['disable_email_all_commenters'] = false;
-			$options_changed = true;
+			$options_changed                               = true;
 		}
 
 		if ( $options_changed ) {
