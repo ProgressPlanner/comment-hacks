@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/7.5/phpunit.xsd"
-		backupGlobals="false"
-		backupStaticAttributes="false"
-		bootstrap="tests/bootstrap.php"
-		colors="true"
-		convertErrorsToExceptions="true"
-		convertNoticesToExceptions="true"
-		convertWarningsToExceptions="true"
-		convertDeprecationsToExceptions="true"
-		forceCoversAnnotation="true"
-		processIsolation="false"
-		stopOnError="false"
-		stopOnFailure="false"
-		stopOnIncomplete="false"
-		stopOnSkipped="false"
-		verbose="true"
+	xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+	backupGlobals="false"
+	backupStaticAttributes="false"
+	bootstrap="tests/bootstrap.php"
+	colors="true"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+	convertDeprecationsToExceptions="true"
+	forceCoversAnnotation="true"
+	processIsolation="false"
+	stopOnError="false"
+	stopOnFailure="false"
+	stopOnIncomplete="false"
+	stopOnSkipped="false"
+	verbose="true"
 	>
+	<coverage includeUncoveredFiles="true" processUncoveredFiles="false">
+		<include>
+			<file>./comment-hacks.php</file>
+			<directory>./admin</directory>
+			<directory>./inc</directory>
+		</include>
+	</coverage>
 	<testsuites>
 		<testsuite name="comment-hacks">
 			<directory suffix="-test.php">./tests/</directory>
 		</testsuite>
 	</testsuites>
-
-	<filter>
-		<whitelist addUncoveredFilesFromWhitelist="true" processUncoveredFilesFromWhitelist="false">
-			<file>./comment-hacks.php</file>
-			<directory>./admin</directory>
-			<directory>./inc</directory>
-		</whitelist>
-	</filter>
 </phpunit>
