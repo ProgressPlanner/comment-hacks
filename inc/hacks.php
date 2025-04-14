@@ -284,6 +284,8 @@ class Hacks {
 	 * @return void
 	 */
 	private function upgrade(): void {
+		$options_changed = false;
+
 		foreach ( [ 'MinComLengthOptions', 'min_comment_length_option', 'CommentRedirect' ] as $old_option ) {
 			$old_option_values = $this->get_option_from_cache( $old_option );
 			if ( \is_array( $old_option_values ) ) {
@@ -293,19 +295,28 @@ class Hacks {
 				}
 				$this->options = \wp_parse_args( $this->options, $old_option_values );
 				\delete_option( $old_option );
+				$options_changed = true;
 			}
 		}
 
 		if ( ! isset( $this->options['version'] ) ) {
 			$this->options['clean_emails'] = true;
-			$this->options['version']      = \EMILIA_COMMENT_HACKS_VERSION;
+			$options_changed               = true;
+		}
+
+		if ( ! isset( $this->options['version'] ) || \EMILIA_COMMENT_HACKS_VERSION > $this->options['version'] ) {
+			$this->options['version'] = \EMILIA_COMMENT_HACKS_VERSION;
+			$options_changed          = true;
 		}
 
 		if ( ! isset( $this->options['disable_email_all_commenters'] ) ) {
 			$this->options['disable_email_all_commenters'] = false;
+			$options_changed                               = true;
 		}
 
-		\update_option( self::$option_name, $this->options );
+		if ( $options_changed ) {
+			\update_option( self::$option_name, $this->options );
+		}
 	}
 
 	/**
