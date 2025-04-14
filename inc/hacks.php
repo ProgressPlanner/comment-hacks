@@ -225,7 +225,7 @@ class Hacks {
 		// If no approved comments have been found, show the thank-you page.
 		if ( empty( $has_approved_comment ) ) {
 			// Only change $url when the page option is actually set and not zero.
-			if ( isset( $this->options['redirect_page'] ) && $this->options['redirect_page'] !== 0 ) {
+			if ( isset( $this->options['redirect_page'] ) && (int) $this->options['redirect_page'] !== 0 ) {
 				$url = \get_permalink( (int) $this->options['redirect_page'] );
 
 				/**
@@ -243,7 +243,7 @@ class Hacks {
 		}
 
 		// Only change $url when the page option is actually set and not zero.
-		if ( isset( $this->options['redirect_repeat_page'] ) && $this->options['redirect_repeat_page'] !== 0 ) {
+		if ( isset( $this->options['redirect_repeat_page'] ) && (int) $this->options['redirect_repeat_page'] !== 0 ) {
 			$url = \get_permalink( (int) $this->options['redirect_repeat_page'] );
 
 			/**
@@ -330,7 +330,7 @@ class Hacks {
 			'comment_policy'               => false,
 			'comment_policy_text'          => \__( 'I agree to the comment policy.', 'comment-hacks' ),
 			'comment_policy_error'         => \__( 'You have to agree to the comment policy.', 'comment-hacks' ),
-			'comment_policy_page'          => 0,
+			'comment_policy_page'          => '0',
 			'disable_email_all_commenters' => false,
 			/* translators: %s expands to the post title */
 			'email_subject'                => \sprintf( \__( 'RE: %s', 'comment-hacks' ), '%title%' ),
@@ -342,7 +342,7 @@ class Hacks {
 			'mincomlengtherror'            => \__( 'Error: Your comment is too short. Please try to say something useful.', 'comment-hacks' ),
 			'maxcomlength'                 => 1500,
 			'maxcomlengtherror'            => \__( 'Error: Your comment is too long. Please try to be more concise.', 'comment-hacks' ),
-			'redirect_page'                => 0,
+			'redirect_page'                => '0',
 			'forward_email'                => '',
 			'forward_name'                 => \__( 'Support', 'comment-hacks' ),
 			/* translators: %1$s is replaced by the blog's name. */
