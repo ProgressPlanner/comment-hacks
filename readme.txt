@@ -61,6 +61,7 @@ If you have bugs to report, please go to [the plugin's GitHub repository](https:
 
 = 2.1.4 =
 
+* Add compatibility with WordPress 6.8.
 * Save proper values for Redirect page settings when no selection is made.
 
 = 2.1.3 =
