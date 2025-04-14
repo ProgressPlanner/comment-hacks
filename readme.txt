@@ -61,7 +61,7 @@ If you have bugs to report, please go to [the plugin's GitHub repository](https:
 
 = 2.1.4 =
 
-* Add necessary compatibility for the upcoming WordPress 6.8.
+* Add compatibility with WordPress 6.8.
 
 = 2.1.3 =
 
