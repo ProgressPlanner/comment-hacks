@@ -2,7 +2,7 @@
 
 namespace EmiliaProjects\WP\Comment\Inc;
 
-use Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\Provider;
+use Progress_Planner\Suggested_Tasks\Tasks\Providers\Provider;
 
 /**
  * Registers the tasks for the Progress Planner.

@@ -4,6 +4,9 @@ namespace EmiliaProjects\WP\Comment\Inc\Progress_Planner;
 
 use Progress_Planner\Suggested_Tasks\Providers\Tasks;
 
+if ( ! \class_exists( '\Progress_Planner\Suggested_Tasks\Providers\Tasks' ) ) {
+	return;
+}
 
 /**
  * Task for the comment moderation.
