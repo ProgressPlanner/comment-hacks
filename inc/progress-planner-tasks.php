@@ -30,6 +30,11 @@ class Progress_Planner_Tasks {
 			return $providers;
 		}
 
+		// Bail early if the Tasks class does not exist.
+		if ( ! \class_exists( '\Progress_Planner\Suggested_Tasks\Providers\Tasks' ) ) {
+			return $providers;
+		}
+
 		// Remove the disable-comments provider - if you have this plugin installed, you don't need to see this task.
 		foreach ( $providers as $key => $provider ) {
 			if ( $provider->get_provider_id() === 'disable-comments' ) {

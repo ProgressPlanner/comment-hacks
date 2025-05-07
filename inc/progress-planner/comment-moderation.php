@@ -2,18 +2,15 @@
 
 namespace EmiliaProjects\WP\Comment\Inc\Progress_Planner;
 
-use Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\Repetitive;
+use Progress_Planner\Suggested_Tasks\Providers\Tasks;
 
-if ( ! \class_exists( '\Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\Repetitive' ) ) {
-	return;
-}
 
 /**
  * Task for the comment moderation.
  *
  * @property string $url
  */
-class Comment_Moderation extends Repetitive {
+class Comment_Moderation extends Tasks {
 
 	/**
 	 * The provider ID.
@@ -35,6 +32,13 @@ class Comment_Moderation extends Repetitive {
 	 * @var string
 	 */
 	protected const CAPABILITY = 'moderate_comments';
+
+	/**
+	 * Whether the task is repetitive.
+	 *
+	 * @var bool
+	 */
+	protected $is_repetitive = true;
 
 	/**
 	 * Constructor.

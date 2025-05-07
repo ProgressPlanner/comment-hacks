@@ -3,18 +3,14 @@
 namespace EmiliaProjects\WP\Comment\Inc\Progress_Planner;
 
 use EmiliaProjects\WP\Comment\Inc\Hacks;
-use Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\One_Time;
-
-if ( ! \class_exists( '\Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\One_Time' ) ) {
-	return;
-}
+use Progress_Planner\Suggested_Tasks\Providers\Tasks;
 
 /**
  * Task for the comment redirect.
  *
  * @property string $url
  */
-class Comment_Redirect extends One_Time {
+class Comment_Redirect extends Tasks {
 
 	/**
 	 * The provider ID.
