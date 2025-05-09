@@ -2,7 +2,7 @@
 
 namespace EmiliaProjects\WP\Comment\Inc;
 
-use Progress_Planner\Suggested_Tasks\Local_Tasks\Providers\Provider;
+use Progress_Planner\Suggested_Tasks\Tasks\Providers\Provider;
 
 /**
  * Registers the tasks for the Progress Planner.
@@ -27,6 +27,11 @@ class Progress_Planner_Tasks {
 		// Bail early if the version is less than 1.1.1.
 		$progress_planner_version = \get_file_data( \PROGRESS_PLANNER_FILE, [ 'Version' => 'Version' ] )['Version'];
 		if ( \version_compare( $progress_planner_version, '1.1.1', '<' ) ) {
+			return $providers;
+		}
+
+		// Bail early if the Tasks class does not exist.
+		if ( ! \class_exists( '\Progress_Planner\Suggested_Tasks\Providers\Tasks' ) ) {
 			return $providers;
 		}
 
