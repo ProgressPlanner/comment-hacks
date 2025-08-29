@@ -26,11 +26,9 @@ class Hacks {
 	 * Class constructor.
 	 */
 	public function __construct() {
-		$this->options = self::get_options();
-		if ( ! isset( $this->options['version'] ) || \EMILIA_COMMENT_HACKS_VERSION > $this->options['version'] ) {
-			$this->set_defaults();
-			$this->upgrade();
-		}
+
+		// On init since option defaults have translatable strings.
+		\add_action( 'init', [ $this, 'init' ], 0, 1 );
 
 		\add_action( 'init', [ $this, 'load_text_domain' ] );
 
@@ -47,10 +45,6 @@ class Hacks {
 
 		\add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_comment_block_scripts' ] );
 
-		if ( $this->options['clean_emails'] ) {
-			new Clean_Emails();
-		}
-
 		if ( \is_admin() || \wp_doing_ajax() ) {
 			new Admin();
 		}
@@ -60,6 +54,23 @@ class Hacks {
 		new Forms();
 		new Length();
 		new Progress_Planner_Tasks();
+	}
+
+	/**
+	 * Initialize the comment hacks.
+	 *
+	 * @return void
+	 */
+	public function init() {
+		$this->options = self::get_options();
+		if ( ! isset( $this->options['version'] ) || \EMILIA_COMMENT_HACKS_VERSION > $this->options['version'] ) {
+			$this->set_defaults();
+			$this->upgrade();
+		}
+
+		if ( $this->options['clean_emails'] ) {
+			new Clean_Emails();
+		}
 	}
 
 	/**
@@ -225,7 +236,7 @@ class Hacks {
 		// If no approved comments have been found, show the thank-you page.
 		if ( empty( $has_approved_comment ) ) {
 			// Only change $url when the page option is actually set and not zero.
-			if ( isset( $this->options['redirect_page'] ) && $this->options['redirect_page'] !== 0 ) {
+			if ( isset( $this->options['redirect_page'] ) && (int) $this->options['redirect_page'] !== 0 ) {
 				$url = \get_permalink( (int) $this->options['redirect_page'] );
 
 				/**
@@ -243,7 +254,7 @@ class Hacks {
 		}
 
 		// Only change $url when the page option is actually set and not zero.
-		if ( isset( $this->options['redirect_repeat_page'] ) && $this->options['redirect_repeat_page'] !== 0 ) {
+		if ( isset( $this->options['redirect_repeat_page'] ) && (int) $this->options['redirect_repeat_page'] !== 0 ) {
 			$url = \get_permalink( (int) $this->options['redirect_repeat_page'] );
 
 			/**
@@ -284,6 +295,8 @@ class Hacks {
 	 * @return void
 	 */
 	private function upgrade(): void {
+		$options_changed = false;
+
 		foreach ( [ 'MinComLengthOptions', 'min_comment_length_option', 'CommentRedirect' ] as $old_option ) {
 			$old_option_values = $this->get_option_from_cache( $old_option );
 			if ( \is_array( $old_option_values ) ) {
@@ -293,19 +306,28 @@ class Hacks {
 				}
 				$this->options = \wp_parse_args( $this->options, $old_option_values );
 				\delete_option( $old_option );
+				$options_changed = true;
 			}
 		}
 
 		if ( ! isset( $this->options['version'] ) ) {
 			$this->options['clean_emails'] = true;
-			$this->options['version']      = \EMILIA_COMMENT_HACKS_VERSION;
+			$options_changed               = true;
+		}
+
+		if ( ! isset( $this->options['version'] ) || \EMILIA_COMMENT_HACKS_VERSION > $this->options['version'] ) {
+			$this->options['version'] = \EMILIA_COMMENT_HACKS_VERSION;
+			$options_changed          = true;
 		}
 
 		if ( ! isset( $this->options['disable_email_all_commenters'] ) ) {
 			$this->options['disable_email_all_commenters'] = false;
+			$options_changed                               = true;
 		}
 
-		\update_option( self::$option_name, $this->options );
+		if ( $options_changed ) {
+			\update_option( self::$option_name, $this->options );
+		}
 	}
 
 	/**
@@ -319,7 +341,7 @@ class Hacks {
 			'comment_policy'               => false,
 			'comment_policy_text'          => \__( 'I agree to the comment policy.', 'comment-hacks' ),
 			'comment_policy_error'         => \__( 'You have to agree to the comment policy.', 'comment-hacks' ),
-			'comment_policy_page'          => 0,
+			'comment_policy_page'          => '0',
 			'disable_email_all_commenters' => false,
 			/* translators: %s expands to the post title */
 			'email_subject'                => \sprintf( \__( 'RE: %s', 'comment-hacks' ), '%title%' ),

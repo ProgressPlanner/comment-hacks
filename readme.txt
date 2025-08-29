@@ -2,9 +2,9 @@
 Contributors: joostdevalk
 Tags: comments, spam, emails
 Text Domain: comment-hacks
-Requires at least: 5.9
+Requires at least: 6.6
 Tested up to: 6.8
-Stable tag: 2.1.3
+Stable tag: 2.1.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires PHP: 7.4
@@ -58,6 +58,14 @@ If you have bugs to report, please go to [the plugin's GitHub repository](https:
 5. The link in the backend to email an individual commenters on a post.
 
 == Changelog ==
+
+= 2.1.4 =
+
+* Add compatibility with WordPress 6.8.
+* Save proper values for Redirect page settings when no selection is made.
+* Run upgrade routine only when plugin version is increased
+* Migrate PHPUnit XML schema
+* Compatibility with Progress Planner v1.4
 
 = 2.1.3 =
 
