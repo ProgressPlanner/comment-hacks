@@ -87,10 +87,10 @@ class Comment_Redirect extends Tasks {
 	/**
 	 * Add task actions specific to this task.
 	 *
-	 * @param array<string, mixed>             $data    The task data.
-	 * @param array<int, array<string, mixed>> $actions The existing actions.
+	 * @param array<string, string|int|bool>             $data    The task data.
+	 * @param array<int, array<string, string|int|bool>> $actions The existing actions.
 	 *
-	 * @return array
+	 * @return array<int, array<string, string|int|bool>>
 	 */
 	public function add_task_actions( $data = [], $actions = [] ) {
 		$actions[] = [
