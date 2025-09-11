@@ -121,4 +121,21 @@ class Comment_Moderation extends Tasks {
 			'description'  => $this->get_description(),
 		];
 	}
+
+	/**
+	 * Add task actions specific to this task.
+	 *
+	 * @param array $data    The task data.
+	 * @param array $actions The existing actions.
+	 *
+	 * @return array
+	 */
+	public function add_task_actions( $data = [], $actions = [] ) {
+		$actions[] = [
+			'priority' => 10,
+			'html'     => '<a class="prpl-tooltip-action-text" href="' . \admin_url( 'edit-comments.php?comment_status=moderated' ) . '" target="_self">' . \esc_html__( 'Moderate', 'progress-planner' ) . '</a>',
+		];
+
+		return $actions;
+	}
 }

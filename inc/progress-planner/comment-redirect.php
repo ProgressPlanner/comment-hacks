@@ -83,4 +83,21 @@ class Comment_Redirect extends Tasks {
 
 		return false;
 	}
+
+	/**
+	 * Add task actions specific to this task.
+	 *
+	 * @param array $data    The task data.
+	 * @param array $actions The existing actions.
+	 *
+	 * @return array
+	 */
+	public function add_task_actions( $data = [], $actions = [] ) {
+		$actions[] = [
+			'priority' => 10,
+			'html'     => '<a class="prpl-tooltip-action-text" href="' . \admin_url( 'options-general.php?page=comment-experience#top#comment-redirect' ) . '" target="_self">' . \esc_html__( 'Implement', 'progress-planner' ) . '</a>',
+		];
+
+		return $actions;
+	}
 }
