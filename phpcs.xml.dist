@@ -38,6 +38,7 @@
     <rule ref="rulesets/naming.xml/BooleanGetMethodName" />
 
     <exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions.NonFullyQualified" />
+    <exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification" />
     <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.ContentAfterBrace" />
 
 </ruleset>
