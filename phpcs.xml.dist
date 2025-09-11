@@ -39,6 +39,7 @@
 
     <exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions.NonFullyQualified" />
     <exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification" />
+    <exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification" />
     <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.ContentAfterBrace" />
 
 </ruleset>
