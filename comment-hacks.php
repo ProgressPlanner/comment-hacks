@@ -35,15 +35,15 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 /**
  * Used for version checks.
  */
-\define( 'EMILIA_COMMENT_HACKS_VERSION', '2.1.3' );
+define( 'EMILIA_COMMENT_HACKS_VERSION', '2.1.3' );
 
 /**
  * Used for asset embedding.
  */
-\define( 'EMILIA_COMMENT_HACKS_FILE', __FILE__ );
+define( 'EMILIA_COMMENT_HACKS_FILE', __FILE__ );
 
-if ( ! \defined( 'EMILIA_COMMENT_HACKS_PATH' ) ) {
-	\define( 'EMILIA_COMMENT_HACKS_PATH', \plugin_dir_path( __FILE__ ) );
+if ( ! defined( 'EMILIA_COMMENT_HACKS_PATH' ) ) {
+	define( 'EMILIA_COMMENT_HACKS_PATH', plugin_dir_path( __FILE__ ) );
 }
 
 require_once EMILIA_COMMENT_HACKS_PATH . 'inc/autoload.php';
