@@ -46,7 +46,7 @@ class Comment_Redirect extends Tasks {
 	 */
 	public function __construct() {
 		$this->options = Hacks::get_options();
-		$this->url     = \admin_url( 'options-general.php?page=comment-experience#top#comment-redirect' );
+		$this->url     = \admin_url( 'options-general.php?page=comment-experience#top#comment-redirect' ); // @phpstan-ignore-line
 	}
 
 	/**

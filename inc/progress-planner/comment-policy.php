@@ -47,7 +47,7 @@ class Comment_Policy extends Tasks {
 	 */
 	public function __construct() {
 		$this->options = Hacks::get_options();
-		$this->url     = \admin_url( 'options-general.php?page=comment-experience#top#comment-policy' );
+		$this->url     = \admin_url( 'options-general.php?page=comment-experience#top#comment-policy' ); // @phpstan-ignore-line
 	}
 
 	/**

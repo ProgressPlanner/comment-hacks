@@ -137,7 +137,7 @@ class Email_Links {
 		/**
 		 * The comment.
 		 *
-		 * @var $comment \WP_Comment
+		 * @var \WP_Comment $comment
 		 */
 		global $comment;
 

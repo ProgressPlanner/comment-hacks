@@ -51,7 +51,7 @@ class Comment_Moderation extends Tasks {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->url = \admin_url( 'edit-comments.php?comment_status=moderated' );
+		$this->url = \admin_url( 'edit-comments.php?comment_status=moderated' ); // @phpstan-ignore-line
 	}
 
 	/**

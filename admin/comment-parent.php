@@ -65,11 +65,11 @@ class Comment_Parent {
 			return; // There might be another reason for a comment to be updated.
 		}
 
-		if ( \defined( 'DOING_AJAX' ) && \DOING_AJAX === true ) {
+		if ( \function_exists( 'wp_doing_ajax' ) && \wp_doing_ajax() ) {
 			\check_ajax_referer( 'replyto-comment', '_ajax_nonce-replyto-comment' );
 		}
 
-		if ( ! \defined( 'DOING_AJAX' ) || \DOING_AJAX !== true ) {
+		if ( ! \function_exists( 'wp_doing_ajax' ) || ! \wp_doing_ajax() ) {
 			\check_admin_referer( 'update-comment_' . $comment_id );
 		}
 
