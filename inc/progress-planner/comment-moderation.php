@@ -125,8 +125,8 @@ class Comment_Moderation extends Tasks {
 	/**
 	 * Add task actions specific to this task.
 	 *
-	 * @param array $data    The task data.
-	 * @param array $actions The existing actions.
+	 * @param array<string, mixed>             $data    The task data.
+	 * @param array<int, array<string, mixed>> $actions The existing actions.
 	 *
 	 * @return array
 	 */
