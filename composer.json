@@ -35,7 +35,7 @@
 	},
 	"config": {
 		"platform": {
-			"php": "7.4"
+			"php": "8.2"
 		},
 		"allow-plugins": {
 			"composer/installers": true,
@@ -59,7 +59,7 @@
 			"@php ./vendor/squizlabs/php_codesniffer/bin/phpcs --config-set default_standard Yoast"
 		],
 		"check-cs": [
-			"@php ./vendor/squizlabs/php_codesniffer/bin/phpcs --runtime-set testVersion 7.4-"
+			"@php ./vendor/squizlabs/php_codesniffer/bin/phpcs --runtime-set testVersion 8.2-"
 		],
 		"fix-cs": [
 			"@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf"
