@@ -96,7 +96,7 @@ class Comment_Policy extends Tasks {
 	public function add_task_actions( $data = [], $actions = [] ) {
 		$actions[] = [
 			'priority' => 10,
-			'html'     => '<a class="prpl-tooltip-action-text" href="' . \admin_url( 'options-general.php?page=comment-experience#top#comment-policy' ) . '" target="_self">' . \esc_html__( 'Implement', 'progress-planner' ) . '</a>',
+			'html'     => '<a class="prpl-tooltip-action-text" href="' . \admin_url( 'options-general.php?page=comment-experience#top#comment-policy' ) . '" target="_self">' . \esc_html__( 'Implement', 'comment-hacks' ) . '</a>',
 		];
 
 		return $actions;
