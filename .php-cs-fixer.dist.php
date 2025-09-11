@@ -13,10 +13,4 @@ $finder = ( new PhpCsFixer\Finder() )
 $config = new PhpCsFixer\Config();
 $config->setUnsupportedPhpVersionAllowed( true );
 
-return $config->setRules(
-	[
-		'native_function_invocation' => [
-			'include' => [ '@all' ],
-		],
-	]
-)->setFinder( $finder );
+return $config->setRules( [] )->setFinder( $finder );
