@@ -10,44 +10,44 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 
 ?>
 	<div class="wrap">
-		<h2><?php esc_html_e( 'Comment Experience', 'comment-hacks' ); ?></h2>
+		<h2><?php \esc_html_e( 'Comment Experience', 'comment-hacks' ); ?></h2>
 
 		<h2 class="nav-tab-wrapper" id="emiliaprojects-tabs">
 			<a class="nav-tab nav-tab-active" id="comment-length-tab" href="#top#comment-length">
-				<?php esc_html_e( 'Comment length', 'comment-hacks' ); ?>
+				<?php \esc_html_e( 'Comment length', 'comment-hacks' ); ?>
 			</a>
 			<a class="nav-tab" id="comment-policy-tab" href="#top#comment-policy">
-				<?php esc_html_e( 'Comment policy', 'comment-hacks' ); ?>
+				<?php \esc_html_e( 'Comment policy', 'comment-hacks' ); ?>
 			</a>
 			<a class="nav-tab" id="email-links-tab" href="#top#email-links">
-				<?php esc_html_e( 'Email links', 'comment-hacks' ); ?>
+				<?php \esc_html_e( 'Email links', 'comment-hacks' ); ?>
 			</a>
 			<a class="nav-tab" id="comment-redirect-tab" href="#top#comment-redirect">
-				<?php esc_html_e( 'Comment redirect', 'comment-hacks' ); ?>
+				<?php \esc_html_e( 'Comment redirect', 'comment-hacks' ); ?>
 			</a>
 			<a class="nav-tab" id="clean-emails-tab" href="#top#clean-emails">
-				<?php esc_html_e( 'Clean emails', 'comment-hacks' ); ?>
+				<?php \esc_html_e( 'Clean emails', 'comment-hacks' ); ?>
 			</a>
 			<a class="nav-tab" id="forward-emails-tab" href="#top#forward-emails">
-				<?php esc_html_e( 'Forward emails', 'comment-hacks' ); ?>
+				<?php \esc_html_e( 'Forward emails', 'comment-hacks' ); ?>
 			</a>
 			<a class="nav-tab" id="email-all-tab" href="#top#email-all">
-				<?php esc_html_e( 'Email all commenters', 'comment-hacks' ); ?>
+				<?php \esc_html_e( 'Email all commenters', 'comment-hacks' ); ?>
 			</a>
 		</h2>
 
-		<form action="<?php echo esc_url( admin_url( 'options.php' ) ); ?>" id="emiliaprojects-ch-conf" method="post">
-			<?php settings_fields( Hacks::$option_name ); ?>
+		<form action="<?php echo \esc_url( \admin_url( 'options.php' ) ); ?>" id="emiliaprojects-ch-conf" method="post">
+			<?php \settings_fields( Hacks::$option_name ); ?>
 
 			<div id="comment-length" class="emiliaprojectstab active">
-				<h3><?php esc_html_e( 'Minimum comment length', 'comment-hacks' ); ?></h3>
+				<h3><?php \esc_html_e( 'Minimum comment length', 'comment-hacks' ); ?></h3>
 
-				<p><?php esc_html_e( 'Users that try to submit a comment smaller than the length you set below will get an error immediately. The text of that error is specified below too.', 'comment-hacks' ); ?></p>
+				<p><?php \esc_html_e( 'Users that try to submit a comment smaller than the length you set below will get an error immediately. The text of that error is specified below too.', 'comment-hacks' ); ?></p>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
 							<label for="mincomlength">
-								<?php esc_html_e( 'Minimum length', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'Minimum length', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -56,8 +56,8 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 								class="small-text"
 								min="5"
 								max="255"
-								value="<?php echo esc_attr( $this->options['mincomlength'] ); ?>"
-								name="<?php echo esc_attr( Hacks::$option_name . '[mincomlength]' ); ?>"
+								value="<?php echo \esc_attr( $this->options['mincomlength'] ); ?>"
+								name="<?php echo \esc_attr( Hacks::$option_name . '[mincomlength]' ); ?>"
 								id="mincomlength"
 							/>
 						</td>
@@ -65,28 +65,28 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					<tr>
 						<th scope="row">
 							<label for="mincomlengtherror">
-								<?php esc_html_e( 'Error message for comment that is too short', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'Error message for comment that is too short', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
 							<textarea
 								rows="4"
 								cols="80"
-								name="<?php echo esc_attr( Hacks::$option_name . '[mincomlengtherror]' ); ?>"
+								name="<?php echo \esc_attr( Hacks::$option_name . '[mincomlengtherror]' ); ?>"
 								id="mincomlengtherror"
-							><?php echo esc_html( $this->options['mincomlengtherror'] ); ?></textarea>
+							><?php echo \esc_html( $this->options['mincomlengtherror'] ); ?></textarea>
 						</td>
 					</tr>
 				</table>
 
-				<h3><?php esc_html_e( 'Maximum comment length', 'comment-hacks' ); ?></h3>
+				<h3><?php \esc_html_e( 'Maximum comment length', 'comment-hacks' ); ?></h3>
 
-				<p><?php esc_html_e( 'Users that try to submit a comment longer than the length you set below will get an error immediately. The text of that error is specified below too.', 'comment-hacks' ); ?></p>
+				<p><?php \esc_html_e( 'Users that try to submit a comment longer than the length you set below will get an error immediately. The text of that error is specified below too.', 'comment-hacks' ); ?></p>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
 							<label for="maxcomlength">
-								<?php esc_html_e( 'Maximum length', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'Maximum length', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -94,8 +94,8 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 								type="number"
 								class="small-text"
 								min="5"
-								value="<?php echo esc_attr( $this->options['maxcomlength'] ); ?>"
-								name="<?php echo esc_attr( Hacks::$option_name . '[maxcomlength]' ); ?>"
+								value="<?php echo \esc_attr( $this->options['maxcomlength'] ); ?>"
+								name="<?php echo \esc_attr( Hacks::$option_name . '[maxcomlength]' ); ?>"
 								id="maxcomlength"
 							/>
 						</td>
@@ -103,41 +103,41 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					<tr>
 						<th scope="row">
 							<label for="maxcomlengtherror">
-								<?php esc_html_e( 'Error message for comment that is too long', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'Error message for comment that is too long', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
 							<textarea
 								rows="4"
 								cols="80"
-								name="<?php echo esc_attr( Hacks::$option_name . '[maxcomlengtherror]' ); ?>"
+								name="<?php echo \esc_attr( Hacks::$option_name . '[maxcomlengtherror]' ); ?>"
 								id="maxcomlengtherror"
-							><?php echo esc_html( $this->options['maxcomlengtherror'] ); ?></textarea>
+							><?php echo \esc_html( $this->options['maxcomlengtherror'] ); ?></textarea>
 						</td>
 					</tr>
 				</table>
 			</div>
 
 			<div id="comment-policy" class="emiliaprojectstab">
-				<h3><?php esc_html_e( 'Comment policy', 'comment-hacks' ); ?></h3>
-				<p><?php esc_html_e( 'This feature allows you to institute a comment policy for your site. To enable it, set a text in the input field below.', 'comment-hacks' ); ?></p>
+				<h3><?php \esc_html_e( 'Comment policy', 'comment-hacks' ); ?></h3>
+				<p><?php \esc_html_e( 'This feature allows you to institute a comment policy for your site. To enable it, set a text in the input field below.', 'comment-hacks' ); ?></p>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
 							<label for="comment_policy">
-								<?php esc_html_e( 'Comment policy', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'Comment policy', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
 							<input
 								type="checkbox"
-								<?php checked( $this->options['comment_policy'] ); ?>
-								name="<?php echo esc_attr( Hacks::$option_name . '[comment_policy]' ); ?>"
+								<?php \checked( $this->options['comment_policy'] ); ?>
+								name="<?php echo \esc_attr( Hacks::$option_name . '[comment_policy]' ); ?>"
 								id="comment_policy"
 							/>
 							<p>
 								<label for="comment_policy">
-									<?php esc_html_e( 'Enable the comment policy functionality.', 'comment-hacks' ); ?>
+									<?php \esc_html_e( 'Enable the comment policy functionality.', 'comment-hacks' ); ?>
 								</label>
 							</p>
 						</td>
@@ -145,19 +145,19 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					<tr>
 						<th scope="row">
 							<label for="comment_policy_page">
-								<?php esc_html_e( 'Comment policy page', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'Comment policy page', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
 							<?php
-							wp_dropdown_pages(
+							\wp_dropdown_pages(
 								[
 									'depth'             => 0,
 									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $selected is not put out, only compared against.
 									'selected'          => ( isset( $this->options['comment_policy_page'] ) ? (int) $this->options['comment_policy_page'] : 0 ),
-									'name'              => esc_attr( Hacks::$option_name . '[comment_policy_page]' ),
+									'name'              => \esc_attr( Hacks::$option_name . '[comment_policy_page]' ),
 									'id'                => 'comment_policy_page',
-									'show_option_none'  => esc_html__( 'Select comment policy page', 'comment-hacks' ),
+									'show_option_none'  => \esc_html__( 'Select comment policy page', 'comment-hacks' ),
 									'option_none_value' => '0',
 								]
 							);
@@ -167,46 +167,46 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					<tr>
 						<th scope="row">
 							<label for="comment_policy_text">
-								<?php esc_html_e( 'Comment policy line', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'Comment policy line', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
 							<input
 								type="text"
 								class="regular-text"
-								value="<?php echo esc_attr( $this->options['comment_policy_text'] ); ?>"
-								name="<?php echo esc_attr( Hacks::$option_name . '[comment_policy_text]' ); ?>"
+								value="<?php echo \esc_attr( $this->options['comment_policy_text'] ); ?>"
+								name="<?php echo \esc_attr( Hacks::$option_name . '[comment_policy_text]' ); ?>"
 								id="comment_policy_text"
 							/>
-							<p><?php esc_html_e( 'Text that appears along with a checkbox above the comment submit button.', 'comment-hacks' ); ?></p>
+							<p><?php \esc_html_e( 'Text that appears along with a checkbox above the comment submit button.', 'comment-hacks' ); ?></p>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">
 							<label for="comment_policyesc_html_error">
-								<?php esc_html_e( 'Error message for not checking comment policy checkbox', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'Error message for not checking comment policy checkbox', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
 							<textarea
 								rows="4"
 								cols="80"
-								name="<?php echo esc_attr( Hacks::$option_name . '[comment_policy_error]' ); ?>"
+								name="<?php echo \esc_attr( Hacks::$option_name . '[comment_policy_error]' ); ?>"
 								id="comment_policy"
-							><?php echo esc_html( $this->options['comment_policy_error'] ); ?></textarea>
+							><?php echo \esc_html( $this->options['comment_policy_error'] ); ?></textarea>
 						</td>
 					</tr>
 				</table>
 			</div>
 
 			<div id="email-links" class="emiliaprojectstab">
-				<h3><?php esc_html_e( 'Email links', 'comment-hacks' ); ?></h3>
+				<h3><?php \esc_html_e( 'Email links', 'comment-hacks' ); ?></h3>
 
 				<p>
 					<?php
-					printf(
+					\printf(
 						/* translators: %s expands to an email button icon */
-						esc_html__( 'This plugin adds an "E-mail" action link on the comments overview page as well as an email all commenters button (%s) on individual post pages in the admin bar. You can customize the default messages here.', 'comment-hacks' ),
+						\esc_html__( 'This plugin adds an "E-mail" action link on the comments overview page as well as an email all commenters button (%s) on individual post pages in the admin bar. You can customize the default messages here.', 'comment-hacks' ),
 						'<span class="dashicons dashicons-email-alt"></span>'
 					);
 					?>
@@ -215,66 +215,66 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					<tr>
 						<th scope="row">
 							<label for="email_body">
-								<?php esc_html_e( 'E-mail subject', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'E-mail subject', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
 							<input
 								type="text"
-								name="<?php echo esc_attr( Hacks::$option_name . '[email_subject]' ); ?>"
+								name="<?php echo \esc_attr( Hacks::$option_name . '[email_subject]' ); ?>"
 								id="email_subject" class="regular-text"
-								value="<?php echo esc_attr( $this->options['email_subject'] ); ?>"
+								value="<?php echo \esc_attr( $this->options['email_subject'] ); ?>"
 							/>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">
 							<label for="email_body">
-								<?php esc_html_e( 'E-mail body', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'E-mail body', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
 							<textarea
 								rows="4"
 								cols="100"
-								name="<?php echo esc_attr( Hacks::$option_name . '[email_body]' ); ?>"
+								name="<?php echo \esc_attr( Hacks::$option_name . '[email_body]' ); ?>"
 								id="email_body"
-							><?php echo esc_html( $this->options['email_body'] ); ?></textarea>
+							><?php echo \esc_html( $this->options['email_body'] ); ?></textarea>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">
 							<label for="mass_email_body">
-								<?php esc_html_e( 'E-mail all commenters body', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'E-mail all commenters body', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
 							<textarea
 								rows="4"
 								cols="100"
-								name="<?php echo esc_attr( Hacks::$option_name . '[mass_email_body]' ); ?>"
+								name="<?php echo \esc_attr( Hacks::$option_name . '[mass_email_body]' ); ?>"
 								id="mass_email_body"
-							><?php echo esc_html( $this->options['mass_email_body'] ); ?></textarea>
+							><?php echo \esc_html( $this->options['mass_email_body'] ); ?></textarea>
 						</td>
 					</tr>
 				</table>
 			</div>
 
 			<div id="comment-redirect" class="emiliaprojectstab">
-				<h3><?php esc_html_e( 'Redirect first time commenters', 'comment-hacks' ); ?></h3>
+				<h3><?php \esc_html_e( 'Redirect first time commenters', 'comment-hacks' ); ?></h3>
 
-				<p><?php esc_html_e( 'Select the page below that a first time commenter on your site should be redirected to.', 'comment-hacks' ); ?></p>
+				<p><?php \esc_html_e( 'Select the page below that a first time commenter on your site should be redirected to.', 'comment-hacks' ); ?></p>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
 							<label for="redirect_page">
-								<?php esc_html_e( 'Redirect to', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'Redirect to', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
 							<?php
 							// A dropdown of all pages in the current WP install.
-							wp_dropdown_pages(
+							\wp_dropdown_pages(
 								[
 									'depth'             => 0,
 									'id'                => 'redirect_page',
@@ -282,7 +282,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 									'name'              => Hacks::$option_name . '[redirect_page]',
 									'option_none_value' => '0',
 									'selected'          => ( isset( $this->options['redirect_page'] ) ? (int) $this->options['redirect_page'] : 0 ),
-									'show_option_none'  => esc_html__( 'Don\'t redirect first time commenters', 'comment-hacks' ),
+									'show_option_none'  => \esc_html__( 'Don\'t redirect first time commenters', 'comment-hacks' ),
 								]
 							);
 							?>
@@ -290,29 +290,29 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 							<?php if ( isset( $this->options['redirect_page'] ) && (int) $this->options['redirect_page'] !== 0 ) : ?>
 								<br>
 								<br>
-								<a target="_blank" href="<?php echo esc_url( get_permalink( (int) $this->options['redirect_page'] ) ); ?>">
-									<?php esc_html_e( 'Current redirect page', 'comment-hacks' ); ?>
+								<a target="_blank" href="<?php echo \esc_url( \get_permalink( (int) $this->options['redirect_page'] ) ); ?>">
+									<?php \esc_html_e( 'Current redirect page', 'comment-hacks' ); ?>
 								</a>
 							<?php endif; ?>
 						</td>
 					</tr>
 				</table>
 
-				<h3><?php esc_html_e( 'Redirect repeat commenters', 'comment-hacks' ); ?></h3>
+				<h3><?php \esc_html_e( 'Redirect repeat commenters', 'comment-hacks' ); ?></h3>
 
-				<p><?php esc_html_e( 'A repeat commenter is a commenter that has commented on your entire site more than once. Select the page below that they should be redirected to.', 'comment-hacks' ); ?></p>
-				<p><?php esc_html_e( 'Note that if you have the "Redirect first time commenters" option set to "Don\'t redirect first time commenters", and you do have a page selected here, first-time commenters will be redirected to the same page as repeat commenters.', 'comment-hacks' ); ?></p>
+				<p><?php \esc_html_e( 'A repeat commenter is a commenter that has commented on your entire site more than once. Select the page below that they should be redirected to.', 'comment-hacks' ); ?></p>
+				<p><?php \esc_html_e( 'Note that if you have the "Redirect first time commenters" option set to "Don\'t redirect first time commenters", and you do have a page selected here, first-time commenters will be redirected to the same page as repeat commenters.', 'comment-hacks' ); ?></p>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
 							<label for="redirect_repeat_page">
-								<?php esc_html_e( 'Redirect repeat commenters to', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'Redirect repeat commenters to', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
 							<?php
 							// A dropdown of all pages in the current WP install.
-							wp_dropdown_pages(
+							\wp_dropdown_pages(
 								[
 									'depth'             => 0,
 									'id'                => 'redirect_repeat_page',
@@ -320,7 +320,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 									'name'              => Hacks::$option_name . '[redirect_repeat_page]',
 									'option_none_value' => '0',
 									'selected'          => ( isset( $this->options['redirect_repeat_page'] ) ? (int) $this->options['redirect_repeat_page'] : 0 ),
-									'show_option_none'  => esc_html__( 'Don\'t redirect repeat commenters', 'comment-hacks' ),
+									'show_option_none'  => \esc_html__( 'Don\'t redirect repeat commenters', 'comment-hacks' ),
 								]
 							);
 							?>
@@ -328,8 +328,8 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 							<?php if ( isset( $this->options['redirect_repeat_page'] ) && $this->options['redirect_repeat_page'] !== 0 ) : ?>
 								<br>
 								<br>
-								<a target="_blank" href="<?php echo esc_url( get_permalink( (int) $this->options['redirect_repeat_page'] ) ); ?>">
-									<?php esc_html_e( 'Current redirect page', 'comment-hacks' ); ?>
+								<a target="_blank" href="<?php echo \esc_url( \get_permalink( (int) $this->options['redirect_repeat_page'] ) ); ?>">
+									<?php \esc_html_e( 'Current redirect page', 'comment-hacks' ); ?>
 								</a>
 							<?php endif; ?>
 						</td>
@@ -337,22 +337,22 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 				</table>
 			</div>
 			<div id="clean-emails" class="emiliaprojectstab">
-				<h3><?php esc_html_e( 'Clean Emails', 'comment-hacks' ); ?></h3>
+				<h3><?php \esc_html_e( 'Clean Emails', 'comment-hacks' ); ?></h3>
 
-				<p><?php esc_html_e( 'Checking this option will make your default comment notification and moderation emails a lot cleaner.', 'comment-hacks' ); ?></p>
+				<p><?php \esc_html_e( 'Checking this option will make your default comment notification and moderation emails a lot cleaner.', 'comment-hacks' ); ?></p>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
 							<label for="clean_emails">
-								<?php esc_html_e( 'Clean comment emails', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'Clean comment emails', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
 							<input
 								type="checkbox"
 								id="clean_emails"
-								name="<?php echo esc_attr( Hacks::$option_name . '[clean_emails]' ); ?>"
-								<?php checked( $this->options['clean_emails'] ); ?>
+								name="<?php echo \esc_attr( Hacks::$option_name . '[clean_emails]' ); ?>"
+								<?php \checked( $this->options['clean_emails'] ); ?>
 							/>
 						</td>
 					</tr>
@@ -360,14 +360,14 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 			</div>
 
 			<div id="forward-emails" class="emiliaprojectstab">
-				<h3><?php esc_html_e( 'Forward Emails', 'comment-hacks' ); ?></h3>
+				<h3><?php \esc_html_e( 'Forward Emails', 'comment-hacks' ); ?></h3>
 
-				<p><?php esc_html_e( 'Allows you to set up a system whereby comments are forwarded to an email address (for instance for your support team) and then trashed.', 'comment-hacks' ); ?></p>
+				<p><?php \esc_html_e( 'Allows you to set up a system whereby comments are forwarded to an email address (for instance for your support team) and then trashed.', 'comment-hacks' ); ?></p>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
 							<label for="forward-emails-email">
-								<?php esc_html_e( 'Forward email to', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'Forward email to', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -375,15 +375,15 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 								type="email"
 								id="forward-emails-email"
 								class="regular-text"
-								name="<?php echo esc_attr( Hacks::$option_name . '[forward_email]' ); ?>"
-								value="<?php echo esc_attr( $this->options['forward_email'] ); ?>"
+								name="<?php echo \esc_attr( Hacks::$option_name . '[forward_email]' ); ?>"
+								value="<?php echo \esc_attr( $this->options['forward_email'] ); ?>"
 							/>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">
 							<label for="forward-emails-name">
-								<?php esc_html_e( 'Forward "From" name', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'Forward "From" name', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -391,15 +391,15 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 								type="text"
 								id="forward-emails-name"
 								class="regular-text"
-								name="<?php echo esc_attr( Hacks::$option_name . '[forward_name]' ); ?>"
-								value="<?php echo esc_attr( $this->options['forward_name'] ); ?>"
+								name="<?php echo \esc_attr( Hacks::$option_name . '[forward_name]' ); ?>"
+								value="<?php echo \esc_attr( $this->options['forward_name'] ); ?>"
 							/>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">
 							<label for="forward-emails-from-email">
-								<?php esc_html_e( 'Forward "From" email address', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'Forward "From" email address', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -407,15 +407,15 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 								type="email"
 								id="forward-emails-from-email"
 								class="regular-text"
-								name="<?php echo esc_attr( Hacks::$option_name . '[forward_from_email]' ); ?>"
-								value="<?php echo esc_attr( $this->options['forward_from_email'] ); ?>"
+								name="<?php echo \esc_attr( Hacks::$option_name . '[forward_from_email]' ); ?>"
+								value="<?php echo \esc_attr( $this->options['forward_from_email'] ); ?>"
 							/>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">
 							<label for="forward-emails-subject">
-								<?php esc_html_e( 'Forward subject', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'Forward subject', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -423,15 +423,15 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 								type="text"
 								id="forward-emails-subject"
 								class="regular-text"
-								name="<?php echo esc_attr( Hacks::$option_name . '[forward_subject]' ); ?>"
-								value="<?php echo esc_attr( $this->options['forward_subject'] ); ?>"
+								name="<?php echo \esc_attr( Hacks::$option_name . '[forward_subject]' ); ?>"
+								value="<?php echo \esc_attr( $this->options['forward_subject'] ); ?>"
 							/>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">
 							<label for="forward-emails-intro-extra">
-								<?php esc_html_e( 'Forward intro additional text', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'Forward intro additional text', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -439,36 +439,36 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 								rows="4"
 								cols="80"
 								id="forward-emails-extra"
-								name="<?php echo esc_attr( Hacks::$option_name . '[forward_extra]' ); ?>"
-							><?php echo isset( $this->options['forward_extra'] ) ? esc_html( $this->options['forward_extra'] ) : ''; ?></textarea>
+								name="<?php echo \esc_attr( Hacks::$option_name . '[forward_extra]' ); ?>"
+							><?php echo isset( $this->options['forward_extra'] ) ? \esc_html( $this->options['forward_extra'] ) : ''; ?></textarea>
 						</td>
 					</tr>
 				</table>
 			</div>
 
 			<div id="email-all" class="emiliaprojectstab">
-				<h3><?php esc_html_e( 'Email all commenters', 'comment-hacks' ); ?></h3>
+				<h3><?php \esc_html_e( 'Email all commenters', 'comment-hacks' ); ?></h3>
 
-				<p><?php esc_html_e( 'This plugin comes with an "Email all commenters" admin bar button. You can disable it here.', 'comment-hacks' ); ?></p>
+				<p><?php \esc_html_e( 'This plugin comes with an "Email all commenters" admin bar button. You can disable it here.', 'comment-hacks' ); ?></p>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
 							<label for="disable_email_all_commenters">
-								<?php esc_html_e( 'Disable "Email all commenters" button', 'comment-hacks' ); ?>
+								<?php \esc_html_e( 'Disable "Email all commenters" button', 'comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
 							<input
 								type="checkbox"
 								id="disable_email_all_commenters"
-								name="<?php echo esc_attr( Hacks::$option_name . '[disable_email_all_commenters]' ); ?>"
-								<?php checked( $this->options['disable_email_all_commenters'] ); ?>
+								name="<?php echo \esc_attr( Hacks::$option_name . '[disable_email_all_commenters]' ); ?>"
+								<?php \checked( $this->options['disable_email_all_commenters'] ); ?>
 							/>
 						</td>
 					</tr>
 				</table>
 			</div>
-			<?php submit_button(); ?>
+			<?php \submit_button(); ?>
 		</form>
 	</div>
 
@@ -480,4 +480,4 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
  *
  * @since 1.6.0
  */
-do_action( 'EmiliaProjects\WP\Comment\admin_footer' );
+\do_action( 'EmiliaProjects\WP\Comment\admin_footer' );
