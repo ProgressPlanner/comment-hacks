@@ -51,7 +51,7 @@ class Comment_Moderation extends Tasks {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->url = \admin_url( 'edit-comments.php?comment_status=moderated' );
+		$this->url = \admin_url( 'edit-comments.php?comment_status=moderated' ); // @phpstan-ignore-line
 	}
 
 	/**
@@ -120,5 +120,22 @@ class Comment_Moderation extends Tasks {
 			'url'          => $this->get_url(),
 			'description'  => $this->get_description(),
 		];
+	}
+
+	/**
+	 * Add task actions specific to this task.
+	 *
+	 * @param array<string, string|int|bool>             $data    The task data.
+	 * @param array<int, array<string, string|int|bool>> $actions The existing actions.
+	 *
+	 * @return array<int, array<string, string|int|bool>>
+	 */
+	public function add_task_actions( $data = [], $actions = [] ) {
+		$actions[] = [
+			'priority' => 10,
+			'html'     => '<a class="prpl-tooltip-action-text" href="' . \admin_url( 'edit-comments.php?comment_status=moderated' ) . '" target="_self">' . \esc_html__( 'Moderate', 'comment-hacks' ) . '</a>',
+		];
+
+		return $actions;
 	}
 }

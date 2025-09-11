@@ -59,6 +59,10 @@ If you have bugs to report, please go to [the plugin's GitHub repository](https:
 
 == Changelog ==
 
+= 2.1.5 =
+
+* Compatibility with Progress Planner v1.8
+
 = 2.1.4 =
 
 * Add compatibility with WordPress 6.8.
