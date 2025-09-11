@@ -134,11 +134,7 @@ class Email_Links {
 	 * @return string[]
 	 */
 	public function add_mailto_action_row( $actions ): array {
-		/**
-		 * The comment.
-		 *
-		 * @var \WP_Comment $comment
-		 */
+		// The comment.
 		global $comment;
 
 		if ( $comment->comment_type !== 'comment' ) {
