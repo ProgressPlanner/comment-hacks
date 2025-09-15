@@ -112,11 +112,11 @@ class Comment_Moderation extends Tasks {
 
 		return [
 			'task_id'      => $task_id,
-			'title'        => $this->get_title(),
+			'post_title'   => $this->get_title(),
 			'parent'       => 0,
-			'priority'     => 'high',
+			'priority'     => $this->get_priority(),
 			'category'     => $this->get_provider_category(),
-			'points'       => 1,
+			'points'       => $this->get_points(),
 			'url'          => $this->get_url(),
 			'description'  => $this->get_description(),
 		];
