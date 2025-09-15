@@ -95,7 +95,7 @@ class Comment_Moderation extends Tasks {
 	 *
 	 * @return array{
 	 *           task_id: string,
-	 *           title: string,
+	 *           post_title: string,
 	 *           parent: int,
 	 *           priority: string,
 	 *           category: string,
