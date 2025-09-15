@@ -113,7 +113,7 @@ class Comment_Moderation extends Tasks {
 		return [
 			'task_id'      => $task_id,
 			'post_title'   => $this->get_title(),
-			'parent'       => 0,
+			'parent'       => $this->get_parent(),
 			'priority'     => $this->get_priority(),
 			'category'     => $this->get_provider_category(),
 			'points'       => $this->get_points(),
