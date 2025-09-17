@@ -109,7 +109,7 @@ class Admin {
 			return $comment_text;
 		}
 
-		$ch_forwarded = \get_comment_meta( (int) $comment->comment_ID, 'ch_forwarded' );
+		$ch_forwarded = \get_comment_meta( (int) $comment->comment_ID, 'ch_forwarded', false );
 		if ( $ch_forwarded ) {
 			/* translators: %s is replaced by the name you're forwarding to. */
 			$pre          = '<div style="background: #fff;border: 1px solid #46b450;border-left-width: 4px;box-shadow: 0 1px 1px rgba(0,0,0,.04);margin: 5px 15px 2px 0;padding: 1px 12px 1px;"><p><strong>' . \sprintf( \esc_html__( 'This comment was forwarded to %s.', 'comment-hacks' ), \esc_html( $this->options['forward_name'] ) ) . '</strong></p></div>';

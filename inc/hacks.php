@@ -18,7 +18,7 @@ class Hacks {
 	/**
 	 * Holds the plugins options.
 	 *
-	 * @var string[]
+	 * @var array<string, string|int|bool>
 	 */
 	private array $options = [];
 
@@ -333,7 +333,7 @@ class Hacks {
 	/**
 	 * Returns the default settings.
 	 *
-	 * @return string[]
+	 * @return array<string, string|int|bool>
 	 */
 	public static function get_defaults(): array {
 		return [
