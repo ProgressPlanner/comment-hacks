@@ -12,7 +12,7 @@ jobs:
       actions: read
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       # Prepare a folder named exactly like the repo as the plugin root.
       # If the repo already has such a folder (common for WP plugins), use it.
