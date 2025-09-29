@@ -1,0 +1,14 @@
+{
+    "landingPage": "wp-admin/options-general.php?page=comment-experience",
+    "features": {
+        "networking": true
+    },
+    "plugins": [
+        "yoast-comment-hacks"
+    ],
+    "steps": [
+        {
+            "step": "login"
+        }
+    ]
+}

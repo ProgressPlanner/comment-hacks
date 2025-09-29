@@ -4,7 +4,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:  Comment Experience
- * Version:      2.1.4
+ * Version:      2.1.5
  * Plugin URI:   https://progressplanner.com/plugins/comment-experience/
  * Description:  Improve the comment experience on your site. Adds lots of features to make commenting easier and more engaging.
  * Requires PHP: 7.4

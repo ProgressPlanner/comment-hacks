@@ -46,7 +46,7 @@ class Comment_Redirect extends Tasks {
 	 */
 	public function __construct() {
 		$this->options = Hacks::get_options();
-		$this->url     = \admin_url( 'options-general.php?page=comment-experience#top#comment-redirect' );
+		$this->url     = \admin_url( 'options-general.php?page=comment-experience#top#comment-redirect' ); // @phpstan-ignore-line
 	}
 
 	/**
@@ -82,5 +82,22 @@ class Comment_Redirect extends Tasks {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Add task actions specific to this task.
+	 *
+	 * @param array<string, string|int|bool>             $data    The task data.
+	 * @param array<int, array<string, string|int|bool>> $actions The existing actions.
+	 *
+	 * @return array<int, array<string, string|int|bool>>
+	 */
+	public function add_task_actions( $data = [], $actions = [] ) {
+		$actions[] = [
+			'priority' => 10,
+			'html'     => '<a class="prpl-tooltip-action-text" href="' . \admin_url( 'options-general.php?page=comment-experience#top#comment-redirect' ) . '" target="_self">' . \esc_html__( 'Implement', 'comment-hacks' ) . '</a>',
+		];
+
+		return $actions;
 	}
 }

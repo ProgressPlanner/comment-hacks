@@ -11,7 +11,7 @@ jobs:
     steps:
       # Checkout the code
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       # Optional: if we add a build step to the plugin, we can run it here.
       # Deploy the plugin to WordPress.org
       - name: WordPress plugin deploy
@@ -20,7 +20,7 @@ jobs:
         with:
           generate-zip: true
         env:
-          SLUG: yoast-comment-hacks
+          SLUG: ${{ secrets.DOT_ORG_SLUG }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
       # After the deploy, we also want to create a zip and upload it to the release on Github. We don't want

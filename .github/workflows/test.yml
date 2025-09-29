@@ -25,21 +25,17 @@ jobs:
     strategy:
       matrix:
         include:
-          - php_version: '7.4'
-            wp_version: '6.2'
+          - php_version: '8.2'
+            wp_version: '6.6'
             multisite: false
-
-          - php_version: '8.0'
-            wp_version: '6.2'
-            multisite: false
-
-          - php_version: '8.1'
-            wp_version: 'latest'
-            multisite: true
 
           - php_version: '8.2'
-            wp_version: '6.4'
+            wp_version: '6.6'
             multisite: true
+
+          - php_version: '8.4'
+            wp_version: 'latest'
+            multisite: false
 
     name: "Integration Test: PHP ${{ matrix.php_version }} | WP ${{ matrix.wp_version }}${{ matrix.multisite == true && ' (+ ms)' || '' }}"
 
@@ -57,7 +53,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install PHP
         uses: shivammathur/setup-php@v2

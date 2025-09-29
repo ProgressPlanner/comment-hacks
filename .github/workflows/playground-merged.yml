@@ -1,0 +1,44 @@
+name: Playground Comment
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      actions: read
+    steps:
+      - name: Prepare blueprint with artifact link
+        id: blueprint
+        run: |
+          set -euxo pipefail
+          ARTIFACT_URL="${{ github.server_url }}/${{ github.repository }}/archive/refs/heads/${{ github.event.repository.default_branch }}.zip"
+
+          # Use Node.js to parse, modify, and stringify the JSON
+          BLUEPRINT=$(node -e "
+            const fs = require('fs');
+            const blueprint = JSON.parse(fs.readFileSync('.wordpress-org/blueprints/playground.json', 'utf8'));
+            blueprint.plugins = blueprint.plugins.map(plugin =>
+              plugin === '${{ github.event.repository.name }}' ? '$ARTIFACT_URL' : plugin
+            );
+            console.log(JSON.stringify(blueprint));
+          ")
+
+          # Base64 encode the blueprint
+          ENCODED_BLUEPRINT=$(echo -n "$BLUEPRINT" | base64 -w 0)
+
+          echo "blueprint=$ENCODED_BLUEPRINT" >> "$GITHUB_OUTPUT"
+
+      # Comment with a Playground link that installs from the artifact ZIP
+      - uses: mshick/add-pr-comment@v2
+        with:
+          message: |
+            **Test merged PR on Playground**
+            [Test this pull request on the Playground](https://playground.wordpress.net/#${{ steps.blueprint.outputs.blueprint }})
+            or [download the zip](${{ github.server_url }}/${{ github.repository }}/archive/refs/heads/${{ github.event.repository.default_branch }}.zip)
