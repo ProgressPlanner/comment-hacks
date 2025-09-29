@@ -116,6 +116,42 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 						</td>
 					</tr>
 				</table>
+
+				<h3><?php esc_html_e( 'Display note about comment length above comment textarea', 'comment-hacks' ); ?></h3>
+
+				<p><?php esc_html_e( 'Display a note above the comment textarea to inform users about the allowed comment length.', 'comment-hacks' ); ?></p>
+				<table class="form-table">
+					<tr>
+						<th scope="row">
+							<label for="allowed_com_length_note_show">
+								<?php esc_html_e( 'Display note', 'comment-hacks' ); ?>
+							</label>
+						</th>
+						<td>
+							<input
+								type="checkbox"
+								id="allowed_com_length_note_show"
+								name="<?php echo esc_attr( Hacks::$option_name . '[allowed_com_length_note_show]' ); ?>"
+								<?php checked( $this->options['allowed_com_length_note_show'] ); ?>
+							/>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
+							<label for="allowed_com_length_note_text">
+								<?php esc_html_e( 'Note text', 'comment-hacks' ); ?>
+							</label>
+						</th>
+						<td>
+							<textarea
+								rows="4"
+								cols="80"
+								name="<?php echo esc_attr( Hacks::$option_name . '[allowed_com_length_note_text]' ); ?>"
+								id="allowedcomnote"
+							><?php echo esc_textarea( $this->options['allowed_com_length_note_text'] ); ?></textarea>
+						</td>
+					</tr>
+				</table>
 			</div>
 
 			<div id="comment-policy" class="emiliaprojectstab">
