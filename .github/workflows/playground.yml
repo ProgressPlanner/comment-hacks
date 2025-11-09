@@ -59,15 +59,15 @@ jobs:
             if [ -n "$PATCH" ]; then
               # If patch exists, increment patch by 1
               PATCH=$((PATCH + 1))
-              NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}b"
+              NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}b - PR ${PR_NUMBER}"
             else
               # If no patch, increment minor by 1
               MINOR=$((MINOR + 1))
-              NEW_VERSION="${MAJOR}.${MINOR}b"
+              NEW_VERSION="${MAJOR}.${MINOR}b - PR ${PR_NUMBER}"
             fi
           else
             # Fallback: if version format is unexpected, just add .1 and 'b'
-            NEW_VERSION="${CURRENT_VERSION}.1b"
+            NEW_VERSION="${CURRENT_VERSION}.1b - PR ${PR_NUMBER}"
           fi
 
           # Replace the version line
