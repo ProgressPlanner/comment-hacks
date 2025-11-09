@@ -25,13 +25,6 @@ class Comment_Policy extends Tasks {
 	protected const PROVIDER_ID = 'ch-comment-policy';
 
 	/**
-	 * The provider type. This is used to determine the type of task.
-	 *
-	 * @var string
-	 */
-	protected const CATEGORY = 'configuration';
-
-	/**
 	 * Holds our options.
 	 *
 	 * @var string[]

@@ -24,13 +24,6 @@ class Comment_Redirect extends Tasks {
 	protected const PROVIDER_ID = 'ch-comment-redirect';
 
 	/**
-	 * The provider type. This is used to determine the type of task.
-	 *
-	 * @var string
-	 */
-	protected const CATEGORY = 'configuration';
-
-	/**
 	 * Holds our options.
 	 *
 	 * @var string[]
