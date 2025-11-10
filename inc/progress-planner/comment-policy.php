@@ -25,6 +25,13 @@ class Comment_Policy extends Tasks {
 	protected const PROVIDER_ID = 'ch-comment-policy';
 
 	/**
+	 * The task priority.
+	 *
+	 * @var int
+	 */
+	protected $priority = 9;
+
+	/**
 	 * Holds our options.
 	 *
 	 * @var string[]

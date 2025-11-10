@@ -37,6 +37,13 @@ class Comment_Moderation extends Tasks {
 	protected $is_repetitive = true;
 
 	/**
+	 * The task priority.
+	 *
+	 * @var int
+	 */
+	protected $priority = 10;
+
+	/**
 	 * Constructor.
 	 *
 	 * @property string $url
