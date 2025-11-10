@@ -4,7 +4,8 @@
         "networking": true
     },
     "plugins": [
-        "yoast-comment-hacks"
+        "yoast-comment-hacks",
+        "progress-planner"
     ],
     "steps": [
         {
