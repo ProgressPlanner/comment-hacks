@@ -45,9 +45,30 @@ jobs:
           PLUGIN_FILE="${{ steps.prep.outputs.PKG_DIR }}/${{ github.event.repository.name }}.php"
           PR_NUMBER="${{ github.event.number }}"
 
-          # Extract current version and add PR number
+          # Extract current version
           CURRENT_VERSION=$(grep -o "Version:[[:space:]]*[0-9.]*" "$PLUGIN_FILE" | sed 's/Version:[[:space:]]*//')
-          NEW_VERSION="${CURRENT_VERSION} - PR ${PR_NUMBER}"
+          
+          # Increment patch version if it exists, otherwise increment minor version
+          # Handle versions like 2.1.5 or 2.1
+          if [[ "$CURRENT_VERSION" =~ ^([0-9]+)\.([0-9]+)(\.([0-9]+))?$ ]]; then
+            MAJOR="${BASH_REMATCH[1]}"
+            MINOR="${BASH_REMATCH[2]}"
+            PATCH="${BASH_REMATCH[4]}"
+            
+            # Build new version with 'b' suffix
+            if [ -n "$PATCH" ]; then
+              # If patch exists, increment patch by 1
+              PATCH=$((PATCH + 1))
+              NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}b - PR ${PR_NUMBER}"
+            else
+              # If no patch, increment minor by 1
+              MINOR=$((MINOR + 1))
+              NEW_VERSION="${MAJOR}.${MINOR}b - PR ${PR_NUMBER}"
+            fi
+          else
+            # Fallback: if version format is unexpected, just add .1 and 'b'
+            NEW_VERSION="${CURRENT_VERSION}.1b - PR ${PR_NUMBER}"
+          fi
 
           # Replace the version line
           sed -i "s/Version:[[:space:]]*[0-9.]*/Version:           ${NEW_VERSION}/" "$PLUGIN_FILE"

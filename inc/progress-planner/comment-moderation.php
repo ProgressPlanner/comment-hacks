@@ -23,13 +23,6 @@ class Comment_Moderation extends Tasks {
 	protected const PROVIDER_ID = 'ch-comment-moderation';
 
 	/**
-	 * The provider type. This is used to determine the type of task.
-	 *
-	 * @var string
-	 */
-	protected const CATEGORY = 'maintenance';
-
-	/**
 	 * The capability required to perform the task.
 	 *
 	 * @var string
@@ -42,6 +35,13 @@ class Comment_Moderation extends Tasks {
 	 * @var bool
 	 */
 	protected $is_repetitive = true;
+
+	/**
+	 * The task priority.
+	 *
+	 * @var int
+	 */
+	protected $priority = 10;
 
 	/**
 	 * Constructor.
@@ -86,40 +86,6 @@ class Comment_Moderation extends Tasks {
 		);
 
 		return $comments > 0; // @phpstan-ignore-line
-	}
-
-	/**
-	 * Get the task details.
-	 *
-	 * @param string $task_id The task ID.
-	 *
-	 * @return array{
-	 *           task_id: string,
-	 *           post_title: string,
-	 *           parent: int,
-	 *           priority: string,
-	 *           category: string,
-	 *           points: int,
-	 *           url: string,
-	 *           description: string
-	 *         } The task details.
-	 */
-	public function get_task_details( $task_id = '' ) {
-
-		if ( ! $task_id ) {
-			$task_id = $this->get_task_id();
-		}
-
-		return [
-			'task_id'      => $task_id,
-			'post_title'   => $this->get_title(),
-			'parent'       => $this->get_parent(),
-			'priority'     => $this->get_priority(),
-			'category'     => $this->get_provider_category(),
-			'points'       => $this->get_points(),
-			'url'          => $this->get_url(),
-			'description'  => $this->get_description(),
-		];
 	}
 
 	/**
