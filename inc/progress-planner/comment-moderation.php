@@ -82,38 +82,6 @@ class Comment_Moderation extends Tasks {
 	}
 
 	/**
-	 * Get the task details.
-	 *
-	 * @param string $task_id The task ID.
-	 *
-	 * @return array{
-	 *           task_id: string,
-	 *           post_title: string,
-	 *           parent: int,
-	 *           priority: string,
-	 *           points: int,
-	 *           url: string,
-	 *           description: string
-	 *         } The task details.
-	 */
-	public function get_task_details( $task_id = '' ) {
-
-		if ( ! $task_id ) {
-			$task_id = $this->get_task_id();
-		}
-
-		return [
-			'task_id'      => $task_id,
-			'post_title'   => $this->get_title(),
-			'parent'       => $this->get_parent(),
-			'priority'     => $this->get_priority(),
-			'points'       => $this->get_points(),
-			'url'          => $this->get_url(),
-			'description'  => $this->get_description(),
-		];
-	}
-
-	/**
 	 * Add task actions specific to this task.
 	 *
 	 * @param array<string, string|int|bool>             $data    The task data.
