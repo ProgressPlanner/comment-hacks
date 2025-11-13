@@ -1,0 +1,112 @@
+name: Generate SBOM on release or manual dispatch
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  build_artifact:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+
+    - name: Set environment variables
+      run: |
+        echo "REPO=$(echo $GITHUB_REPOSITORY | cut -d'/' -f 2)" >> $GITHUB_ENV
+        TAG_NAME="${GITHUB_REF#refs/tags/}"
+        # If TAG_NAME is empty (manual dispatch), get the latest release tag
+        if [ -z "$TAG_NAME" ] || [ "$TAG_NAME" = "$GITHUB_REF" ]; then
+          TAG_NAME=$(gh api repos/$GITHUB_REPOSITORY/releases/latest --jq '.tag_name' 2>/dev/null || git describe --tags --abbrev=0 2>/dev/null || echo "")
+        fi
+        if [ -z "$TAG_NAME" ]; then
+          echo "Error: Could not determine TAG_NAME. No releases found."
+          exit 1
+        fi
+        echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.0'
+        extensions: dom, curl, json
+        tools: wp-cli
+
+    - name: Check for composer.json
+      id: composer-check
+      run: |
+        if [ -f "composer.json" ]; then
+          echo "exists=true" >> $GITHUB_OUTPUT
+        else
+          echo "exists=false" >> $GITHUB_OUTPUT
+        fi
+    - name: Get Composer Cache Directory
+      if: steps.composer-check.outputs.exists == 'true'
+      id: composer-cache-dir
+      run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+    - name: Cache Composer dependencies
+      if: steps.composer-check.outputs.exists == 'true'
+      uses: actions/cache@v4
+      with:
+        path: ${{ steps.composer-cache-dir.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: ${{ runner.os }}-composer-
+
+    - name: Install PHP dependencies
+      if: steps.composer-check.outputs.exists == 'true'
+      run: composer install --no-dev --optimize-autoloader --no-interaction
+
+    # Check for npm
+    - name: Check for package.json
+      id: npm-check
+      run: |
+        if [ -f "package.json" ]; then
+          echo "exists=true" >> $GITHUB_OUTPUT
+        else
+          echo "exists=false" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Setup Node.js
+      if: steps.npm-check.outputs.exists == 'true'
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install Node.js dependencies
+      if: steps.npm-check.outputs.exists == 'true'
+      run: npm ci
+
+    - name: Build production assets
+      if: steps.npm-check.outputs.exists == 'true'
+      run: npm run build
+
+    # === Generate SBOM before creating the build ===
+    - name: Install Syft
+      run: |
+        curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+
+    - name: Generate SBOM
+      run: syft . -o cyclonedx-json=sbom-${{ env.TAG_NAME }}.json
+
+    # === Check that the SBOM was generated ===
+    - name: Verify SBOM exists
+      run: |
+        if [ ! -f "sbom-${{ env.TAG_NAME }}.json" ]; then
+          echo "SBOM generation failed"
+          exit 1
+        fi
+
+    # === Upload both artifact and SBOM to release ===
+    - name: Upload artifact to release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          sbom-${{ env.TAG_NAME }}.json
+        body: |
+          SBOM Format: CycloneDX JSON
+          Generated with: Syft
