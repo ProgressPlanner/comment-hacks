@@ -30,8 +30,6 @@ class Hacks {
 		// On init since option defaults have translatable strings.
 		\add_action( 'init', [ $this, 'init' ], 0, 1 );
 
-		\add_action( 'init', [ $this, 'load_text_domain' ] );
-
 		// Filter the redirect URL.
 		\add_filter( 'comment_post_redirect', [ $this, 'comment_redirect' ], 10, 2 );
 
@@ -376,14 +374,5 @@ class Hacks {
 		$this->options = \wp_parse_args( $this->options, self::get_defaults() );
 
 		\update_option( self::$option_name, $this->options );
-	}
-
-	/**
-	 * Load plugin textdomain.
-	 *
-	 * @return void
-	 */
-	public function load_text_domain(): void {
-		\load_plugin_textdomain( 'comment-hacks', false, \dirname( \plugin_basename( \EMILIA_COMMENT_HACKS_FILE ) ) . '/languages' );
 	}
 }
