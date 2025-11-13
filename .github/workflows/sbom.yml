@@ -1,4 +1,4 @@
-name: Generate SBOM on release or manual dispatch
+name: Generate SBOM
 
 on:
   workflow_dispatch:
@@ -81,8 +81,18 @@ jobs:
       if: steps.npm-check.outputs.exists == 'true'
       run: npm ci
 
-    - name: Build production assets
+    - name: Check for build script
       if: steps.npm-check.outputs.exists == 'true'
+      id: build-check
+      run: |
+        if node -e "const pkg = require('./package.json'); process.exit(pkg.scripts && pkg.scripts.build ? 0 : 1);" 2>/dev/null; then
+          echo "exists=true" >> $GITHUB_OUTPUT
+        else
+          echo "exists=false" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Build production assets
+      if: steps.npm-check.outputs.exists == 'true' && steps.build-check.outputs.exists == 'true'
       run: npm run build
 
     # === Generate SBOM before creating the build ===
