@@ -21,11 +21,11 @@ jobs:
 
         - name: Build plugin
           run: |
-            wp dist-archive . ./yoast-comment-hacks.zip
+            wp dist-archive . ./${{ github.event.repository.name }}.zip
             mkdir build
-            unzip yoast-comment-hacks.zip -d build
+            unzip ${{ github.event.repository.name }}.zip -d build
 
         - name: Run plugin check
           uses: wordpress/plugin-check-action@v1.0.6
           with:
-            build-dir: './build/yoast-comment-hacks'
+            build-dir: './build/${{ github.event.repository.name }}'
