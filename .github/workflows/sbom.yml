@@ -115,6 +115,7 @@ jobs:
     - name: Upload artifact to release
       uses: softprops/action-gh-release@v1
       with:
+        tag_name: ${{ env.TAG_NAME }}
         files: |
           sbom-${{ env.TAG_NAME }}.json
         body: |
