@@ -247,7 +247,7 @@ class Hacks {
 				 *
 				 * @since 1.6.0
 				 */
-				$url = \apply_filters( 'Yoast_Comment_Hacks\redirect', $url, $comment, 'first' );
+				$url = \apply_filters( 'comment_experience\redirect', $url, $comment, 'first' );
 			}
 		}
 
@@ -265,7 +265,7 @@ class Hacks {
 			 *
 			 * @since 2.2.0
 			 */
-			$url = \apply_filters( 'Yoast_Comment_Hacks\redirect', $url, $comment, 'repeat' );
+			$url = \apply_filters( 'comment_experience\redirect', $url, $comment, 'repeat' );
 		}
 
 		return $url;
