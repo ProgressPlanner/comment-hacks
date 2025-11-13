@@ -516,4 +516,4 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
  *
  * @since 1.6.0
  */
-do_action( 'EmiliaProjects\WP\Comment\admin_footer' );
+do_action( 'Yoast_Comment_Hacks\admin_footer' );

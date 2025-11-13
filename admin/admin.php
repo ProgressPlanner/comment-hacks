@@ -256,7 +256,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 		 * @since 1.6.0
 		 */
 		$roles = \apply_filters(
-			'EmiliaProjects\WP\Comment\notification_roles',
+			'Yoast_Comment_Hacks\notification_roles',
 			[ 'contributor', 'author', 'editor', 'administrator', 'super-admin' ]
 		);
 
