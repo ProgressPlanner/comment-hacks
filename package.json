@@ -4,15 +4,15 @@
   "license": "GPL-2.0+",
   "plugin": {
     "glotpress": "https://translate.wordpress.org",
-    "textdomain": "comment-hacks"
+    "textdomain": "yoast-comment-hacks"
   },
   "pot": {
-    "reportmsgidbugsto": "https://github.com/Emilia-Capital/comment-hacks/issues",
+    "reportmsgidbugsto": "https://github.com/ProgressPlanner/comment-hacks/issues",
     "languageteam": "Emilia Projects Translate <translations@emilia.capital>",
     "lasttranslator": "Emilia Projects Translate Team <translations@emilia.capital>"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Emilia-Capital/comment-hacks"
+    "url": "https://github.com/ProgressPlanner/comment-hacks"
   }
 }

@@ -10,29 +10,29 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 
 ?>
 	<div class="wrap">
-		<h2><?php esc_html_e( 'Comment Experience', 'comment-hacks' ); ?></h2>
+		<h2><?php esc_html_e( 'Comment Experience', 'yoast-comment-hacks' ); ?></h2>
 
 		<h2 class="nav-tab-wrapper" id="emiliaprojects-tabs">
 			<a class="nav-tab nav-tab-active" id="comment-length-tab" href="#top#comment-length">
-				<?php esc_html_e( 'Comment length', 'comment-hacks' ); ?>
+				<?php esc_html_e( 'Comment length', 'yoast-comment-hacks' ); ?>
 			</a>
 			<a class="nav-tab" id="comment-policy-tab" href="#top#comment-policy">
-				<?php esc_html_e( 'Comment policy', 'comment-hacks' ); ?>
+				<?php esc_html_e( 'Comment policy', 'yoast-comment-hacks' ); ?>
 			</a>
 			<a class="nav-tab" id="email-links-tab" href="#top#email-links">
-				<?php esc_html_e( 'Email links', 'comment-hacks' ); ?>
+				<?php esc_html_e( 'Email links', 'yoast-comment-hacks' ); ?>
 			</a>
 			<a class="nav-tab" id="comment-redirect-tab" href="#top#comment-redirect">
-				<?php esc_html_e( 'Comment redirect', 'comment-hacks' ); ?>
+				<?php esc_html_e( 'Comment redirect', 'yoast-comment-hacks' ); ?>
 			</a>
 			<a class="nav-tab" id="clean-emails-tab" href="#top#clean-emails">
-				<?php esc_html_e( 'Clean emails', 'comment-hacks' ); ?>
+				<?php esc_html_e( 'Clean emails', 'yoast-comment-hacks' ); ?>
 			</a>
 			<a class="nav-tab" id="forward-emails-tab" href="#top#forward-emails">
-				<?php esc_html_e( 'Forward emails', 'comment-hacks' ); ?>
+				<?php esc_html_e( 'Forward emails', 'yoast-comment-hacks' ); ?>
 			</a>
 			<a class="nav-tab" id="email-all-tab" href="#top#email-all">
-				<?php esc_html_e( 'Email all commenters', 'comment-hacks' ); ?>
+				<?php esc_html_e( 'Email all commenters', 'yoast-comment-hacks' ); ?>
 			</a>
 		</h2>
 
@@ -40,14 +40,14 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 			<?php settings_fields( Hacks::$option_name ); ?>
 
 			<div id="comment-length" class="emiliaprojectstab active">
-				<h3><?php esc_html_e( 'Minimum comment length', 'comment-hacks' ); ?></h3>
+				<h3><?php esc_html_e( 'Minimum comment length', 'yoast-comment-hacks' ); ?></h3>
 
-				<p><?php esc_html_e( 'Users that try to submit a comment smaller than the length you set below will get an error immediately. The text of that error is specified below too.', 'comment-hacks' ); ?></p>
+				<p><?php esc_html_e( 'Users that try to submit a comment smaller than the length you set below will get an error immediately. The text of that error is specified below too.', 'yoast-comment-hacks' ); ?></p>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
 							<label for="mincomlength">
-								<?php esc_html_e( 'Minimum length', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Minimum length', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -65,7 +65,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					<tr>
 						<th scope="row">
 							<label for="mincomlengtherror">
-								<?php esc_html_e( 'Error message for comment that is too short', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Error message for comment that is too short', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -79,14 +79,14 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					</tr>
 				</table>
 
-				<h3><?php esc_html_e( 'Maximum comment length', 'comment-hacks' ); ?></h3>
+				<h3><?php esc_html_e( 'Maximum comment length', 'yoast-comment-hacks' ); ?></h3>
 
-				<p><?php esc_html_e( 'Users that try to submit a comment longer than the length you set below will get an error immediately. The text of that error is specified below too.', 'comment-hacks' ); ?></p>
+				<p><?php esc_html_e( 'Users that try to submit a comment longer than the length you set below will get an error immediately. The text of that error is specified below too.', 'yoast-comment-hacks' ); ?></p>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
 							<label for="maxcomlength">
-								<?php esc_html_e( 'Maximum length', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Maximum length', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -103,7 +103,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					<tr>
 						<th scope="row">
 							<label for="maxcomlengtherror">
-								<?php esc_html_e( 'Error message for comment that is too long', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Error message for comment that is too long', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -117,14 +117,14 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					</tr>
 				</table>
 
-				<h3><?php esc_html_e( 'Display note about comment length above comment textarea', 'comment-hacks' ); ?></h3>
+				<h3><?php esc_html_e( 'Display note about comment length above comment textarea', 'yoast-comment-hacks' ); ?></h3>
 
-				<p><?php esc_html_e( 'Display a note above the comment textarea to inform users about the allowed comment length.', 'comment-hacks' ); ?></p>
+				<p><?php esc_html_e( 'Display a note above the comment textarea to inform users about the allowed comment length.', 'yoast-comment-hacks' ); ?></p>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
 							<label for="allowed_com_length_note_show">
-								<?php esc_html_e( 'Display note', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Display note', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -139,7 +139,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					<tr>
 						<th scope="row">
 							<label for="allowed_com_length_note_text">
-								<?php esc_html_e( 'Note text', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Note text', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -155,13 +155,13 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 			</div>
 
 			<div id="comment-policy" class="emiliaprojectstab">
-				<h3><?php esc_html_e( 'Comment policy', 'comment-hacks' ); ?></h3>
-				<p><?php esc_html_e( 'This feature allows you to institute a comment policy for your site. To enable it, set a text in the input field below.', 'comment-hacks' ); ?></p>
+				<h3><?php esc_html_e( 'Comment policy', 'yoast-comment-hacks' ); ?></h3>
+				<p><?php esc_html_e( 'This feature allows you to institute a comment policy for your site. To enable it, set a text in the input field below.', 'yoast-comment-hacks' ); ?></p>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
 							<label for="comment_policy">
-								<?php esc_html_e( 'Comment policy', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Comment policy', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -173,7 +173,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 							/>
 							<p>
 								<label for="comment_policy">
-									<?php esc_html_e( 'Enable the comment policy functionality.', 'comment-hacks' ); ?>
+									<?php esc_html_e( 'Enable the comment policy functionality.', 'yoast-comment-hacks' ); ?>
 								</label>
 							</p>
 						</td>
@@ -181,7 +181,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					<tr>
 						<th scope="row">
 							<label for="comment_policy_page">
-								<?php esc_html_e( 'Comment policy page', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Comment policy page', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -193,7 +193,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 									'selected'          => ( isset( $this->options['comment_policy_page'] ) ? (int) $this->options['comment_policy_page'] : 0 ),
 									'name'              => esc_attr( Hacks::$option_name . '[comment_policy_page]' ),
 									'id'                => 'comment_policy_page',
-									'show_option_none'  => esc_html__( 'Select comment policy page', 'comment-hacks' ),
+									'show_option_none'  => esc_html__( 'Select comment policy page', 'yoast-comment-hacks' ),
 									'option_none_value' => '0',
 								]
 							);
@@ -203,7 +203,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					<tr>
 						<th scope="row">
 							<label for="comment_policy_text">
-								<?php esc_html_e( 'Comment policy line', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Comment policy line', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -214,13 +214,13 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 								name="<?php echo esc_attr( Hacks::$option_name . '[comment_policy_text]' ); ?>"
 								id="comment_policy_text"
 							/>
-							<p><?php esc_html_e( 'Text that appears along with a checkbox above the comment submit button.', 'comment-hacks' ); ?></p>
+							<p><?php esc_html_e( 'Text that appears along with a checkbox above the comment submit button.', 'yoast-comment-hacks' ); ?></p>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">
 							<label for="comment_policyesc_html_error">
-								<?php esc_html_e( 'Error message for not checking comment policy checkbox', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Error message for not checking comment policy checkbox', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -236,13 +236,13 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 			</div>
 
 			<div id="email-links" class="emiliaprojectstab">
-				<h3><?php esc_html_e( 'Email links', 'comment-hacks' ); ?></h3>
+				<h3><?php esc_html_e( 'Email links', 'yoast-comment-hacks' ); ?></h3>
 
 				<p>
 					<?php
 					printf(
 						/* translators: %s expands to an email button icon */
-						esc_html__( 'This plugin adds an "E-mail" action link on the comments overview page as well as an email all commenters button (%s) on individual post pages in the admin bar. You can customize the default messages here.', 'comment-hacks' ),
+						esc_html__( 'This plugin adds an "E-mail" action link on the comments overview page as well as an email all commenters button (%s) on individual post pages in the admin bar. You can customize the default messages here.', 'yoast-comment-hacks' ),
 						'<span class="dashicons dashicons-email-alt"></span>'
 					);
 					?>
@@ -251,7 +251,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					<tr>
 						<th scope="row">
 							<label for="email_body">
-								<?php esc_html_e( 'E-mail subject', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'E-mail subject', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -266,7 +266,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					<tr>
 						<th scope="row">
 							<label for="email_body">
-								<?php esc_html_e( 'E-mail body', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'E-mail body', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -281,7 +281,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					<tr>
 						<th scope="row">
 							<label for="mass_email_body">
-								<?php esc_html_e( 'E-mail all commenters body', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'E-mail all commenters body', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -297,14 +297,14 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 			</div>
 
 			<div id="comment-redirect" class="emiliaprojectstab">
-				<h3><?php esc_html_e( 'Redirect first time commenters', 'comment-hacks' ); ?></h3>
+				<h3><?php esc_html_e( 'Redirect first time commenters', 'yoast-comment-hacks' ); ?></h3>
 
-				<p><?php esc_html_e( 'Select the page below that a first time commenter on your site should be redirected to.', 'comment-hacks' ); ?></p>
+				<p><?php esc_html_e( 'Select the page below that a first time commenter on your site should be redirected to.', 'yoast-comment-hacks' ); ?></p>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
 							<label for="redirect_page">
-								<?php esc_html_e( 'Redirect to', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Redirect to', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -318,7 +318,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 									'name'              => Hacks::$option_name . '[redirect_page]',
 									'option_none_value' => '0',
 									'selected'          => ( isset( $this->options['redirect_page'] ) ? (int) $this->options['redirect_page'] : 0 ),
-									'show_option_none'  => esc_html__( 'Don\'t redirect first time commenters', 'comment-hacks' ),
+									'show_option_none'  => esc_html__( 'Don\'t redirect first time commenters', 'yoast-comment-hacks' ),
 								]
 							);
 							?>
@@ -327,22 +327,22 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 								<br>
 								<br>
 								<a target="_blank" href="<?php echo esc_url( get_permalink( (int) $this->options['redirect_page'] ) ); ?>">
-									<?php esc_html_e( 'Current redirect page', 'comment-hacks' ); ?>
+									<?php esc_html_e( 'Current redirect page', 'yoast-comment-hacks' ); ?>
 								</a>
 							<?php endif; ?>
 						</td>
 					</tr>
 				</table>
 
-				<h3><?php esc_html_e( 'Redirect repeat commenters', 'comment-hacks' ); ?></h3>
+				<h3><?php esc_html_e( 'Redirect repeat commenters', 'yoast-comment-hacks' ); ?></h3>
 
-				<p><?php esc_html_e( 'A repeat commenter is a commenter that has commented on your entire site more than once. Select the page below that they should be redirected to.', 'comment-hacks' ); ?></p>
-				<p><?php esc_html_e( 'Note that if you have the "Redirect first time commenters" option set to "Don\'t redirect first time commenters", and you do have a page selected here, first-time commenters will be redirected to the same page as repeat commenters.', 'comment-hacks' ); ?></p>
+				<p><?php esc_html_e( 'A repeat commenter is a commenter that has commented on your entire site more than once. Select the page below that they should be redirected to.', 'yoast-comment-hacks' ); ?></p>
+				<p><?php esc_html_e( 'Note that if you have the "Redirect first time commenters" option set to "Don\'t redirect first time commenters", and you do have a page selected here, first-time commenters will be redirected to the same page as repeat commenters.', 'yoast-comment-hacks' ); ?></p>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
 							<label for="redirect_repeat_page">
-								<?php esc_html_e( 'Redirect repeat commenters to', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Redirect repeat commenters to', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -356,7 +356,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 									'name'              => Hacks::$option_name . '[redirect_repeat_page]',
 									'option_none_value' => '0',
 									'selected'          => ( isset( $this->options['redirect_repeat_page'] ) ? (int) $this->options['redirect_repeat_page'] : 0 ),
-									'show_option_none'  => esc_html__( 'Don\'t redirect repeat commenters', 'comment-hacks' ),
+									'show_option_none'  => esc_html__( 'Don\'t redirect repeat commenters', 'yoast-comment-hacks' ),
 								]
 							);
 							?>
@@ -365,7 +365,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 								<br>
 								<br>
 								<a target="_blank" href="<?php echo esc_url( get_permalink( (int) $this->options['redirect_repeat_page'] ) ); ?>">
-									<?php esc_html_e( 'Current redirect page', 'comment-hacks' ); ?>
+									<?php esc_html_e( 'Current redirect page', 'yoast-comment-hacks' ); ?>
 								</a>
 							<?php endif; ?>
 						</td>
@@ -373,14 +373,14 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 				</table>
 			</div>
 			<div id="clean-emails" class="emiliaprojectstab">
-				<h3><?php esc_html_e( 'Clean Emails', 'comment-hacks' ); ?></h3>
+				<h3><?php esc_html_e( 'Clean Emails', 'yoast-comment-hacks' ); ?></h3>
 
-				<p><?php esc_html_e( 'Checking this option will make your default comment notification and moderation emails a lot cleaner.', 'comment-hacks' ); ?></p>
+				<p><?php esc_html_e( 'Checking this option will make your default comment notification and moderation emails a lot cleaner.', 'yoast-comment-hacks' ); ?></p>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
 							<label for="clean_emails">
-								<?php esc_html_e( 'Clean comment emails', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Clean comment emails', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -396,14 +396,14 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 			</div>
 
 			<div id="forward-emails" class="emiliaprojectstab">
-				<h3><?php esc_html_e( 'Forward Emails', 'comment-hacks' ); ?></h3>
+				<h3><?php esc_html_e( 'Forward Emails', 'yoast-comment-hacks' ); ?></h3>
 
-				<p><?php esc_html_e( 'Allows you to set up a system whereby comments are forwarded to an email address (for instance for your support team) and then trashed.', 'comment-hacks' ); ?></p>
+				<p><?php esc_html_e( 'Allows you to set up a system whereby comments are forwarded to an email address (for instance for your support team) and then trashed.', 'yoast-comment-hacks' ); ?></p>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
 							<label for="forward-emails-email">
-								<?php esc_html_e( 'Forward email to', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Forward email to', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -419,7 +419,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					<tr>
 						<th scope="row">
 							<label for="forward-emails-name">
-								<?php esc_html_e( 'Forward "From" name', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Forward "From" name', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -435,7 +435,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					<tr>
 						<th scope="row">
 							<label for="forward-emails-from-email">
-								<?php esc_html_e( 'Forward "From" email address', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Forward "From" email address', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -451,7 +451,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					<tr>
 						<th scope="row">
 							<label for="forward-emails-subject">
-								<?php esc_html_e( 'Forward subject', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Forward subject', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -467,7 +467,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 					<tr>
 						<th scope="row">
 							<label for="forward-emails-intro-extra">
-								<?php esc_html_e( 'Forward intro additional text', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Forward intro additional text', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>
@@ -483,14 +483,14 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 			</div>
 
 			<div id="email-all" class="emiliaprojectstab">
-				<h3><?php esc_html_e( 'Email all commenters', 'comment-hacks' ); ?></h3>
+				<h3><?php esc_html_e( 'Email all commenters', 'yoast-comment-hacks' ); ?></h3>
 
-				<p><?php esc_html_e( 'This plugin comes with an "Email all commenters" admin bar button. You can disable it here.', 'comment-hacks' ); ?></p>
+				<p><?php esc_html_e( 'This plugin comes with an "Email all commenters" admin bar button. You can disable it here.', 'yoast-comment-hacks' ); ?></p>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
 							<label for="disable_email_all_commenters">
-								<?php esc_html_e( 'Disable "Email all commenters" button', 'comment-hacks' ); ?>
+								<?php esc_html_e( 'Disable "Email all commenters" button', 'yoast-comment-hacks' ); ?>
 							</label>
 						</th>
 						<td>

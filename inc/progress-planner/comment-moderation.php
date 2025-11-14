@@ -60,7 +60,7 @@ class Comment_Moderation extends Tasks {
 	 * @return string
 	 */
 	public function get_title() {
-		return \esc_html__( 'Moderate comments', 'comment-hacks' );
+		return \esc_html__( 'Moderate comments', 'yoast-comment-hacks' );
 	}
 
 	/**
@@ -69,7 +69,7 @@ class Comment_Moderation extends Tasks {
 	 * @return string
 	 */
 	public function get_description() {
-		return \esc_html__( 'Moderate comments to make sure they are not spam.', 'comment-hacks' );
+		return \esc_html__( 'Moderate comments to make sure they are not spam.', 'yoast-comment-hacks' );
 	}
 
 	/**
@@ -99,7 +99,7 @@ class Comment_Moderation extends Tasks {
 	public function add_task_actions( $data = [], $actions = [] ) {
 		$actions[] = [
 			'priority' => 10,
-			'html'     => '<a class="prpl-tooltip-action-text" href="' . \admin_url( 'edit-comments.php?comment_status=moderated' ) . '" target="_self">' . \esc_html__( 'Moderate', 'comment-hacks' ) . '</a>',
+			'html'     => '<a class="prpl-tooltip-action-text" href="' . \admin_url( 'edit-comments.php?comment_status=moderated' ) . '" target="_self">' . \esc_html__( 'Moderate', 'yoast-comment-hacks' ) . '</a>',
 		];
 
 		return $actions;

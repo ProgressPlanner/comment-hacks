@@ -112,7 +112,7 @@ class Admin {
 		$ch_forwarded = \get_comment_meta( (int) $comment->comment_ID, 'ch_forwarded', false );
 		if ( $ch_forwarded ) {
 			/* translators: %s is replaced by the name you're forwarding to. */
-			$pre          = '<div style="background: #fff;border: 1px solid #46b450;border-left-width: 4px;box-shadow: 0 1px 1px rgba(0,0,0,.04);margin: 5px 15px 2px 0;padding: 1px 12px 1px;"><p><strong>' . \sprintf( \esc_html__( 'This comment was forwarded to %s.', 'comment-hacks' ), \esc_html( $this->options['forward_name'] ) ) . '</strong></p></div>';
+			$pre          = '<div style="background: #fff;border: 1px solid #46b450;border-left-width: 4px;box-shadow: 0 1px 1px rgba(0,0,0,.04);margin: 5px 15px 2px 0;padding: 1px 12px 1px;"><p><strong>' . \sprintf( \esc_html__( 'This comment was forwarded to %s.', 'yoast-comment-hacks' ), \esc_html( $this->options['forward_name'] ) ) . '</strong></p></div>';
 			$comment_text = $pre . $comment_text;
 		}
 
@@ -142,7 +142,7 @@ class Admin {
 			echo '<div class="msg updated"><p>';
 			\printf(
 				/* translators: %1$s is replaced by (a link to) the blog's name, %2$s by (a link to) the title of the blogpost. */
-				\esc_html__( 'Forwarding comment from %1$s to %2$s.', 'comment-hacks' ),
+				\esc_html__( 'Forwarding comment from %1$s to %2$s.', 'yoast-comment-hacks' ),
 				'<strong>' . \esc_html( $comment->comment_author ) . '</strong>',
 				\esc_html( $this->options['forward_name'] )
 			);
@@ -150,7 +150,7 @@ class Admin {
 
 			$intro = \sprintf(
 				/* translators: %1$s is replaced by (a link to) the blog's name, %2$s by (a link to) the title of the post. */
-				\esc_html__( 'This comment was forwarded from %1$s where it was left on: %2$s.', 'comment-hacks' ),
+				\esc_html__( 'This comment was forwarded from %1$s where it was left on: %2$s.', 'yoast-comment-hacks' ),
 				'<a href=" ' . \esc_url( \get_site_url() ) . ' ">' . \esc_html( \get_bloginfo( 'name' ) ) . '</a>',
 				'<a href="' . \esc_url( \get_permalink( (int) $comment->comment_post_ID ) ) . '">' . \esc_html( \get_the_title( (int) $comment->comment_post_ID ) ) . '</a>'
 			) . "\n\n";
@@ -162,7 +162,7 @@ class Admin {
 			$intro .= '---------- Forwarded message ---------
 From: ' . \esc_html( $comment->comment_author ) . ' &lt;' . \esc_html( $comment->comment_author_email ) . '&gt;
 Date: ' . \gmdate( 'D, M j, Y \a\t h:i A', \strtotime( $comment->comment_date ) ) . '
-Subject: ' . \esc_html__( 'Comment on', 'comment-hacks' ) . ' ' . \esc_html( \get_bloginfo( 'name' ) ) . '
+Subject: ' . \esc_html__( 'Comment on', 'yoast-comment-hacks' ) . ' ' . \esc_html( \get_bloginfo( 'name' ) ) . '
 To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->options['forward_from_email'] ) . '&gt;';
 			$intro .= "\n\n";
 
@@ -196,12 +196,12 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 		}
 
 		// Escaped before returning the actions array.
-		$label = \__( 'Forward to support', 'comment-hacks' );
+		$label = \__( 'Forward to support', 'yoast-comment-hacks' );
 
 		// '1' === approved, 'trash' === trashed.
 		if ( $comment->comment_approved !== '1' && $comment->comment_approved !== 'trash' ) {
 			// Escaped before returning the actions array.
-			$label = \__( 'Forward to support & trash', 'comment-hacks' );
+			$label = \__( 'Forward to support & trash', 'yoast-comment-hacks' );
 		}
 
 		$actions['ch_forward'] = '<a href="' . \esc_url( \admin_url( 'edit-comments.php' ) . '?comment_id=' . $comment->comment_ID . '&ch_action=forward_comment&nonce=' . \wp_create_nonce( 'comment-hacks-forward' ) ) . '">' . \esc_html( $label ) . '</a>';
@@ -217,7 +217,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 	public function register_meta_boxes(): void {
 		\add_meta_box(
 			'comment-hacks-reroute',
-			\__( 'Comment Experience', 'comment-hacks' ),
+			\__( 'Comment Experience', 'yoast-comment-hacks' ),
 			[
 				$this,
 				'meta_box_callback',
@@ -242,7 +242,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 			value="<?php echo \esc_attr( \wp_create_nonce( 'comment_notification_recipient_nonce' ) ); ?>"
 		/>
 		<label for="comment_notification_recipient">
-			<?php \esc_html_e( 'Comment notification recipients:', 'comment-hacks' ); ?>
+			<?php \esc_html_e( 'Comment notification recipients:', 'yoast-comment-hacks' ); ?>
 		</label>
 		<br/>
 		<?php
@@ -383,7 +383,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 				'min_length_invalid',
 				\sprintf(
 					/* translators: %d is replaced with the minimum number of characters */
-					\__( 'The minimum length you entered is invalid, please enter a minimum length above %d.', 'comment-hacks' ),
+					\__( 'The minimum length you entered is invalid, please enter a minimum length above %d.', 'yoast-comment-hacks' ),
 					$this->absolute_min
 				)
 			);
@@ -423,8 +423,8 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 	 */
 	public function add_config_page() {
 		\add_options_page(
-			\__( 'Comment Experience', 'comment-hacks' ),
-			\__( 'Comment Experience', 'comment-hacks' ),
+			\__( 'Comment Experience', 'yoast-comment-hacks' ),
+			\__( 'Comment Experience', 'yoast-comment-hacks' ),
 			'manage_options',
 			$this->hook,
 			[
@@ -450,7 +450,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 		}
 
 		if ( $file === $this_plugin ) {
-			$settings_link = '<a href="' . \admin_url( 'options-general.php?page=' . $this->hook ) . '">' . \__( 'Settings', 'comment-hacks' ) . '</a>';
+			$settings_link = '<a href="' . \admin_url( 'options-general.php?page=' . $this->hook ) . '">' . \__( 'Settings', 'yoast-comment-hacks' ) . '</a>';
 			// Put our link before other links.
 			\array_unshift( $links, $settings_link );
 		}
@@ -469,7 +469,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 		// Show the content of the options array when debug is enabled.
 		if ( \defined( 'WP_DEBUG' ) && \WP_DEBUG ) {
 			?>
-			<h4><?php \esc_html_e( 'Options debug', 'comment-hacks' ); ?></h4>
+			<h4><?php \esc_html_e( 'Options debug', 'yoast-comment-hacks' ); ?></h4>
 			<div style="border: 1px solid #aaa; padding: 20px;">
 				<?php
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Debug output.
