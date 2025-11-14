@@ -4,6 +4,7 @@ on: # rebuild any PRs and main branch changes
 
 jobs:
   test:
+    name: 'WordPress.org Plugin Check'
     runs-on: ubuntu-latest
     steps:
         - name: Checkout
@@ -28,5 +29,5 @@ jobs:
         - name: Run plugin check
           uses: wordpress/plugin-check-action@v1.0.6
           with:
-            exclude-checks: 'plugin_header_text_domain'
+            exclude-checks: 'i18n_usage'
             build-dir: './build/${{ github.event.repository.name }}'
