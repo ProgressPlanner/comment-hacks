@@ -3,14 +3,15 @@
  * Comment Experience plugin.
  *
  * @wordpress-plugin
- * Plugin Name:  Comment Experience
+ * Plugin Name:  Comment Experience by Progress Planner
  * Version:      2.1.6
  * Plugin URI:   https://progressplanner.com/plugins/comment-experience/
  * Description:  Improve the comment experience on your site. Adds lots of features to make commenting easier and more engaging.
  * Requires PHP: 7.4
  * Author:       Team Progress Planner
  * Author URI:   https://progressplanner.com
- * Text Domain:  comment-hacks
+ * License:      GPL-3.0-or-later
+ * Text Domain:  yoast-comment-hacks
  *
  * Copyright 2009-2025 Joost de Valk and Team Progress Planner
  *

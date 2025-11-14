@@ -55,7 +55,7 @@ class Comment_Redirect extends Tasks {
 	 * @return string
 	 */
 	public function get_title() {
-		return \esc_html__( 'Implement a comment redirect', 'comment-hacks' );
+		return \esc_html__( 'Implement a comment redirect', 'yoast-comment-hacks' );
 	}
 
 	/**
@@ -66,8 +66,8 @@ class Comment_Redirect extends Tasks {
 	public function get_description() {
 		return \sprintf(
 			/* translators: %s:<a href="https://prpl.fyi/comment-redirect" target="_blank">comment redirect</a> link */
-			\esc_html__( 'Implement a %s to thank first-time commenters for their comment.', 'comment-hacks' ),
-			'<a href="https://prpl.fyi/comment-policy" target="_blank">' . \esc_html__( 'comment redirect', 'comment-hacks' ) . '</a>'
+			\esc_html__( 'Implement a %s to thank first-time commenters for their comment.', 'yoast-comment-hacks' ),
+			'<a href="https://prpl.fyi/comment-policy" target="_blank">' . \esc_html__( 'comment redirect', 'yoast-comment-hacks' ) . '</a>'
 		);
 	}
 
@@ -95,7 +95,7 @@ class Comment_Redirect extends Tasks {
 	public function add_task_actions( $data = [], $actions = [] ) {
 		$actions[] = [
 			'priority' => 10,
-			'html'     => '<a class="prpl-tooltip-action-text" href="' . \admin_url( 'options-general.php?page=comment-experience#top#comment-redirect' ) . '" target="_self">' . \esc_html__( 'Implement', 'comment-hacks' ) . '</a>',
+			'html'     => '<a class="prpl-tooltip-action-text" href="' . \admin_url( 'options-general.php?page=comment-experience#top#comment-redirect' ) . '" target="_self">' . \esc_html__( 'Implement', 'yoast-comment-hacks' ) . '</a>',
 		];
 
 		return $actions;
