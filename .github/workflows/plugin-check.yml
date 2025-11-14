@@ -28,6 +28,5 @@ jobs:
         - name: Run plugin check
           uses: wordpress/plugin-check-action@v1.0.6
           with:
-            slug: 'yoast-comment-hacks'
-            ignore-codes: 'textdomain_mismatch'
+            exclude-checks: 'plugin_header_text_domain'
             build-dir: './build/${{ github.event.repository.name }}'
