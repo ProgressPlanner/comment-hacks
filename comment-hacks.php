@@ -11,7 +11,7 @@
  * Author:       Team Progress Planner
  * Author URI:   https://progressplanner.com
  * License:      GPL-3.0-or-later
- * Text Domain:  comment-hacks
+ * Text Domain:  yoast-comment-hacks
  *
  * Copyright 2009-2025 Joost de Valk and Team Progress Planner
  *
