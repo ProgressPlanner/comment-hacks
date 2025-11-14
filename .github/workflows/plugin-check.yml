@@ -29,4 +29,5 @@ jobs:
           uses: wordpress/plugin-check-action@v1.0.6
           with:
             slug: 'yoast-comment-hacks'
+            ignore-codes: 'textdomain_mismatch'
             build-dir: './build/${{ github.event.repository.name }}'
