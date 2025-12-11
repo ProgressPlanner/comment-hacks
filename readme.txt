@@ -2,8 +2,9 @@
 Contributors: joostdevalk
 Tags: comments, spam, emails
 Text Domain: comment-hacks
-Requires at least: 6.6
-Tested up to: 6.8
+Requires at least: 6.7
+Tested up to: 6.9
+Requires PHP: 7.4
 Stable tag: 2.1.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
