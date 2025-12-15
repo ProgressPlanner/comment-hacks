@@ -27,7 +27,7 @@ jobs:
             unzip ${{ github.event.repository.name }}.zip -d build
 
         - name: Run plugin check
-          uses: wordpress/plugin-check-action@v1.0.6
+          uses: wordpress/plugin-check-action@v1.1.4
           with:
             exclude-checks: 'i18n_usage'
             build-dir: './build/${{ github.event.repository.name }}'
