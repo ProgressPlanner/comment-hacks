@@ -72,7 +72,7 @@ jobs:
 
     - name: Setup Node.js
       if: steps.npm-check.outputs.exists == 'true'
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         node-version: '18'
         cache: 'npm'
