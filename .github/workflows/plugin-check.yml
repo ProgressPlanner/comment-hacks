@@ -1,0 +1,33 @@
+name: 'WordPress.org Plugin Check'
+on: # rebuild any PRs and main branch changes
+  pull_request:
+
+jobs:
+  test:
+    name: 'WordPress.org Plugin Check'
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v5
+
+        - name: Setup PHP
+          uses: shivammathur/setup-php@v2
+          with:
+            php-version: '8.3'
+            coverage: none
+            tools: wp-cli
+
+        - name: Install latest version of dist-archive-command
+          run: wp package install wp-cli/dist-archive-command:@stable
+
+        - name: Build plugin
+          run: |
+            wp dist-archive . ./${{ github.event.repository.name }}.zip
+            mkdir build
+            unzip ${{ github.event.repository.name }}.zip -d build
+
+        - name: Run plugin check
+          uses: wordpress/plugin-check-action@v1.0.6
+          with:
+            exclude-checks: 'i18n_usage'
+            build-dir: './build/${{ github.event.repository.name }}'

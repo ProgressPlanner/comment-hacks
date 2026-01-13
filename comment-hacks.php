@@ -10,7 +10,8 @@
  * Requires PHP: 7.4
  * Author:       Team Progress Planner
  * Author URI:   https://progressplanner.com
- * Text Domain:  comment-hacks
+ * License:      GPL-3.0-or-later
+ * Text Domain:  yoast-comment-hacks
  *
  * Copyright 2009-2026 Joost de Valk and Team Progress Planner
  *

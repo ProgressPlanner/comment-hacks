@@ -56,7 +56,7 @@ class Comment_Policy extends Tasks {
 	 * @return string
 	 */
 	public function get_title() {
-		return \esc_html__( 'Implement a comment policy', 'comment-hacks' );
+		return \esc_html__( 'Implement a comment policy', 'yoast-comment-hacks' );
 	}
 
 	/**
@@ -67,8 +67,8 @@ class Comment_Policy extends Tasks {
 	public function get_description() {
 		return \sprintf(
 			/* translators: %s:<a href="https://prpl.fyi/comment-policy" target="_blank">comment policy</a> link */
-			\esc_html__( 'Implement a %s to make sure your commenters know what they can and cannot do.', 'comment-hacks' ),
-			'<a href="https://prpl.fyi/comment-policy" target="_blank">' . \esc_html__( 'comment policy', 'comment-hacks' ) . '</a>'
+			\esc_html__( 'Implement a %s to make sure your commenters know what they can and cannot do.', 'yoast-comment-hacks' ),
+			'<a href="https://prpl.fyi/comment-policy" target="_blank">' . \esc_html__( 'comment policy', 'yoast-comment-hacks' ) . '</a>'
 		);
 	}
 
@@ -96,7 +96,7 @@ class Comment_Policy extends Tasks {
 	public function add_task_actions( $data = [], $actions = [] ) {
 		$actions[] = [
 			'priority' => 10,
-			'html'     => '<a class="prpl-tooltip-action-text" href="' . \admin_url( 'options-general.php?page=comment-experience#top#comment-policy' ) . '" target="_self">' . \esc_html__( 'Implement', 'comment-hacks' ) . '</a>',
+			'html'     => '<a class="prpl-tooltip-action-text" href="' . \admin_url( 'options-general.php?page=comment-experience#top#comment-policy' ) . '" target="_self">' . \esc_html__( 'Implement', 'yoast-comment-hacks' ) . '</a>',
 		];
 
 		return $actions;

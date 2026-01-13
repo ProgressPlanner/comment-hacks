@@ -95,7 +95,7 @@ class Email_Links {
 		$wp_admin_bar->add_menu(
 			[
 				'id'    => 'epch-email-commenters',
-				'title' => '<span class="ab-icon" title="' . \__( 'Email commenters', 'comment-hacks' ) . '"></span>',
+				'title' => '<span class="ab-icon" title="' . \__( 'Email commenters', 'yoast-comment-hacks' ) . '"></span>',
 				'href'  => '#',
 				'meta'  => [ 'onclick' => 'epch_email_commenters(event)' ],
 			]
@@ -150,7 +150,7 @@ class Email_Links {
 
 		$new_action = [
 			/* translators: %s is replaced with the comment authors name */
-			'mailto' => '<a href="' . \esc_url( $link ) . '"><span class="dashicons dashicons-email-alt"></span> ' . \esc_html( \sprintf( \__( 'E-mail %s', 'comment-hacks' ), $comment->comment_author ) ) . '</a>',
+			'mailto' => '<a href="' . \esc_url( $link ) . '"><span class="dashicons dashicons-email-alt"></span> ' . \esc_html( \sprintf( \__( 'E-mail %s', 'yoast-comment-hacks' ), $comment->comment_author ) ) . '</a>',
 		];
 
 		return \array_merge( $left_actions, $new_action, $right_actions );
