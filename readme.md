@@ -9,7 +9,7 @@
 [![Lint](https://github.com/ProgressPlanner/comment-hacks/actions/workflows/lint.yml/badge.svg)](https://github.com/ProgressPlanner/comment-hacks/actions/workflows/lint.yml)
 [![Test](https://github.com/ProgressPlanner/comment-hacks/actions/workflows/test.yml/badge.svg)](https://github.com/ProgressPlanner/comment-hacks/actions/workflows/test.yml)
 
-# Comment Experience by Progress Planner
+# Comment Experience
 
 Improve the comment experience on your site. Adds lots of features to make commenting easier and more engaging.
 

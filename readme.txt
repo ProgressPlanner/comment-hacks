@@ -1,10 +1,10 @@
-=== Comment Experience by Progress Planner ===
+=== Comment Experience ===
 Contributors: joostdevalk
 Tags: comments, spam, emails
 Text Domain: comment-hacks
 Requires at least: 6.6
 Tested up to: 6.8
-Stable tag: 2.1.6
+Stable tag: 2.1.7
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires PHP: 7.4
@@ -58,6 +58,10 @@ If you have bugs to report, please go to [the plugin's GitHub repository](https:
 5. The link in the backend to email an individual commenters on a post.
 
 == Changelog ==
+
+= 2.1.7 =
+
+* Minor updates, name change mostly.
 
 = 2.1.6 =
 
