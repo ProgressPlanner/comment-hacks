@@ -18,6 +18,7 @@ package.json
 phpcs.xml.dist
 phpstan.neon.dist
 phpunit.xml.dist
+CLAUDE.md
 README.md
 admin/assets/js/.jshintrc
 SECURITY.md

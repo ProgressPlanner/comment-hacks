@@ -1,11 +1,17 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+// phpcs:disable SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedName
+
 /**
  * Config page admin view.
  *
- * @var Admin $this
+ * @var \EmiliaProjects\WP\Comment\Admin\Admin $this
  */
 
-use EmiliaProjects\WP\Comment\Admin\Admin;
 use EmiliaProjects\WP\Comment\Inc\Hacks;
 
 ?>
