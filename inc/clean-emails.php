@@ -11,11 +11,6 @@ use WP_Post;
 class Clean_Emails {
 
 	/**
-	 * Holds the current comment's ID.
-	 */
-	private int $comment_id = 0;
-
-	/**
 	 * Holds the current comment.
 	 */
 	private WP_Comment $comment;
@@ -231,9 +226,8 @@ class Clean_Emails {
 	 * @return void
 	 */
 	private function setup_data( int $comment_id ): void {
-		$this->comment_id = $comment_id;
-		$this->comment    = \get_comment( $this->comment_id );
-		$this->post       = \get_post( (int) $this->comment->comment_post_ID );
+		$this->comment = \get_comment( $comment_id );
+		$this->post    = \get_post( (int) $this->comment->comment_post_ID );
 	}
 
 	/**
@@ -318,7 +312,7 @@ class Clean_Emails {
 	 * @return string
 	 */
 	private function comment_action_link( string $label, string $action ): string {
-		$url = \admin_url( \sprintf( 'comment.php?action=%s&c=%d', $action, $this->comment_id ) );
+		$url = \admin_url( \sprintf( 'comment.php?action=%s&c=%d', $action, $this->comment->comment_ID ) );
 
 		return '<a href="' . \esc_url( $url ) . '">' . \esc_html( $label ) . '</a>';
 	}
