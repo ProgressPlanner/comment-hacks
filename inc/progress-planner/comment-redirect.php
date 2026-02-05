@@ -77,11 +77,7 @@ class Comment_Redirect extends Tasks {
 	 * @return bool
 	 */
 	public function should_add_task() {
-		if ( ! $this->options['redirect_page'] ) {
-			return true;
-		}
-
-		return false;
+		return ! $this->options['redirect_page'];
 	}
 
 	/**

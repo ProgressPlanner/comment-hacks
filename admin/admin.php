@@ -401,7 +401,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 	 * @return bool
 	 */
 	private function sanitize_bool( $value ): bool {
-		return ( $value || ! empty( $value ) );
+		return (bool) $value;
 	}
 
 	/**

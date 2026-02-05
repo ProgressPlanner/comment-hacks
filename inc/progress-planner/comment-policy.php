@@ -78,11 +78,7 @@ class Comment_Policy extends Tasks {
 	 * @return bool
 	 */
 	public function should_add_task() {
-		if ( ! (int) $this->options['comment_policy_page'] || ! (int) $this->options['comment_policy'] ) {
-			return true;
-		}
-
-		return false;
+		return ! (int) $this->options['comment_policy_page'] || ! (int) $this->options['comment_policy'];
 	}
 
 	/**

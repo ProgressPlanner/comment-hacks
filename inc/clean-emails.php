@@ -299,14 +299,12 @@ class Clean_Emails {
 	 * @return void
 	 */
 	private function comment_action_links( array $actions ): void {
-		$links = '';
+		$links = [];
 		foreach ( $actions as $action => $label ) {
-			$links .= $this->comment_action_link( $label, $action ) . ' | ';
+			$links[] = $this->comment_action_link( $label, $action );
 		}
 
-		$links = \rtrim( $links, '| ' );
-
-		$this->message .= $links;
+		$this->message .= \implode( ' | ', $links );
 	}
 
 	/**
