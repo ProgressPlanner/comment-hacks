@@ -4,6 +4,11 @@ namespace EmiliaProjects\WP\Comment\Inc\Progress_Planner;
 
 use Progress_Planner\Suggested_Tasks\Providers\Tasks;
 
+// phpcs:ignore SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions.NonFullyQualified -- Plugin Check requires defined() without backslash.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! \class_exists( '\Progress_Planner\Suggested_Tasks\Providers\Tasks' ) ) {
 	return;
 }
