@@ -5,6 +5,10 @@ namespace EmiliaProjects\WP\Comment\Inc;
 use WP_Comment;
 use WP_Post;
 
+if ( ! \defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Clean the emails.
  */

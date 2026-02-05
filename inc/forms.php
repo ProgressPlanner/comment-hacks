@@ -2,6 +2,10 @@
 
 namespace EmiliaProjects\WP\Comment\Inc;
 
+if ( ! \defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Add comment note.
  */

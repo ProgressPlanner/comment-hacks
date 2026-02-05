@@ -4,6 +4,10 @@ namespace EmiliaProjects\WP\Comment\Inc;
 
 use Progress_Planner\Suggested_Tasks\Tasks\Providers\Provider;
 
+if ( ! \defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Registers the tasks for the Progress Planner.
  */

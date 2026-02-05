@@ -5,6 +5,10 @@ namespace EmiliaProjects\WP\Comment\Inc;
 use EmiliaProjects\WP\Comment\Admin\Admin;
 use WP_Comment;
 
+if ( ! \defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Main comment hacks functionality.
  */

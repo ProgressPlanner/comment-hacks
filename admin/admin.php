@@ -6,6 +6,10 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 use WP_Comment;
 use WP_Post;
 
+if ( ! \defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Admin handling class.
  */

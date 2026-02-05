@@ -2,6 +2,10 @@
 
 namespace EmiliaProjects\WP\Comment\Admin;
 
+if ( ! \defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Comment parent handling class.
  */
