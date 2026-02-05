@@ -30,13 +30,17 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use EmiliaProjects\WP\Comment\Inc\Autoload;
 use EmiliaProjects\WP\Comment\Inc\Hacks;
 
 /**
  * Used for version checks.
  */
-define( 'EMILIA_COMMENT_HACKS_VERSION', '2.1.6' );
+define( 'EMILIA_COMMENT_HACKS_VERSION', '2.1.7' );
 
 /**
  * Used for asset embedding.
