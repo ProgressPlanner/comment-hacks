@@ -54,9 +54,7 @@ class Notifications {
 			return $message_headers;
 		}
 
-		$name = $comment->comment_author !== ''
-			? \esc_html( $comment->comment_author )
-			: $comment->comment_author_email;
+		$name = ( $comment->comment_author !== '' ) ? \esc_html( $comment->comment_author ) : $comment->comment_author_email;
 
 		$message_headers .= "\nReply-To: $name <$comment->comment_author_email>\n";
 
