@@ -97,7 +97,7 @@ jobs:
       # Upload the FOLDER (not a .zip). The artifact service zips it for us,
       # keeping the top-level folder name inside the archive.
       - name: Upload plugin artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ secrets.DOT_ORG_SLUG }}
           path: ${{ steps.prep.outputs.PKG_DIR }}
