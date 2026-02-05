@@ -176,7 +176,7 @@ class Clean_Emails {
 	 * @return void
 	 */
 	private function add_author_line(): void {
-		if ( $this->comment->comment_type === 'comment' ) {
+		if ( $this->comment->comment_type !== 'pingback' && $this->comment->comment_type !== 'trackback' ) {
 			/* translators: %1$s is replaced with the comment author's name, %2$s is replaced with the comment author's email */
 			$this->message .= \sprintf( \esc_html__( 'Author: %1$s (%2$s)', 'yoast-comment-hacks' ), \esc_html( $this->comment->comment_author ), '<a href="' . \esc_url( 'mailto:' . $this->comment->comment_author_email ) . '">' . \esc_html( $this->comment->comment_author_email ) . '</a>' ) . '<br />';
 		}
@@ -192,7 +192,7 @@ class Clean_Emails {
 	 * @return void
 	 */
 	private function add_content_line(): void {
-		if ( $this->comment->comment_type === 'comment' ) {
+		if ( $this->comment->comment_type !== 'pingback' && $this->comment->comment_type !== 'trackback' ) {
 			$this->message .= \esc_html__( 'Comment:', 'yoast-comment-hacks' );
 		}
 		else {
