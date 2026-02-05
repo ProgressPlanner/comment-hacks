@@ -2,11 +2,12 @@
 
 namespace EmiliaProjects\WP\Comment\Inc;
 
-use Progress_Planner\Suggested_Tasks\Tasks\Providers\Provider;
-
-if ( ! \defined( 'ABSPATH' ) ) {
+// phpcs:ignore SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions.NonFullyQualified -- Plugin Check requires defined() without backslash.
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+use Progress_Planner\Suggested_Tasks\Tasks\Providers\Provider;
 
 /**
  * Registers the tasks for the Progress Planner.

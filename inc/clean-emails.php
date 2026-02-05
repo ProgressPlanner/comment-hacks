@@ -2,12 +2,13 @@
 
 namespace EmiliaProjects\WP\Comment\Inc;
 
-use WP_Comment;
-use WP_Post;
-
-if ( ! \defined( 'ABSPATH' ) ) {
+// phpcs:ignore SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions.NonFullyQualified -- Plugin Check requires defined() without backslash.
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+use WP_Comment;
+use WP_Post;
 
 /**
  * Clean the emails.
