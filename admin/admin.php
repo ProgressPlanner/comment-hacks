@@ -2,6 +2,11 @@
 
 namespace EmiliaProjects\WP\Comment\Admin;
 
+// phpcs:ignore SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions.NonFullyQualified -- Plugin Check requires defined() without backslash.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use EmiliaProjects\WP\Comment\Inc\Hacks;
 use WP_Comment;
 use WP_Post;
