@@ -40,7 +40,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 /**
  * Used for version checks.
  */
-define( 'EMILIA_COMMENT_HACKS_VERSION', '2.1.6' );
+define( 'EMILIA_COMMENT_HACKS_VERSION', '2.1.7' );
 
 /**
  * Used for asset embedding.
