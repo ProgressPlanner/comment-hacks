@@ -18,7 +18,7 @@ jobs:
             tools: wp-cli
 
         - name: Install latest version of dist-archive-command
-          run: wp package install wp-cli/dist-archive-command:@stable
+          run: wp package install wp-cli/dist-archive-command:^3.1
 
         - name: Build plugin
           run: |
