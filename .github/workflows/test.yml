@@ -68,7 +68,7 @@ jobs:
         run: composer config --unset platform.php
 
       - name: "Install Composer dependencies"
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@v4
         with:
           # Force a `composer update` run.
           dependency-versions: "highest"
