@@ -1,5 +1,5 @@
 === Comment Experience ===
-Contributors: joostdevalk
+Contributors: joostdevalk, aristath, filipi, progressplanner
 Tags: comments, comment moderation, comment emails, discussion, comment policy
 Text Domain: yoast-comment-hacks
 Stable tag: 2.1.7
