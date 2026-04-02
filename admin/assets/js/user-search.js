@@ -19,7 +19,7 @@ jQuery( document ).ready( function( $ ) {
 		searchTimer = setTimeout( function() {
 			$.ajax( {
 				url: chUserSearch.ajax_url,
-				type: "POST",
+				type: "GET",
 				data: {
 					action: "ch_search_users",
 					search: query,

@@ -302,7 +302,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 			\wp_send_json_error( 'Unauthorized' );
 		}
 
-		$search = isset( $_POST['search'] ) ? \sanitize_text_field( \wp_unslash( $_POST['search'] ) ) : '';
+		$search = isset( $_GET['search'] ) ? \sanitize_text_field( \wp_unslash( $_GET['search'] ) ) : '';
 
 		if ( \strlen( $search ) < 2 ) {
 			\wp_send_json_success( [] );
@@ -402,6 +402,11 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 					'ajax_url' => \admin_url( 'admin-ajax.php' ),
 					'nonce'    => \wp_create_nonce( 'ch_search_users_nonce' ),
 				]
+			);
+
+			\wp_add_inline_style(
+				'wp-admin',
+				'#comment_notification_recipient_results li { padding: 5px; margin: 0; cursor: pointer; } #comment_notification_recipient_results li:hover { background: #f0f0f1; }'
 			);
 		}
 	}
