@@ -68,6 +68,8 @@ class Admin {
 
 		\add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_discussion_settings_script' ] );
 
+		\add_action( 'wp_ajax_ch_search_users', [ $this, 'ajax_search_users' ] );
+
 		new Comment_Parent();
 	}
 
@@ -240,17 +242,71 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 	 * @return void
 	 */
 	public function meta_box_callback( $post ): void {
+		$selected_id   = (int) \get_post_meta( $post->ID, self::NOTIFICATION_RECIPIENT_KEY, true );
+		$selected_name = '';
+
+		if ( $selected_id > 0 ) {
+			$user = \get_userdata( $selected_id );
+			if ( $user ) {
+				$selected_name = $user->display_name;
+			}
+		}
+
 		?>
 		<input
 			type="hidden"
 			name="comment_notification_recipient_nonce"
 			value="<?php echo \esc_attr( \wp_create_nonce( 'comment_notification_recipient_nonce' ) ); ?>"
 		/>
-		<label for="comment_notification_recipient">
+		<label for="comment_notification_recipient_search">
 			<?php \esc_html_e( 'Comment notification recipients:', 'yoast-comment-hacks' ); ?>
 		</label>
 		<br/>
+		<input
+			type="hidden"
+			name="comment_notification_recipient"
+			id="comment_notification_recipient"
+			value="<?php echo \esc_attr( (string) $selected_id ); ?>"
+		/>
+		<input
+			type="text"
+			id="comment_notification_recipient_search"
+			value="<?php echo \esc_attr( $selected_name ); ?>"
+			placeholder="<?php \esc_attr_e( 'Search for a user...', 'yoast-comment-hacks' ); ?>"
+			class="widefat"
+			autocomplete="off"
+		/>
+		<ul id="comment_notification_recipient_results" style="display:none;margin:0;padding:0;list-style:none;border:1px solid #ddd;background:#fff;max-height:150px;overflow-y:auto;"></ul>
+		<?php if ( $selected_id > 0 ) : ?>
+		<a href="#" id="comment_notification_recipient_clear" style="display:inline;">
+			<?php \esc_html_e( 'Reset to post author', 'yoast-comment-hacks' ); ?>
+		</a>
+		<?php else : ?>
+		<a href="#" id="comment_notification_recipient_clear" style="display:none;">
+			<?php \esc_html_e( 'Reset to post author', 'yoast-comment-hacks' ); ?>
+		</a>
+		<?php endif; ?>
+		<p class="description"><?php \esc_html_e( 'Leave empty to use post author.', 'yoast-comment-hacks' ); ?></p>
 		<?php
+	}
+
+	/**
+	 * AJAX handler for searching users.
+	 *
+	 * @return void
+	 */
+	public function ajax_search_users(): void {
+		\check_ajax_referer( 'ch_search_users_nonce', 'nonce' );
+
+		if ( ! \current_user_can( 'edit_posts' ) ) {
+			\wp_send_json_error( 'Unauthorized' );
+		}
+
+		$search = isset( $_GET['search'] ) ? \sanitize_text_field( \wp_unslash( $_GET['search'] ) ) : '';
+
+		if ( \strlen( $search ) < 2 ) {
+			\wp_send_json_success( [] );
+		}
 
 		/**
 		 * This filter allows filtering which roles should be shown in the dropdown for notifications.
@@ -265,16 +321,25 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 			[ 'contributor', 'author', 'editor', 'administrator', 'super-admin' ]
 		);
 
-		\wp_dropdown_users(
+		$users = \get_users(
 			[
-				'selected'          => \get_post_meta( $post->ID, self::NOTIFICATION_RECIPIENT_KEY, true ),
-				'show_option_none'  => 'Post author',
-				'name'              => 'comment_notification_recipient',
-				'id'                => 'comment_notification_recipient',
-				'role__in'          => $roles,
-				'option_none_value' => 0,
+				'search'   => '*' . $search . '*',
+				'role__in' => $roles,
+				'number'   => 20,
+				'orderby'  => 'display_name',
+				'order'    => 'ASC',
 			]
 		);
+
+		$results = [];
+		foreach ( $users as $user ) {
+			$results[] = [
+				'id'   => $user->ID,
+				'name' => $user->display_name,
+			];
+		}
+
+		\wp_send_json_success( $results );
 	}
 
 	/**
@@ -297,9 +362,11 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 	/**
 	 * Enqueue our admin script.
 	 *
+	 * @param string $hook_suffix The current admin page.
+	 *
 	 * @return void
 	 */
-	public function enqueue(): void {
+	public function enqueue( $hook_suffix ): void {
 		$page = \filter_input( \INPUT_GET, 'page' );
 
 		if ( $page === 'comment-experience' ) {
@@ -316,6 +383,30 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 				[],
 				\EMILIA_COMMENT_HACKS_VERSION,
 				true
+			);
+		}
+
+		if ( $hook_suffix === 'post.php' || $hook_suffix === 'post-new.php' ) {
+			\wp_enqueue_script(
+				'emiliaprojects-comment-hacks-user-search',
+				\plugins_url( 'admin/assets/js/user-search.js', \EMILIA_COMMENT_HACKS_FILE ),
+				[ 'jquery' ],
+				\EMILIA_COMMENT_HACKS_VERSION,
+				true
+			);
+
+			\wp_localize_script(
+				'emiliaprojects-comment-hacks-user-search',
+				'chUserSearch',
+				[
+					'ajax_url' => \admin_url( 'admin-ajax.php' ),
+					'nonce'    => \wp_create_nonce( 'ch_search_users_nonce' ),
+				]
+			);
+
+			\wp_add_inline_style(
+				'wp-admin',
+				'#comment_notification_recipient_results li { padding: 5px; margin: 0; cursor: pointer; } #comment_notification_recipient_results li:hover { background: #f0f0f1; }'
 			);
 		}
 	}
