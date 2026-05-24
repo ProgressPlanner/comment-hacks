@@ -482,8 +482,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 					'<code>',
 					'<code style="background-color: #eee; margin: 0; padding: 0;">',
 					// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export -- This is only shown in debug mode.
-					\highlight_string( "<?php\n\$this->options = " . \var_export( $this->options, true ) . ';', true ),
-					$num
+					\highlight_string( "<?php\n\$this->options = " . \var_export( $this->options, true ) . ';', true )
 				);
 				?>
 			</div>
