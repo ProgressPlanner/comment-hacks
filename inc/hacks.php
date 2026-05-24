@@ -255,9 +255,8 @@ class Hacks {
 				$url = \apply_filters( 'comment_experience\redirect', $url, $comment, 'first' );
 			}
 		}
-
 		// Only change $url when the page option is actually set and not zero.
-		if ( isset( $this->options['redirect_repeat_page'] ) && (int) $this->options['redirect_repeat_page'] !== 0 ) {
+		elseif ( isset( $this->options['redirect_repeat_page'] ) && (int) $this->options['redirect_repeat_page'] !== 0 ) {
 			$url = \get_permalink( (int) $this->options['redirect_repeat_page'] );
 
 			/**
