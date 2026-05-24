@@ -165,7 +165,7 @@ class Hacks {
 	public function get_remove_comment_url_link( $comment_id ) {
 		$comment = \get_comment( $comment_id );
 
-		if ( isset( $comment ) && $comment instanceof WP_Comment && ! empty( $comment->comment_author_url ) ) {
+		if ( $comment instanceof WP_Comment && ! empty( $comment->comment_author_url ) ) {
 			return \sprintf(
 				'<a href="#" class="comment-remove-url" data-comment-id="%d" aria-label="%s">%s</a>',
 				\esc_attr( (string) $comment_id ),

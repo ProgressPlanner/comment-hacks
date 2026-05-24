@@ -38,18 +38,16 @@ class Comment_Parent {
 	 * @return void
 	 */
 	public function load_comment_parent_box() {
-		if ( \function_exists( 'add_meta_box' ) ) {
-			\add_meta_box(
-				'comment_parent',
-				\esc_html__( 'Comment Parent', 'yoast-comment-hacks' ),
-				[
-					$this,
-					'comment_parent_box',
-				],
-				'comment',
-				'normal'
-			);
-		}
+		\add_meta_box(
+			'comment_parent',
+			\esc_html__( 'Comment Parent', 'yoast-comment-hacks' ),
+			[
+				$this,
+				'comment_parent_box',
+			],
+			'comment',
+			'normal'
+		);
 	}
 
 	/**
@@ -70,11 +68,10 @@ class Comment_Parent {
 			return; // There might be another reason for a comment to be updated.
 		}
 
-		if ( \function_exists( 'wp_doing_ajax' ) && \wp_doing_ajax() ) {
+		if ( \wp_doing_ajax() ) {
 			\check_ajax_referer( 'replyto-comment', '_ajax_nonce-replyto-comment' );
 		}
-
-		if ( ! \function_exists( 'wp_doing_ajax' ) || ! \wp_doing_ajax() ) {
+		else {
 			\check_admin_referer( 'update-comment_' . $comment_id );
 		}
 
