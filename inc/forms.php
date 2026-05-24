@@ -35,7 +35,6 @@ class Forms {
 	 */
 	public function init() {
 		$this->options = Hacks::get_options();
-		Hacks::get_defaults();
 
 		if ( $this->options['comment_policy'] ) {
 			\add_action( 'comment_form_after_fields', [ $this, 'comment_form_fields' ] );
