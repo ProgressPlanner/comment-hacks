@@ -9,36 +9,72 @@
 [![Lint](https://github.com/ProgressPlanner/comment-hacks/actions/workflows/lint.yml/badge.svg)](https://github.com/ProgressPlanner/comment-hacks/actions/workflows/lint.yml)
 [![Test](https://github.com/ProgressPlanner/comment-hacks/actions/workflows/test.yml/badge.svg)](https://github.com/ProgressPlanner/comment-hacks/actions/workflows/test.yml)
 
+![Comment Experience banner](.wordpress-org/github_banner_comment_experience_pp.png)
+
 # Comment Experience
 
-Improve the comment experience on your site. Adds lots of features to make commenting easier and more engaging.
+Make WordPress comments easier to manage with cleaner moderation emails, better routing, comment policy controls, length limits, and tools for following up with commenters.
 
-## Description
+## Why this plugin exists
 
-This plugin adds many small improvements around core WordPress comments to make them more bearable:
+Core WordPress comments work, but moderation and follow-up can feel clunky. Comment Experience adds practical improvements for site owners and editors who want a cleaner, more manageable comment workflow without replacing the native comments system.
 
-* Cleaner comment notification emails.
-* The option to enforce a comment policy.
-* The option to forward comments to an email address (for instance for your support team) and then trash them.
-* The option to disallow comments below a certain length.
-* The option to redirect first time commenters to a "thank you" page.
-* An input field on the comment edit screen to change the comment parent ID.
-* Links in the admin comments section to email individual commenters.
-* A button in the WP toolbar to email all the commenters on a post.
+## What it helps you do
+
+- Clean up comment notification emails so moderation is easier.
+- Require acceptance of a comment policy before submission.
+- Forward comments to another email address and optionally trash them.
+- Set minimum and maximum comment lengths.
+- Redirect first-time commenters to a thank-you page.
+- Change a comment's parent ID from the comment edit screen.
+- Email an individual commenter from the comments screen.
+- Email all commenters on a post from the admin bar.
+- Route comment emails to another user from a post's discussion settings.
+
+## Installation
+
+### From WordPress admin
+
+1. In your WordPress dashboard, go to **Plugins → Add New**.
+2. Search for **Comment Experience** or **comment hacks**.
+3. Install and activate the plugin.
+4. Go to **Settings → Comment Experience** to configure the available options.
+
+### Manual installation
+
+1. Download the plugin zip.
+2. Upload the `comment-hacks` folder to `/wp-content/plugins/`.
+3. Activate the plugin in **Plugins**.
+4. Go to **Settings → Comment Experience** to configure the available options.
 
 ## Screenshots
 
-Screenshot of a clean comment notification email:<br>
-![Screenshot of a clean comment notification email](.wordpress-org/screenshot-1.png)<br>
-<br>
-The comment parent edit box:<br>
-![The comment parent edit box](.wordpress-org/screenshot-2.png)<br>
-<br>
-The plugins admin settings:<br>
-![The plugins admin settings](.wordpress-org/screenshot-3.png)<br>
-<br>
-The button on the frontend to email all the commenters on a post:<br>
-![The button to email all commenters](.wordpress-org/screenshot-4.png)<br>
-<br>
-The link in the backend to email an individual commenters on a post:<br>
-![The button to email all commenters](.wordpress-org/screenshot-5.png)<br><br>
+### Cleaner comment notification emails
+![Cleaner comment notification emails](.wordpress-org/screenshot-1.png)
+
+### Edit a comment's parent directly from the comment screen
+![Edit a comment's parent directly from the comment screen](.wordpress-org/screenshot-2.png)
+
+### Configure comment length, policy, redirects, email links, and forwarding from one settings screen
+![Configure comment settings](.wordpress-org/screenshot-3.png)
+
+### Email all commenters on a post from the WordPress admin bar
+![Email all commenters on a post from the WordPress admin bar](.wordpress-org/screenshot-4.png)
+
+### Contact an individual commenter from the comments list table
+![Contact an individual commenter from the comments list table](.wordpress-org/screenshot-5.png)
+
+## Support, issues, and security
+
+- Questions or support: [WordPress.org support forum](https://wordpress.org/support/plugin/yoast-comment-hacks/)
+- Bug reports and feature requests: [GitHub issues](https://github.com/ProgressPlanner/comment-hacks/issues)
+- Security reports: [Patchstack VDP](https://patchstack.com/database/vdp/comment-hacks)
+
+## Contributing
+
+Contributions are welcome. Please read [`.github/CONTRIBUTING.md`](.github/CONTRIBUTING.md) before opening an issue or pull request.
+
+## Links
+
+- [Plugin page on WordPress.org](https://wordpress.org/plugins/yoast-comment-hacks/)
+- [Progress Planner](https://progressplanner.com/)
