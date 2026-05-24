@@ -286,7 +286,7 @@ class Hacks {
 	 */
 	private function get_option_from_cache( string $option ) {
 		$options = \wp_load_alloptions();
-		return isset( $options[ $option ] ) ? $option : false;
+		return isset( $options[ $option ] ) ? $options[ $option ] : false;
 	}
 
 	/**
