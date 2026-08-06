@@ -105,7 +105,7 @@ jobs:
           compression-level: 0
 
       # Comment with a Playground link that installs from the artifact ZIP
-      - uses: mshick/add-pr-comment@v2
+      - uses: mshick/add-pr-comment@v3
         with:
           message: |
             **Test on Playground**

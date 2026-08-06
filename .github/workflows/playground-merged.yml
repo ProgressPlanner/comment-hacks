@@ -36,7 +36,7 @@ jobs:
           echo "blueprint=$ENCODED_BLUEPRINT" >> "$GITHUB_OUTPUT"
 
       # Comment with a Playground link that installs from the artifact ZIP
-      - uses: mshick/add-pr-comment@v2
+      - uses: mshick/add-pr-comment@v3
         with:
           message: |
             **Test merged PR on Playground**
