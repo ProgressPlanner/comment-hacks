@@ -16,11 +16,6 @@ use WP_Post;
 class Clean_Emails {
 
 	/**
-	 * Holds the current comment's ID.
-	 */
-	private int $comment_id = 0;
-
-	/**
 	 * Holds the current comment.
 	 */
 	private WP_Comment $comment;
@@ -181,7 +176,7 @@ class Clean_Emails {
 	 * @return void
 	 */
 	private function add_author_line(): void {
-		if ( $this->comment->comment_type === 'comment' ) {
+		if ( $this->comment->comment_type !== 'pingback' && $this->comment->comment_type !== 'trackback' ) {
 			/* translators: %1$s is replaced with the comment author's name, %2$s is replaced with the comment author's email */
 			$this->message .= \sprintf( \esc_html__( 'Author: %1$s (%2$s)', 'yoast-comment-hacks' ), \esc_html( $this->comment->comment_author ), '<a href="' . \esc_url( 'mailto:' . $this->comment->comment_author_email ) . '">' . \esc_html( $this->comment->comment_author_email ) . '</a>' ) . '<br />';
 		}
@@ -197,7 +192,7 @@ class Clean_Emails {
 	 * @return void
 	 */
 	private function add_content_line(): void {
-		if ( $this->comment->comment_type === 'comment' ) {
+		if ( $this->comment->comment_type !== 'pingback' && $this->comment->comment_type !== 'trackback' ) {
 			$this->message .= \esc_html__( 'Comment:', 'yoast-comment-hacks' );
 		}
 		else {
@@ -236,9 +231,8 @@ class Clean_Emails {
 	 * @return void
 	 */
 	private function setup_data( int $comment_id ): void {
-		$this->comment_id = $comment_id;
-		$this->comment    = \get_comment( $this->comment_id );
-		$this->post       = \get_post( (int) $this->comment->comment_post_ID );
+		$this->comment = \get_comment( $comment_id );
+		$this->post    = \get_post( (int) $this->comment->comment_post_ID );
 	}
 
 	/**
@@ -304,14 +298,12 @@ class Clean_Emails {
 	 * @return void
 	 */
 	private function comment_action_links( array $actions ): void {
-		$links = '';
+		$links = [];
 		foreach ( $actions as $action => $label ) {
-			$links .= $this->comment_action_link( $label, $action ) . ' | ';
+			$links[] = $this->comment_action_link( $label, $action );
 		}
 
-		$links = \rtrim( $links, '| ' );
-
-		$this->message .= $links;
+		$this->message .= \implode( ' | ', $links );
 	}
 
 	/**
@@ -323,7 +315,7 @@ class Clean_Emails {
 	 * @return string
 	 */
 	private function comment_action_link( string $label, string $action ): string {
-		$url = \admin_url( \sprintf( 'comment.php?action=%s&c=%d', $action, $this->comment_id ) );
+		$url = \admin_url( \sprintf( 'comment.php?action=%s&c=%d', $action, $this->comment->comment_ID ) );
 
 		return '<a href="' . \esc_url( $url ) . '">' . \esc_html( $label ) . '</a>';
 	}

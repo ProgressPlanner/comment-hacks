@@ -209,7 +209,7 @@ final class Security_Test extends TestCase {
 		$_REQUEST['nonce'] = \wp_create_nonce( 'ch_search_users_nonce' );
 		$admin             = new Admin();
 		foreach ( [ 'privateloginsecret', 'privateemailsecret', 'Public Staff', 'public-staff' ] as $search ) {
-			$_POST['search'] = $search;
+			$_GET['search'] = $search;
 			\ob_start();
 			try {
 				$admin->ajax_search_users();

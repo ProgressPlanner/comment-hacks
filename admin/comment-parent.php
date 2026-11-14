@@ -38,18 +38,16 @@ class Comment_Parent {
 	 * @return void
 	 */
 	public function load_comment_parent_box() {
-		if ( \function_exists( 'add_meta_box' ) ) {
-			\add_meta_box(
-				'comment_parent',
-				\esc_html__( 'Comment Parent', 'yoast-comment-hacks' ),
-				[
-					$this,
-					'comment_parent_box',
-				],
-				'comment',
-				'normal'
-			);
-		}
+		\add_meta_box(
+			'comment_parent',
+			\esc_html__( 'Comment Parent', 'yoast-comment-hacks' ),
+			[
+				$this,
+				'comment_parent_box',
+			],
+			'comment',
+			'normal'
+		);
 	}
 
 	/**

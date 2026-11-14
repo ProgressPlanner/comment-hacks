@@ -309,7 +309,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 			\wp_send_json_error( 'Unauthorized' );
 		}
 
-		$search = isset( $_POST['search'] ) ? \sanitize_text_field( \wp_unslash( $_POST['search'] ) ) : '';
+		$search = isset( $_GET['search'] ) ? \sanitize_text_field( \wp_unslash( $_GET['search'] ) ) : '';
 
 		if ( \strlen( $search ) < 2 ) {
 			\wp_send_json_success( [] );
@@ -397,6 +397,11 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 					'ajax_url' => \admin_url( 'admin-ajax.php' ),
 					'nonce'    => \wp_create_nonce( 'ch_search_users_nonce' ),
 				]
+			);
+
+			\wp_add_inline_style(
+				'wp-admin',
+				'#comment_notification_recipient_results li { padding: 5px; margin: 0; cursor: pointer; } #comment_notification_recipient_results li:hover { background: #f0f0f1; }'
 			);
 		}
 	}
@@ -494,7 +499,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 	 * @return bool
 	 */
 	private function sanitize_bool( $value ): bool {
-		return ( $value || ! empty( $value ) );
+		return (bool) $value;
 	}
 
 	/**
@@ -570,8 +575,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 					'<code>',
 					'<code style="background-color: #eee; margin: 0; padding: 0;">',
 					// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export -- This is only shown in debug mode.
-					\highlight_string( "<?php\n\$this->options = " . \var_export( $this->options, true ) . ';', true ),
-					$num
+					\highlight_string( "<?php\n\$this->options = " . \var_export( $this->options, true ) . ';', true )
 				);
 				?>
 			</div>
