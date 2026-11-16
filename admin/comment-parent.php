@@ -69,7 +69,14 @@ class Comment_Parent {
 			return;
 		}
 
-		$comment_parent = \filter_var( \wp_unslash( $_POST['epch_comment_parent'] ), \FILTER_VALIDATE_INT );
+		$raw_parent = \wp_unslash( $_POST['epch_comment_parent'] );
+		if ( ! \is_string( $raw_parent ) ) {
+			return;
+		}
+
+		// An emptied field means "no parent", as it did before this field was validated.
+		$raw_parent     = \trim( $raw_parent );
+		$comment_parent = ( $raw_parent === '' ) ? 0 : \filter_var( $raw_parent, \FILTER_VALIDATE_INT );
 		$comment        = \get_comment( $comment_id );
 		if ( $comment_parent === false || $comment_parent < 0 || ! $comment || $comment_parent === (int) $comment_id ) {
 			return;

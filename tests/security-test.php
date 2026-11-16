@@ -266,9 +266,14 @@ final class Security_Test extends TestCase {
 		$_POST['action'] = 'editedcomment';
 		$handler->update_comment_parent( $child );
 		$this->assertSame( (string) $parent, \get_comment( $child )->comment_parent );
-		$_POST['epch_comment_parent'] = '0';
-		$handler->update_comment_parent( $child );
-		$this->assertSame( '0', \get_comment( $child )->comment_parent );
+		foreach ( [ '0', '', '  ' ] as $no_parent ) {
+			$_POST['epch_comment_parent'] = (string) $parent;
+			$handler->update_comment_parent( $child );
+			$this->assertSame( (string) $parent, \get_comment( $child )->comment_parent );
+			$_POST['epch_comment_parent'] = $no_parent;
+			$handler->update_comment_parent( $child );
+			$this->assertSame( '0', \get_comment( $child )->comment_parent );
+		}
 		\wp_update_comment(
 			[
 				'comment_ID'     => $parent,
