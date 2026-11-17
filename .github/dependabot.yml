@@ -15,4 +15,3 @@ updates:
       prefix: "GH Actions:"
     labels:
       - "changelog: non-user-facing"
-      - "yoast cs/qa"

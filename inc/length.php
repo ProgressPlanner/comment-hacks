@@ -2,6 +2,8 @@
 
 namespace EmiliaProjects\WP\Comment\Inc;
 
+use WP_Error;
+
 // phpcs:ignore SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions.NonFullyQualified -- Plugin Check requires defined() without backslash.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -27,6 +29,7 @@ class Length {
 
 		// Process the comment and check it for length.
 		\add_filter( 'preprocess_comment', [ $this, 'check_comment_length' ] );
+		\add_filter( 'rest_pre_insert_comment', [ $this, 'check_rest_comment_length' ] );
 
 		// Add a message to the comment form, before the comment textarea, to inform the user about the allowed comment length.
 		\add_filter( 'comment_form_field_comment', [ $this, 'allowed_comment_length_note' ], 99 );
@@ -42,15 +45,49 @@ class Length {
 	 * @return string[] All the data for the comment (only returned when the comment is long enough).
 	 */
 	public function check_comment_length( $comment_data ): array {
-		// Bail early for editors and admins, they can leave short or long comments if they want.
-		if ( \current_user_can( 'edit_posts' ) ) {
+		$error = $this->get_length_error( $comment_data['comment_content'] );
+		if ( $error !== '' ) {
+			\wp_die( \esc_html( $error ) . '<br /><a href="javascript:history.go(-1);">' . \esc_html__( 'Go back and try again.', 'yoast-comment-hacks' ) . '</a>' );
+		}
+		return $comment_data;
+	}
+
+	/**
+	 * Apply the same length limits to new REST comments.
+	 *
+	 * @param array<string, string|int>|WP_Error $comment_data Prepared comment data.
+	 *
+	 * @return array<string, string|int>|WP_Error
+	 */
+	public function check_rest_comment_length( $comment_data ) {
+		if ( \is_wp_error( $comment_data ) ) {
 			return $comment_data;
 		}
 
-		$length = $this->get_comment_length( $comment_data['comment_content'] );
+		$error = $this->get_length_error( ( $comment_data['comment_content'] ?? '' ) );
+		if ( $error !== '' ) {
+			return new WP_Error( 'comment_experience_length', $error, [ 'status' => 400 ] );
+		}
+		return $comment_data;
+	}
+
+	/**
+	 * Get a validation message for a comment's length.
+	 *
+	 * @param string $content Comment content.
+	 *
+	 * @return string
+	 */
+	private function get_length_error( string $content ): string {
+		// Preserve the existing exemption for users who can edit posts.
+		if ( \current_user_can( 'edit_posts' ) ) {
+			return '';
+		}
+
+		$length = $this->get_comment_length( $content );
 
 		// Check for comment length and die if too short or too long.
-		$error = false;
+		$error = '';
 		if ( $length < $this->options['mincomlength'] ) {
 			$error = $this->options['mincomlengtherror'];
 		}
@@ -58,10 +95,7 @@ class Length {
 			$error = $this->options['maxcomlengtherror'];
 		}
 
-		if ( $error ) {
-			\wp_die( \esc_html( $error ) . '<br /><a href="javascript:history.go(-1);">' . \esc_html__( 'Go back and try again.', 'yoast-comment-hacks' ) . '</a>' );
-		}
-		return $comment_data;
+		return $error;
 	}
 
 	/**

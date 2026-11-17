@@ -165,7 +165,7 @@ class Hacks {
 	public function get_remove_comment_url_link( $comment_id ) {
 		$comment = \get_comment( $comment_id );
 
-		if ( isset( $comment ) && $comment instanceof WP_Comment && ! empty( $comment->comment_author_url ) ) {
+		if ( $comment instanceof WP_Comment && ! empty( $comment->comment_author_url ) ) {
 			return \sprintf(
 				'<a href="#" class="comment-remove-url" data-comment-id="%d" aria-label="%s">%s</a>',
 				\esc_attr( (string) $comment_id ),
@@ -255,9 +255,8 @@ class Hacks {
 				$url = \apply_filters( 'comment_experience\redirect', $url, $comment, 'first' );
 			}
 		}
-
 		// Only change $url when the page option is actually set and not zero.
-		if ( isset( $this->options['redirect_repeat_page'] ) && (int) $this->options['redirect_repeat_page'] !== 0 ) {
+		elseif ( isset( $this->options['redirect_repeat_page'] ) && (int) $this->options['redirect_repeat_page'] !== 0 ) {
 			$url = \get_permalink( (int) $this->options['redirect_repeat_page'] );
 
 			/**
@@ -287,7 +286,7 @@ class Hacks {
 	 */
 	private function get_option_from_cache( string $option ) {
 		$options = \wp_load_alloptions();
-		return isset( $options[ $option ] ) ? $option : false;
+		return isset( $options[ $option ] ) ? $options[ $option ] : false;
 	}
 
 	/**
