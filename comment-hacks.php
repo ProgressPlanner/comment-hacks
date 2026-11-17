@@ -7,6 +7,7 @@
  * Version:      2.1.8
  * Plugin URI:   https://progressplanner.com/plugins/comment-experience/
  * Description:  Improve the comment experience on your site. Adds lots of features to make commenting easier and more engaging.
+ * Requires at least: 6.7
  * Requires PHP: 7.4
  * Author:       Team Progress Planner
  * Author URI:   https://progressplanner.com
