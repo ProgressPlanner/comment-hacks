@@ -8,6 +8,8 @@ on:
 jobs:
   build_artifact:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - uses: actions/checkout@v6
       with:
@@ -31,7 +33,7 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.0'
+        php-version: '8.3'
         extensions: dom, curl, json
         tools: wp-cli
 
@@ -118,6 +120,3 @@ jobs:
         tag_name: ${{ env.TAG_NAME }}
         files: |
           sbom-${{ env.TAG_NAME }}.json
-        body: |
-          SBOM Format: CycloneDX JSON
-          Generated with: Syft

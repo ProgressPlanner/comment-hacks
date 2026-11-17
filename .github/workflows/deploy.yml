@@ -8,6 +8,8 @@ jobs:
   deploy_to_wordpress_org:
     name: Deploy release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       # Checkout the code
       - name: Checkout code

@@ -1,6 +1,7 @@
 /.cache
 /.git
 /.github
+/.planning
 /.wordpress-org
 /node_modules
 /tests

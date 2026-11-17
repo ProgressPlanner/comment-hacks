@@ -2,9 +2,9 @@
 Contributors: joostdevalk, aristath, filipi, progressplanner
 Tags: comments, comment moderation, comment emails, discussion, comment policy
 Text Domain: yoast-comment-hacks
-Stable tag: 2.1.7
+Stable tag: 2.1.8
 Requires at least: 6.7
-Tested up to: 7.1
+Tested up to: 7.1.4
 Requires PHP: 7.4
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -88,6 +88,15 @@ Yes. You can forward comments to another email address, and you can also route c
 5. Comments list action link for emailing an individual commenter.
 
 == Changelog ==
+
+= 2.1.8 =
+* Security: strengthen permission checks for comment actions and notification recipients.
+* Security: escape comment content in notification emails and restrict user searches to public names.
+* Apply comment length limits and comment policy acceptance to REST API comment creation.
+* Replace the notification recipient dropdown with an AJAX-powered user search.
+* Fix first-time commenter redirects, cached option values, and email formatting for older comments.
+* Preserve the ability to remove a comment's parent by clearing the parent field.
+* Update compatibility information for WordPress 7.1.4.
 
 = 2.1.7 =
 * Maintenance release with minor updates and the Comment Experience name change.
@@ -187,6 +196,9 @@ Yes. You can forward comments to another email address, and you can also route c
 * Initial version.
 
 == Upgrade Notice ==
+
+= 2.1.8 =
+Security and reliability improvements. REST clients must send comment_policy: true or comment_policy: "on" when comment policy acceptance is enabled.
 
 = 2.1.7 =
 This maintenance release keeps Comment Experience current and aligned with its updated branding.

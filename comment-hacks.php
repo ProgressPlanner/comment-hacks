@@ -4,7 +4,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:  Comment Experience
- * Version:      2.1.7
+ * Version:      2.1.8
  * Plugin URI:   https://progressplanner.com/plugins/comment-experience/
  * Description:  Improve the comment experience on your site. Adds lots of features to make commenting easier and more engaging.
  * Requires PHP: 7.4
@@ -40,7 +40,7 @@ use EmiliaProjects\WP\Comment\Inc\Hacks;
 /**
  * Used for version checks.
  */
-define( 'EMILIA_COMMENT_HACKS_VERSION', '2.1.7' );
+define( 'EMILIA_COMMENT_HACKS_VERSION', '2.1.8' );
 
 /**
  * Used for asset embedding.
