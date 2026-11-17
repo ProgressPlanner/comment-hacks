@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use EmiliaProjects\WP\Comment\Inc\Hacks;
+use EmiliaProjects\WP\Comment\Inc\Notifications;
 use WP_Comment;
 use WP_Post;
 
@@ -141,10 +142,16 @@ class Admin {
 			&& isset( $_GET['nonce'] )
 			&& isset( $_GET['comment_id'] )
 			&& $_GET['ch_action'] === 'forward_comment'
-			&& \wp_verify_nonce( \wp_strip_all_tags( \wp_unslash( $_GET['nonce'] ) ), 'comment-hacks-forward' )
 		) {
 			$comment_id = (int) $_GET['comment_id'];
-			$comment    = \get_comment( $comment_id );
+			if ( $comment_id <= 0 || ! \wp_verify_nonce( \sanitize_text_field( \wp_unslash( $_GET['nonce'] ) ), 'comment-hacks-forward_' . $comment_id ) ) {
+				return;
+			}
+
+			$comment = \get_comment( $comment_id );
+			if ( ! $comment || ! \current_user_can( 'edit_comment', $comment_id ) ) {
+				return;
+			}
 
 			echo '<div class="msg updated"><p>';
 			\printf(
@@ -163,7 +170,7 @@ class Admin {
 			) . "\n\n";
 
 			if ( ! empty( $this->options['forward_extra'] ) ) {
-				$intro .= $this->options['forward_extra'] . "\n\n";
+				$intro .= \esc_html( $this->options['forward_extra'] ) . "\n\n";
 			}
 
 			$intro .= '---------- Forwarded message ---------
@@ -173,7 +180,7 @@ Subject: ' . \esc_html__( 'Comment on', 'yoast-comment-hacks' ) . ' ' . \esc_htm
 To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->options['forward_from_email'] ) . '&gt;';
 			$intro .= "\n\n";
 
-			$content = \nl2br( $intro . $comment->comment_content );
+			$content = \nl2br( $intro . \esc_html( $comment->comment_content ) );
 
 			$headers = [
 				'From: ' . \get_bloginfo( 'name' ) . ' <' . \esc_html( $this->options['forward_from_email'] ) . '>',
@@ -198,7 +205,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 	 * @return string[]
 	 */
 	public function forward_to_support_action_link( $actions, $comment ): array {
-		if ( empty( $this->options['forward_email'] ) ) {
+		if ( empty( $this->options['forward_email'] ) || ! \current_user_can( 'edit_comment', (int) $comment->comment_ID ) ) {
 			return $actions;
 		}
 
@@ -211,7 +218,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 			$label = \__( 'Forward to support & trash', 'yoast-comment-hacks' );
 		}
 
-		$actions['ch_forward'] = '<a href="' . \esc_url( \admin_url( 'edit-comments.php' ) . '?comment_id=' . $comment->comment_ID . '&ch_action=forward_comment&nonce=' . \wp_create_nonce( 'comment-hacks-forward' ) ) . '">' . \esc_html( $label ) . '</a>';
+		$actions['ch_forward'] = '<a href="' . \esc_url( \admin_url( 'edit-comments.php' ) . '?comment_id=' . $comment->comment_ID . '&ch_action=forward_comment&nonce=' . \wp_create_nonce( 'comment-hacks-forward_' . $comment->comment_ID ) ) . '">' . \esc_html( $label ) . '</a>';
 
 		return $actions;
 	}
@@ -308,26 +315,14 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 			\wp_send_json_success( [] );
 		}
 
-		/**
-		 * This filter allows filtering which roles should be shown in the dropdown for notifications.
-		 * Defaults to contributor and up.
-		 *
-		 * @param array $roles Array with user roles.
-		 *
-		 * @since 1.6.0
-		 */
-		$roles = \apply_filters(
-			'comment_experience\notification_roles',
-			[ 'contributor', 'author', 'editor', 'administrator', 'super-admin' ]
-		);
-
 		$users = \get_users(
 			[
-				'search'   => '*' . $search . '*',
-				'role__in' => $roles,
-				'number'   => 20,
-				'orderby'  => 'display_name',
-				'order'    => 'ASC',
+				'search'         => '*' . $search . '*',
+				'search_columns' => [ 'display_name', 'user_nicename' ],
+				'role__in'       => Notifications::get_allowed_roles(),
+				'number'         => 20,
+				'orderby'        => 'display_name',
+				'order'          => 'ASC',
 			]
 		);
 
@@ -420,12 +415,19 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 	 */
 	public function save_reroute_comment_emails( $post_id ): void {
 
-		if ( ! isset( $_POST['comment_notification_recipient'] ) || ! \wp_verify_nonce( \filter_input( \INPUT_POST, 'comment_notification_recipient_nonce' ), 'comment_notification_recipient_nonce' ) ) {
+		if (
+			! isset( $_POST['comment_notification_recipient'], $_POST['comment_notification_recipient_nonce'] )
+			|| ! \wp_verify_nonce( \sanitize_text_field( \wp_unslash( $_POST['comment_notification_recipient_nonce'] ) ), 'comment_notification_recipient_nonce' )
+			|| ! \current_user_can( 'edit_post', $post_id )
+		) {
 			return;
 		}
 
-		$recipient_id = (int) \sanitize_key( \wp_unslash( $_POST['comment_notification_recipient'] ) );
-		if ( $recipient_id > 0 ) {
+		$recipient_id = \filter_var( \wp_unslash( $_POST['comment_notification_recipient'] ), \FILTER_VALIDATE_INT );
+		if ( $recipient_id === 0 ) {
+			\delete_post_meta( $post_id, self::NOTIFICATION_RECIPIENT_KEY );
+		}
+		elseif ( $recipient_id > 0 && Notifications::is_allowed_recipient( $recipient_id ) ) {
 			\update_post_meta( $post_id, self::NOTIFICATION_RECIPIENT_KEY, $recipient_id );
 		}
 	}
