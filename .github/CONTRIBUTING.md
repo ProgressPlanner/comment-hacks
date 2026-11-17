@@ -1,48 +1,46 @@
 # Contribution Guidelines
 
-Before filing a bug report or a feature request, be sure to read the contribution guidelines.
+Thanks for your interest in improving Comment Experience.
 
-## How to use GitHub
-We use GitHub exclusively for well-documented bugs, feature requests and code contributions. Communication is always done in English.
+## Support, bugs, and feature requests
 
-To receive free support for this plugin, go to [the support formus](https://wordpress.org/support/plugin/yoast-comment-hacks/). Thanks for your understanding.
+We use GitHub for well-documented bug reports, feature requests, and code contributions. Communication is in English.
 
-## Security issues
-Please do not report security issues here. Instead, report them per our [security policy](https://github.com/emilia-capital/comment-hacks/security/policy).
+- For plugin support, use the [WordPress.org support forum](https://wordpress.org/support/plugin/yoast-comment-hacks/).
+- For security issues, follow our [security policy](https://github.com/ProgressPlanner/comment-hacks/security/policy).
+- Before opening an issue, please search existing issues first.
 
-## I have found a bug
-Before opening a new issue, please:
-* update to the newest versions of WordPress, Yoast SEO and the PDF XML sitemap plugins.
-* search for duplicate issues to prevent opening a duplicate issue. If there is already an open existing issue, please comment on that issue.
-* follow our _New issue_ template when creating a new issue.
-* add as much information as possible. For example: add screenshots, relevant links, step by step guides etc.
+## Reporting a bug
 
-## I have a feature request
-Before opening a new issue, please:
-* search for duplicate issues to prevent opening a duplicate feature request. If there is already an open existing request, please leave a comment there.
-* add as much information as possible. For example: give us a clear explanation of why you think the feature request is something we should consider for the plugin.
+Before opening a bug report, please:
 
-## I want to create a patch
-Community made patches, localizations, bug reports and contributions are very welcome and help us tremendously.
+- Update WordPress and the plugin to the latest available versions.
+- Check whether the issue has already been reported.
+- Follow the issue template and include clear reproduction steps.
+- Add screenshots, relevant links, logs, or other context where helpful.
 
-When contributing please ensure you follow the guidelines below so that we can keep on top of things.
+If you still need to report a bug, [open an issue](https://github.com/ProgressPlanner/comment-hacks/issues/new/choose).
 
-#### Submitting an issue you found
-Make sure your problem does not exist as a ticket already by searching through [the existing issues](https://github.com/emilia-capital/comment-hacks/issues/). If you cannot find anything which resembles your problem, please [create a new issue](https://github.com/emilia-capital/comment-hacks/issues/new).
+## Requesting a feature
 
-#### Fixing an issue
+Before opening a feature request, please:
 
-* Fork the repository on GitHub (make sure to use the `develop` branch).
-* Make the changes to your forked repository.
-* Ensure you stick to the [WordPress Coding Standards](https://make.wordpress.org/core/handbook/best-practices/coding-standards/) and you properly document any new functions, actions and filters following the [documentation standards](https://make.wordpress.org/core/handbook/best-practices/inline-documentation-standards/php/).
-* When committing, reference your issue and include a note about the fix.
-* Push the changes to your fork and submit a pull request to the `develop` branch of the Accessibility Checker repository.
+- Check whether the idea has already been suggested.
+- Explain the problem you are trying to solve.
+- Share enough context for us to understand the use case and expected outcome.
 
-We will review your pull request and merge when everything is in order. We will help you to make sure the code complies with the standards described above.
+## Submitting a patch
 
-#### 'Patch welcome' issues
-Some issues are labeled 'patch-welcome'. This means we see the value in the particular enhancement being suggested but have decided for now not to prioritize it. If you however decide to write a patch for it, we'll gladly include it after some code review.
+Community contributions are welcome.
 
-#### Additional Resources
-* [General GitHub Documentation](https://help.github.com/)
-* [GitHub Pull Request documentation](https://help.github.com/send-pull-requests/)
+1. Fork the repository.
+2. Create a branch for your change.
+3. Make your update.
+4. Follow the [WordPress Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/) and relevant inline documentation standards.
+5. Run the relevant checks before submitting.
+6. Open a pull request against the default branch used by this repository.
+
+## Additional resources
+
+- [GitHub documentation](https://docs.github.com/)
+- [Pull request documentation](https://docs.github.com/pull-requests)
