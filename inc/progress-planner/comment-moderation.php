@@ -90,7 +90,7 @@ class Comment_Moderation extends Tasks {
 			]
 		);
 
-		return $comments > 0; // @phpstan-ignore-line
+		return $comments > 0;
 	}
 
 	/**
