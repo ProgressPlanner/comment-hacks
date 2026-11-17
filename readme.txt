@@ -4,7 +4,7 @@ Tags: comments, comment moderation, comment emails, discussion, comment policy
 Text Domain: yoast-comment-hacks
 Stable tag: 2.1.8
 Requires at least: 6.7
-Tested up to: 7.1.4
+Tested up to: 7.1
 Requires PHP: 7.4
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -96,7 +96,7 @@ Yes. You can forward comments to another email address, and you can also route c
 * Replace the notification recipient dropdown with an AJAX-powered user search.
 * Fix first-time commenter redirects, cached option values, and email formatting for older comments.
 * Preserve the ability to remove a comment's parent by clearing the parent field.
-* Update compatibility information for WordPress 7.1.4.
+* Update compatibility information for WordPress 7.1.
 
 = 2.1.7 =
 * Maintenance release with minor updates and the Comment Experience name change.
