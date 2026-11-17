@@ -50,7 +50,7 @@ class Email_Links {
 	 * @return void
 	 */
 	public function admin_bar_comment_link(): void {
-		if ( ! \is_singular() || $this->options['disable_email_all_commenters'] ) {
+		if ( ! \current_user_can( 'moderate_comments' ) || ! \is_singular() || $this->options['disable_email_all_commenters'] ) {
 			return;
 		}
 
