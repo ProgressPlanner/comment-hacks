@@ -6,6 +6,8 @@ on:
 jobs:
   playground:
     runs-on: ubuntu-latest
+    env:
+      PLUGIN_SLUG: yoast-comment-hacks
     permissions:
       contents: read
       pull-requests: write
@@ -77,14 +79,14 @@ jobs:
         id: blueprint
         run: |
           set -euxo pipefail
-          ARTIFACT_URL="https://nightly.link/${{ github.repository }}/actions/runs/${{ github.run_id }}/${{ secrets.DOT_ORG_SLUG }}.zip"
+          ARTIFACT_URL="https://nightly.link/${{ github.repository }}/actions/runs/${{ github.run_id }}/${{ env.PLUGIN_SLUG }}.zip"
 
           # Use Node.js to parse, modify, and stringify the JSON
           BLUEPRINT=$(node -e "
             const fs = require('fs');
             const blueprint = JSON.parse(fs.readFileSync('.wordpress-org/blueprints/playground.json', 'utf8'));
             blueprint.plugins = blueprint.plugins.map(plugin =>
-              plugin === '${{ secrets.DOT_ORG_SLUG }}' ? '$ARTIFACT_URL' : plugin
+              plugin === '${{ env.PLUGIN_SLUG }}' ? '$ARTIFACT_URL' : plugin
             );
             console.log(JSON.stringify(blueprint));
           ")
@@ -99,15 +101,17 @@ jobs:
       - name: Upload plugin artifact
         uses: actions/upload-artifact@v6
         with:
-          name: ${{ secrets.DOT_ORG_SLUG }}
+          name: ${{ env.PLUGIN_SLUG }}
           path: ${{ steps.prep.outputs.PKG_DIR }}
           # Optional: faster uploads for already-compressed assets
           compression-level: 0
 
       # Comment with a Playground link that installs from the artifact ZIP
       - uses: mshick/add-pr-comment@v3
+        # Fork and Dependabot runs can build artifacts but cannot write PR comments.
+        if: github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]' && github.event.pull_request.user.login != 'dependabot[bot]'
         with:
           message: |
             **Test on Playground**
             [Test this pull request on the Playground](https://playground.wordpress.net/#${{ steps.blueprint.outputs.blueprint }})
-            or [download the zip](https://nightly.link/${{ github.repository }}/actions/runs/${{ github.run_id }}/${{ secrets.DOT_ORG_SLUG }}.zip)
+            or [download the zip](https://nightly.link/${{ github.repository }}/actions/runs/${{ github.run_id }}/${{ env.PLUGIN_SLUG }}.zip)

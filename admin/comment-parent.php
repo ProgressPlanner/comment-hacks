@@ -38,60 +38,69 @@ class Comment_Parent {
 	 * @return void
 	 */
 	public function load_comment_parent_box() {
-		if ( \function_exists( 'add_meta_box' ) ) {
-			\add_meta_box(
-				'comment_parent',
-				\esc_html__( 'Comment Parent', 'yoast-comment-hacks' ),
-				[
-					$this,
-					'comment_parent_box',
-				],
-				'comment',
-				'normal'
-			);
-		}
+		\add_meta_box(
+			'comment_parent',
+			\esc_html__( 'Comment Parent', 'yoast-comment-hacks' ),
+			[
+				$this,
+				'comment_parent_box',
+			],
+			'comment',
+			'normal'
+		);
 	}
 
 	/**
 	 * Updates the comment parent field.
 	 *
+	 * @param int $comment_id The comment ID supplied by the edit_comment hook.
+	 *
 	 * @return void
 	 */
-	public function update_comment_parent() {
-		$comment_parent = \filter_input( \INPUT_POST, 'epch_comment_parent', \FILTER_VALIDATE_INT );
-		$comment_id     = \filter_input( \INPUT_POST, 'comment_ID', \FILTER_VALIDATE_INT );
-		$action         = \filter_input( \INPUT_POST, 'action' );
-
-		if ( $action === 'edit-comment' ) {
-			return; // We're on the quick edit screen. As the comment parent isn't sent along here, we might lose it if we do anything.
+	public function update_comment_parent( $comment_id ) {
+		if (
+			! \is_admin() || \wp_doing_ajax()
+			|| ! isset( $_POST['action'], $_POST['comment_ID'], $_POST['epch_comment_parent'], $_POST['_wpnonce'] )
+			|| $_POST['action'] !== 'editedcomment'
+			|| (int) $_POST['comment_ID'] !== (int) $comment_id
+			|| ! \wp_verify_nonce( \sanitize_text_field( \wp_unslash( $_POST['_wpnonce'] ) ), 'update-comment_' . $comment_id )
+			|| ! \current_user_can( 'edit_comment', $comment_id )
+		) {
+			return;
 		}
 
-		if ( empty( $comment_id ) && empty( $comment_parent ) ) {
-			return; // There might be another reason for a comment to be updated.
+		if ( ! \is_string( $_POST['epch_comment_parent'] ) ) {
+			return;
 		}
 
-		if ( \function_exists( 'wp_doing_ajax' ) && \wp_doing_ajax() ) {
-			\check_ajax_referer( 'replyto-comment', '_ajax_nonce-replyto-comment' );
+		// An emptied field means "no parent", as it did before this field was validated.
+		$raw_parent     = \sanitize_text_field( \wp_unslash( $_POST['epch_comment_parent'] ) );
+		$comment_parent = ( $raw_parent === '' ) ? 0 : \filter_var( $raw_parent, \FILTER_VALIDATE_INT );
+		$comment        = \get_comment( $comment_id );
+		if ( $comment_parent === false || $comment_parent < 0 || ! $comment || $comment_parent === (int) $comment_id ) {
+			return;
 		}
 
-		if ( ! \function_exists( 'wp_doing_ajax' ) || ! \wp_doing_ajax() ) {
-			\check_admin_referer( 'update-comment_' . $comment_id );
+		// Reject missing parents, parents on other posts, and circular threads.
+		$ancestor_id = $comment_parent;
+		$seen        = [ (int) $comment_id ];
+		while ( $ancestor_id > 0 ) {
+			$parent = \get_comment( $ancestor_id );
+			if ( ! $parent || (int) $parent->comment_post_ID !== (int) $comment->comment_post_ID || \in_array( $ancestor_id, $seen, true ) ) {
+				return;
+			}
+			$seen[]      = $ancestor_id;
+			$ancestor_id = (int) $parent->comment_parent;
 		}
 
-		if ( ! isset( $comment_parent ) ) {
-			$comment_parent = 0;
-		}
-
-		if ( $comment_id ) {
-			$comment                 = \get_comment( $comment_id );
-			$comment->comment_parent = $comment_parent;
-
-			// Remove our filter, or we'll keep looping.
-			\remove_action( 'edit_comment', [ $this, 'update_comment_parent' ] );
-			\wp_update_comment( (array) $comment );
-
-			// Add our filter back.
-			\add_action( 'edit_comment', [ $this, 'update_comment_parent' ] );
-		}
+		// Remove our filter, or we'll keep looping.
+		\remove_action( 'edit_comment', [ $this, 'update_comment_parent' ] );
+		\wp_update_comment(
+			[
+				'comment_ID'     => $comment_id,
+				'comment_parent' => $comment_parent,
+			]
+		);
+		\add_action( 'edit_comment', [ $this, 'update_comment_parent' ] );
 	}
 }
