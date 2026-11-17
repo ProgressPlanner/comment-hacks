@@ -147,8 +147,8 @@ class Clean_Emails {
 
 		$this->comment_moderation_actions();
 		$this->message .= ' | ' . \sprintf(
-			'<a href="http://ip-lookup.net/index.php?ip=%1$s">%2$s</a>',
-			$this->comment->comment_author_IP,
+			'<a href="%1$s">%2$s</a>',
+			\esc_url( 'https://ip-lookup.net/index.php?ip=' . \rawurlencode( $this->comment->comment_author_IP ) ),
 			\esc_html__( 'Whois', 'yoast-comment-hacks' )
 		);
 		$this->message .= '<br/><br/>';
@@ -199,7 +199,7 @@ class Clean_Emails {
 			$this->message .= \esc_html__( 'Excerpt:', 'yoast-comment-hacks' );
 		}
 
-		$this->message .= '<br />' . \wpautop( $this->comment->comment_content ) . '<br />';
+		$this->message .= '<br />' . \wpautop( \esc_html( $this->comment->comment_content ) ) . '<br />';
 	}
 
 	/**
