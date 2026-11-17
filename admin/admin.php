@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use EmiliaProjects\WP\Comment\Inc\Hacks;
+use EmiliaProjects\WP\Comment\Inc\Notifications;
 use WP_Comment;
 use WP_Post;
 
@@ -67,6 +68,8 @@ class Admin {
 		\add_filter( 'comment_text', [ $this, 'show_forward_status' ], 10, 2 );
 
 		\add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_discussion_settings_script' ] );
+
+		\add_action( 'wp_ajax_ch_search_users', [ $this, 'ajax_search_users' ] );
 
 		new Comment_Parent();
 	}
@@ -139,10 +142,16 @@ class Admin {
 			&& isset( $_GET['nonce'] )
 			&& isset( $_GET['comment_id'] )
 			&& $_GET['ch_action'] === 'forward_comment'
-			&& \wp_verify_nonce( \wp_strip_all_tags( \wp_unslash( $_GET['nonce'] ) ), 'comment-hacks-forward' )
 		) {
 			$comment_id = (int) $_GET['comment_id'];
-			$comment    = \get_comment( $comment_id );
+			if ( $comment_id <= 0 || ! \wp_verify_nonce( \sanitize_text_field( \wp_unslash( $_GET['nonce'] ) ), 'comment-hacks-forward_' . $comment_id ) ) {
+				return;
+			}
+
+			$comment = \get_comment( $comment_id );
+			if ( ! $comment || ! \current_user_can( 'edit_comment', $comment_id ) ) {
+				return;
+			}
 
 			echo '<div class="msg updated"><p>';
 			\printf(
@@ -161,7 +170,7 @@ class Admin {
 			) . "\n\n";
 
 			if ( ! empty( $this->options['forward_extra'] ) ) {
-				$intro .= $this->options['forward_extra'] . "\n\n";
+				$intro .= \esc_html( $this->options['forward_extra'] ) . "\n\n";
 			}
 
 			$intro .= '---------- Forwarded message ---------
@@ -171,7 +180,7 @@ Subject: ' . \esc_html__( 'Comment on', 'yoast-comment-hacks' ) . ' ' . \esc_htm
 To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->options['forward_from_email'] ) . '&gt;';
 			$intro .= "\n\n";
 
-			$content = \nl2br( $intro . $comment->comment_content );
+			$content = \nl2br( $intro . \esc_html( $comment->comment_content ) );
 
 			$headers = [
 				'From: ' . \get_bloginfo( 'name' ) . ' <' . \esc_html( $this->options['forward_from_email'] ) . '>',
@@ -196,7 +205,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 	 * @return string[]
 	 */
 	public function forward_to_support_action_link( $actions, $comment ): array {
-		if ( empty( $this->options['forward_email'] ) ) {
+		if ( empty( $this->options['forward_email'] ) || ! \current_user_can( 'edit_comment', (int) $comment->comment_ID ) ) {
 			return $actions;
 		}
 
@@ -209,7 +218,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 			$label = \__( 'Forward to support & trash', 'yoast-comment-hacks' );
 		}
 
-		$actions['ch_forward'] = '<a href="' . \esc_url( \admin_url( 'edit-comments.php' ) . '?comment_id=' . $comment->comment_ID . '&ch_action=forward_comment&nonce=' . \wp_create_nonce( 'comment-hacks-forward' ) ) . '">' . \esc_html( $label ) . '</a>';
+		$actions['ch_forward'] = '<a href="' . \esc_url( \admin_url( 'edit-comments.php' ) . '?comment_id=' . $comment->comment_ID . '&ch_action=forward_comment&nonce=' . \wp_create_nonce( 'comment-hacks-forward_' . $comment->comment_ID ) ) . '">' . \esc_html( $label ) . '</a>';
 
 		return $actions;
 	}
@@ -240,41 +249,92 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 	 * @return void
 	 */
 	public function meta_box_callback( $post ): void {
+		$selected_id   = (int) \get_post_meta( $post->ID, self::NOTIFICATION_RECIPIENT_KEY, true );
+		$selected_name = '';
+
+		if ( $selected_id > 0 ) {
+			$user = \get_userdata( $selected_id );
+			if ( $user ) {
+				$selected_name = $user->display_name;
+			}
+		}
+
 		?>
 		<input
 			type="hidden"
 			name="comment_notification_recipient_nonce"
 			value="<?php echo \esc_attr( \wp_create_nonce( 'comment_notification_recipient_nonce' ) ); ?>"
 		/>
-		<label for="comment_notification_recipient">
+		<label for="comment_notification_recipient_search">
 			<?php \esc_html_e( 'Comment notification recipients:', 'yoast-comment-hacks' ); ?>
 		</label>
 		<br/>
+		<input
+			type="hidden"
+			name="comment_notification_recipient"
+			id="comment_notification_recipient"
+			value="<?php echo \esc_attr( (string) $selected_id ); ?>"
+		/>
+		<input
+			type="text"
+			id="comment_notification_recipient_search"
+			value="<?php echo \esc_attr( $selected_name ); ?>"
+			placeholder="<?php \esc_attr_e( 'Search for a user...', 'yoast-comment-hacks' ); ?>"
+			class="widefat"
+			autocomplete="off"
+		/>
+		<ul id="comment_notification_recipient_results" style="display:none;margin:0;padding:0;list-style:none;border:1px solid #ddd;background:#fff;max-height:150px;overflow-y:auto;"></ul>
+		<?php if ( $selected_id > 0 ) : ?>
+		<a href="#" id="comment_notification_recipient_clear" style="display:inline;">
+			<?php \esc_html_e( 'Reset to post author', 'yoast-comment-hacks' ); ?>
+		</a>
+		<?php else : ?>
+		<a href="#" id="comment_notification_recipient_clear" style="display:none;">
+			<?php \esc_html_e( 'Reset to post author', 'yoast-comment-hacks' ); ?>
+		</a>
+		<?php endif; ?>
+		<p class="description"><?php \esc_html_e( 'Leave empty to use post author.', 'yoast-comment-hacks' ); ?></p>
 		<?php
+	}
 
-		/**
-		 * This filter allows filtering which roles should be shown in the dropdown for notifications.
-		 * Defaults to contributor and up.
-		 *
-		 * @param array $roles Array with user roles.
-		 *
-		 * @since 1.6.0
-		 */
-		$roles = \apply_filters(
-			'comment_experience\notification_roles',
-			[ 'contributor', 'author', 'editor', 'administrator', 'super-admin' ]
-		);
+	/**
+	 * AJAX handler for searching users.
+	 *
+	 * @return void
+	 */
+	public function ajax_search_users(): void {
+		\check_ajax_referer( 'ch_search_users_nonce', 'nonce' );
 
-		\wp_dropdown_users(
+		if ( ! \current_user_can( 'edit_posts' ) ) {
+			\wp_send_json_error( 'Unauthorized' );
+		}
+
+		$search = isset( $_GET['search'] ) ? \sanitize_text_field( \wp_unslash( $_GET['search'] ) ) : '';
+
+		if ( \strlen( $search ) < 2 ) {
+			\wp_send_json_success( [] );
+		}
+
+		$users = \get_users(
 			[
-				'selected'          => \get_post_meta( $post->ID, self::NOTIFICATION_RECIPIENT_KEY, true ),
-				'show_option_none'  => 'Post author',
-				'name'              => 'comment_notification_recipient',
-				'id'                => 'comment_notification_recipient',
-				'role__in'          => $roles,
-				'option_none_value' => 0,
+				'search'         => '*' . $search . '*',
+				'search_columns' => [ 'display_name', 'user_nicename' ],
+				'role__in'       => Notifications::get_allowed_roles(),
+				'number'         => 20,
+				'orderby'        => 'display_name',
+				'order'          => 'ASC',
 			]
 		);
+
+		$results = [];
+		foreach ( $users as $user ) {
+			$results[] = [
+				'id'   => $user->ID,
+				'name' => $user->display_name,
+			];
+		}
+
+		\wp_send_json_success( $results );
 	}
 
 	/**
@@ -297,9 +357,11 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 	/**
 	 * Enqueue our admin script.
 	 *
+	 * @param string $hook_suffix The current admin page.
+	 *
 	 * @return void
 	 */
-	public function enqueue(): void {
+	public function enqueue( $hook_suffix ): void {
 		$page = \filter_input( \INPUT_GET, 'page' );
 
 		if ( $page === 'comment-experience' ) {
@@ -318,6 +380,30 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 				true
 			);
 		}
+
+		if ( $hook_suffix === 'post.php' || $hook_suffix === 'post-new.php' ) {
+			\wp_enqueue_script(
+				'emiliaprojects-comment-hacks-user-search',
+				\plugins_url( 'admin/assets/js/user-search.js', \EMILIA_COMMENT_HACKS_FILE ),
+				[ 'jquery' ],
+				\EMILIA_COMMENT_HACKS_VERSION,
+				true
+			);
+
+			\wp_localize_script(
+				'emiliaprojects-comment-hacks-user-search',
+				'chUserSearch',
+				[
+					'ajax_url' => \admin_url( 'admin-ajax.php' ),
+					'nonce'    => \wp_create_nonce( 'ch_search_users_nonce' ),
+				]
+			);
+
+			\wp_add_inline_style(
+				'wp-admin',
+				'#comment_notification_recipient_results li { padding: 5px; margin: 0; cursor: pointer; } #comment_notification_recipient_results li:hover { background: #f0f0f1; }'
+			);
+		}
 	}
 
 	/**
@@ -329,12 +415,19 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 	 */
 	public function save_reroute_comment_emails( $post_id ): void {
 
-		if ( ! isset( $_POST['comment_notification_recipient'] ) || ! \wp_verify_nonce( \filter_input( \INPUT_POST, 'comment_notification_recipient_nonce' ), 'comment_notification_recipient_nonce' ) ) {
+		if (
+			! isset( $_POST['comment_notification_recipient'], $_POST['comment_notification_recipient_nonce'] )
+			|| ! \wp_verify_nonce( \sanitize_text_field( \wp_unslash( $_POST['comment_notification_recipient_nonce'] ) ), 'comment_notification_recipient_nonce' )
+			|| ! \current_user_can( 'edit_post', $post_id )
+		) {
 			return;
 		}
 
-		$recipient_id = (int) \sanitize_key( \wp_unslash( $_POST['comment_notification_recipient'] ) );
-		if ( $recipient_id > 0 ) {
+		$recipient_id = \filter_var( \wp_unslash( $_POST['comment_notification_recipient'] ), \FILTER_VALIDATE_INT );
+		if ( $recipient_id === 0 ) {
+			\delete_post_meta( $post_id, self::NOTIFICATION_RECIPIENT_KEY );
+		}
+		elseif ( $recipient_id > 0 && Notifications::is_allowed_recipient( $recipient_id ) ) {
 			\update_post_meta( $post_id, self::NOTIFICATION_RECIPIENT_KEY, $recipient_id );
 		}
 	}
@@ -406,7 +499,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 	 * @return bool
 	 */
 	private function sanitize_bool( $value ): bool {
-		return ( $value || ! empty( $value ) );
+		return (bool) $value;
 	}
 
 	/**
@@ -482,8 +575,7 @@ To: ' . \esc_html( \get_bloginfo( 'name' ) ) . ' &lt;' . \esc_html( $this->optio
 					'<code>',
 					'<code style="background-color: #eee; margin: 0; padding: 0;">',
 					// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export -- This is only shown in debug mode.
-					\highlight_string( "<?php\n\$this->options = " . \var_export( $this->options, true ) . ';', true ),
-					$num
+					\highlight_string( "<?php\n\$this->options = " . \var_export( $this->options, true ) . ';', true )
 				);
 				?>
 			</div>
