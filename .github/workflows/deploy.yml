@@ -13,7 +13,7 @@ jobs:
     steps:
       # Checkout the code
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       # Optional: if we add a build step to the plugin, we can run it here.
       # Deploy the plugin to WordPress.org
       - name: WordPress plugin deploy
