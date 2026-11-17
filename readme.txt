@@ -73,7 +73,7 @@ Yes. You can create a comment policy page, enable the option, and require accept
 
 = Can I limit how short or long comments can be? =
 
-Yes. The plugin lets you configure both minimum and maximum comment length limits.
+Yes. Go to **Settings > Comment Experience > Comment length** to set minimum and maximum comment lengths.
 
 = Can I send comment notifications to someone else? =
 
