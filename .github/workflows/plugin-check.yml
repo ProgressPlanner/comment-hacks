@@ -8,10 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: Checkout
-          uses: actions/checkout@v7
+          uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
         - name: Setup PHP
-          uses: shivammathur/setup-php@v2
+          uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
           with:
             php-version: '8.3'
             coverage: none
@@ -52,7 +52,7 @@ jobs:
         # that fix landed upstream, @wordpress/env needs no version pin here.
         # https://github.com/WordPress/plugin-check-action/pull/590
         - name: Run plugin check
-          uses: wordpress/plugin-check-action@v1.1.9
+          uses: wordpress/plugin-check-action@10857da14b6c2246d15402b3e69f777edcf8c12e # v1.1.9
           with:
             exclude-checks: 'i18n_usage'
             build-dir: './build/${{ github.event.repository.name }}'

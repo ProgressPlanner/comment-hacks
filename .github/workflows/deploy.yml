@@ -13,12 +13,12 @@ jobs:
     steps:
       # Checkout the code
       - name: Checkout code
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       # Optional: if we add a build step to the plugin, we can run it here.
       # Deploy the plugin to WordPress.org
       - name: WordPress plugin deploy
         id: deploy
-        uses: 10up/action-wordpress-plugin-deploy@develop
+        uses: 10up/action-wordpress-plugin-deploy@008657da18d18e065aaaccd287fa3af53ff768a1 # develop
         with:
           generate-zip: true
         env:
@@ -28,7 +28,7 @@ jobs:
       # After the deploy, we also want to create a zip and upload it to the release on Github. We don't want
       # users to have to go to the repository to find our plugin :).
       - name: Upload release asset
-        uses: Shopify/upload-to-release@master
+        uses: Shopify/upload-to-release@d0164d4ca84081447a4c6751d3bae0e834c501de # master
         with:
           name: ${{ github.event.repository.name }}.zip
           path: ${{ steps.deploy.outputs.zip-path }}
