@@ -25,6 +25,11 @@ jobs:
     strategy:
       matrix:
         include:
+          # The lowest PHP version the plugin header declares.
+          - php_version: '7.4'
+            wp_version: '6.6'
+            multisite: false
+
           - php_version: '8.2'
             wp_version: '6.6'
             multisite: false
@@ -71,13 +76,24 @@ jobs:
       - name: "Composer: remove the PHP platform requirement"
         run: composer config --unset platform.php
 
+      # The code style and static analysis tools are not needed here and do not install on older PHP versions.
+      - name: "Composer: remove the dev tools that are not needed for the tests"
+        run: >
+          composer remove --dev --no-update --no-scripts --no-interaction
+          friendsofphp/php-cs-fixer
+          php-parallel-lint/php-parallel-lint
+          phpcompatibility/phpcompatibility-wp
+          phpstan/extension-installer
+          phpstan/phpstan
+          szepeviktor/phpstan-wordpress
+          wp-coding-standards/wpcs
+          yoast/yoastcs
+
       - name: "Install Composer dependencies"
         uses: ramsey/composer-install@26d8a556604053a9612623447203a691f406fbe6 # v4
         with:
-          # Force a `composer update` run.
+          # Force a `composer update` run, so the test tooling matches the PHP version.
           dependency-versions: "highest"
-          # But make it selective.
-          composer-options: "yoast/wp-test-utils --with-dependencies"
           # Bust the cache at least once a month - output format: YYYY-MM-DD.
           custom-cache-suffix: $(date -u -d "-0 month -$(($(date +%d)-1)) days" "+%F")
 

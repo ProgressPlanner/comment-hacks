@@ -26,7 +26,7 @@ jobs:
       matrix:
         # Lint against the highest/lowest supported versions of each PHP major.
         # And also do a run against "nightly" (the current dev version of PHP).
-        php_version: ['8.2', '8.3', '8.4', '8.5']
+        php_version: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
 
     name: "Lint: PHP ${{ matrix.php_version }}"
 
@@ -34,13 +34,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Install PHP
+      # The locked dev tools (PHP-CS-Fixer and friends) need a newer PHP than the
+      # plugin itself supports, so install with a recent PHP first.
+      - name: Install PHP for the composer install
         uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
         with:
-          php-version: ${{ matrix.php_version }}
-          ini-values: zend.assertions=1, error_reporting=-1, display_errors=On
+          php-version: '8.3'
           coverage: none
-          tools: cs2pr
+
+      # Without this, vendor/autoload.php refuses to load on the older PHP versions in the matrix.
+      - name: 'Composer: disable the platform check'
+        run: composer config platform-check false
 
       # Install dependencies and handle caching in one go.
       # @link https://github.com/marketplace/actions/install-composer-dependencies
@@ -49,6 +53,14 @@ jobs:
         with:
           # Bust the cache at least once a month - output format: YYYY-MM-DD.
           custom-cache-suffix: $(date -u -d "-0 month -$(($(date +%d)-1)) days" "+%F")
+
+      - name: Install PHP for the actual lint
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+        with:
+          php-version: ${{ matrix.php_version }}
+          ini-values: zend.assertions=1, error_reporting=-1, display_errors=On
+          coverage: none
+          tools: cs2pr
 
       - name: Lint against parse errors
         run: composer lint -- --checkstyle | cs2pr
