@@ -26,4 +26,4 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       # No checkout or execution of pull-request code. The action reads files as data.
-      - uses: jdevalk/plugin-page-preview@3b44ebfe0eeecfcd46a1cce923b12fd5182c4320 # v1
+      - uses: jdevalk/plugin-page-preview@2200faaecd4ec148bd4e861a68bd8f3ab0619bac # v1
