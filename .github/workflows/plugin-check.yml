@@ -15,7 +15,12 @@ jobs:
           with:
             php-version: '8.3'
             coverage: none
-            tools: wp-cli
+            # A pinned release archive, not the mutable latest-build URL: when
+            # that download fails, setup-php only logs "Could not setup wp-cli"
+            # and the job dies later with "wp: command not found".
+            tools: wp-cli:2.12.0
+          env:
+            fail-fast: true
 
         # setup-php stores the ephemeral Actions token in ~/.composer/auth.json
         # as a github-oauth credential. Composer rejects that token whenever it
@@ -38,6 +43,9 @@ jobs:
         - name: Install latest version of dist-archive-command
           run: |
             rm -f "$(composer config --global home 2>/dev/null)/auth.json"
+            # Without a token Composer may fall back to cloning over SSH, and
+            # the runner has no key. HTTPS works for this public repository.
+            git config --global url."https://github.com/".insteadOf "git@github.com:"
             wp package install wp-cli/dist-archive-command:v3.1.0
 
         - name: Build plugin
