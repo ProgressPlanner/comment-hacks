@@ -9,11 +9,15 @@ jobs:
   if_merged:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    env:
+      PLUGIN_SLUG: yoast-comment-hacks
     permissions:
       contents: read
       pull-requests: write
       actions: read
     steps:
+      - uses: actions/checkout@v7
+
       - name: Prepare blueprint with artifact link
         id: blueprint
         run: |
@@ -25,7 +29,7 @@ jobs:
             const fs = require('fs');
             const blueprint = JSON.parse(fs.readFileSync('.wordpress-org/blueprints/playground.json', 'utf8'));
             blueprint.plugins = blueprint.plugins.map(plugin =>
-              plugin === '${{ github.event.repository.name }}' ? '$ARTIFACT_URL' : plugin
+              plugin === '${{ env.PLUGIN_SLUG }}' ? '$ARTIFACT_URL' : plugin
             );
             console.log(JSON.stringify(blueprint));
           ")
